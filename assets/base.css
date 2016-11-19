@@ -199,7 +199,6 @@ a.fb-like:hover {
     padding-right: 10px;
 }
 .subject {
-    width: 100%;
     color: #ff4500;
     font-size: 14px;
     font-family: Tahoma, Arial, sans-serif;
@@ -215,7 +214,7 @@ a.fb-like:hover {
 }
 .wrapper p, .wrapper finger, 
 .wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
-    margin-bottom: 5px; 
+    margin-bottom: 10px; 
 }
 
 .wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
@@ -231,6 +230,9 @@ a.fb-like:hover {
     font-size: 15px;
     line-height: 20px;
     padding: 12px 12px 12px 12px;
+}
+.highlight code {
+    font-family: Tahoma, Arial, sans-serif;
 }
 #bann {
     width: 100%;
