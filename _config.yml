@@ -1,0 +1,10 @@
+# 生成的HTML路径格式
+permalink: /:year/:month/:day/:title
+
+# 语法高亮显示
+markdown: kramdown
+highlighter: rouge
+
+
+BASE_PATH: https://amonest.github.io
+ASSET_PATH: false

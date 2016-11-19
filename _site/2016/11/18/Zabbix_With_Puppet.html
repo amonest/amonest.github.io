@@ -1,0 +1,3039 @@
+
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
+        <meta name="keywords" content="CentOS,Ubuntu,Fedora,Debian,Linux,KVM,Virtualization" />
+        <meta name="description" content="The site for people who want to establish the Network Server with CentOS, Ubuntu, Fedora, Debian" />
+        <title>用Puppet推送Zabbix Agent</title>
+        <link href="/assets/base.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/assets/navi.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/assets/main.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/assets/position.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="/assets/rouge/thankful_eyes.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <body>
+
+    
+<!-- LEFT BEGIN -->
+
+<div id="left">
+            <div class="os">Main Menu</div>
+            <div class="navi">
+                <ul>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=download">
+                            Install / Initial Config
+                        </a>
+                        <ul style="position: absolute; margin-top: -1.6em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=download">
+                                    &nbsp; Install CentOS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=download">
+                                    ( 1 ) Download CentOS 7
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=install">
+                                    ( 2 ) Install CentOS 7
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf">
+                                    &nbsp; Initial Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=1">
+                                    ( 1 ) Add an User
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=2">
+                                    ( 2 ) FireWall &amp; SELinux
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=3">
+                                    ( 3 ) Configure Networking
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=4">
+                                    ( 4 ) Configure Services
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=5">
+                                    ( 5 ) Update System
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=6">
+                                    ( 6 ) Add Repositories
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=7">
+                                    ( 7 ) Configure vim
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=8">
+                                    ( 8 ) Configure sudo
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=initial_conf&amp;f=9">
+                                    ( 9 ) Cron's Setting
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=ntp">
+                            NTP / SSH Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -1.9em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ntp">
+                                    &nbsp; NTP Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ntp&amp;f=1">
+                                    (1) Configure NTP Server (NTPd)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ntp&amp;f=3">
+                                    (2) Configure NTP Server (Chrony)
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ntp&amp;f=2">
+                                    (3) Configure NTP Client
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh">
+                                    &nbsp; SSH Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=1">
+                                    ( 1 ) Password Authentication
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=2">
+                                    ( 2 ) SSH File Transfer(CentOS)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=3">
+                                    ( 3 ) SSH File Transfer(Windows)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=4">
+                                    ( 4 ) SSH Keys Authentication
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=5">
+                                    ( 5 ) SFTP only + Chroot
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=6">
+                                    ( 6 ) SSH Port Forwarding
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=10">
+                                    ( 7 ) SSH X11 Forwarding
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=7">
+                                    ( 8 ) Use SSHPass
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=8">
+                                    ( 9 ) Use SSH-Agent
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=ssh&amp;f=9">
+                                    (10) Use Parallel SSH
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=dns">
+                            DNS / DHCP Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -3.7em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=dnsmasq">
+                                    &nbsp; DNS/DHCP Server (Dnsmasq)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=dnsmasq&amp;f=1">
+                                    (1) Install Dnsmasq
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid">
+                                <a href="assets/note?os=CentOS_7&amp;p=dnsmasq&amp;f=2">
+                                    (2) Configure DHCP Server
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=dns">
+                                    &nbsp; DNS Server (BIND)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=dns&amp;f=1">
+                                    (1) Install BIND
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=dns&amp;f=2">
+                                    (2) Set Zones
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=dns&amp;f=3">
+                                    (3) Start BIND
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=dns&amp;f=4">
+                                    (4) Enable chroot
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=dns&amp;f=5">
+                                    (5) Set CNAME
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=dns&amp;f=6">
+                                    (6) Configure Slave DNS Server
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=dhcp">
+                                    &nbsp; DHCP Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=dhcp&amp;f=1">
+                                    (1) Configure DHCP Server
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=dhcp&amp;f=2">
+                                    (2) Configure DHCP Client
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=nfs">
+                            Storage Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -5.55em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=nfs">
+                                    &nbsp; NFS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nfs&amp;f=1">
+                                    (1) Configure NFS Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nfs&amp;f=2">
+                                    (2) Configure NFS Client(CentOS)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nfs&amp;f=3">
+                                    (3) Configure NFS Client(Win Server)
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=nfs&amp;f=4">
+                                    (4) Configure NFS Client(Win Client)
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-top: #696969 1px solid;border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=iscsi">
+                                    &nbsp; iSCSI
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=iscsi&amp;f=1">
+                                    (1) Configure iSCSI Target
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=iscsi&amp;f=4">
+                                    (2) Configure iSCSI Target (tgt)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=iscsi&amp;f=2">
+                                    (3) Configure iSCSI Initiator(CentOS)
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=iscsi&amp;f=3">
+                                    (4) Configure iSCSI Initiator(Win)
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-top: #696969 1px solid;border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ceph">
+                                    &nbsp; Ceph
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ceph&amp;f=1">
+                                    (1) Configure Ceph Cluster
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ceph&amp;f=2">
+                                    (2) Use as Block Device
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=ceph&amp;f=3">
+                                    (3) Use as File System
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-top: #696969 1px solid;border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=glusterfs">
+                                    &nbsp; GlusterFS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=glusterfs&amp;f=1">
+                                    (1) Install GlusterFS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=glusterfs&amp;f=2">
+                                    (2) Distributed Setting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=glusterfs&amp;f=4">
+                                    (3) Replication Setting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=glusterfs&amp;f=5">
+                                    (4) Striping Setting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=glusterfs&amp;f=6">
+                                    (5) Distributed + Replication
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=glusterfs&amp;f=7">
+                                    (6) Striping + Replication
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=glusterfs&amp;f=3">
+                                    (7) Clients' Settings
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=kvm">
+                            Virtualization
+                        </a>
+                        <ul style="position: absolute; margin-top: -7.4em; z-index:60;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm">
+                                    &nbsp; KVM
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=1">
+                                    (1) Install KVM
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=2">
+                                    (2) Create a Virtual Machine#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=3">
+                                    (3) Create a Virtual Machine#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=4">
+                                    (4) Basic Operations
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=9">
+                                    (5) Virt Tools
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=8">
+                                    (6) Live Migration
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=5">
+                                    (7) SPICE Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=6">
+                                    (8) SPICE Client
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=kvm&amp;f=7">
+                                    (9) Nested KVM
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ovirt">
+                                    &nbsp; oVirt
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ovirt&amp;f=1">
+                                    (1) Configure Control Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ovirt&amp;f=2">
+                                    (2) Configure oVirt Node
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ovirt&amp;f=3">
+                                    (3) Add Target Node for Manage
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ovirt&amp;f=4">
+                                    (4) Add Storage
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ovirt&amp;f=5">
+                                    (5) Create Virtual Machine
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=xen">
+                                    &nbsp; Xen
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=xen&amp;f=1">
+                                    (1) Install Xen
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=xen&amp;f=2">
+                                    (2) Create a Virtual Machine
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=vmware_player">
+                                    &nbsp; VMware Player
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=vmware_player&amp;f=1">
+                                    (1) Install VMware Player
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=vmware_player&amp;f=2">
+                                    (2) Create a Virtual Machine
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=vmware_player&amp;f=3">
+                                    (3) Nested Virtualization
+                                </a>
+                            </li>
+                        </ul>
+                        <ul style="position: absolute; margin-top: -7.4em; margin-left: 22.8em; border-left: #696969 1px dashed; z-index:70;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=docker">
+                                    &nbsp; Docker
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=docker&amp;f=1">
+                                    (1) Install Docker
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=docker&amp;f=2">
+                                    (2) Add Images
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=docker&amp;f=3">
+                                    (3) Access to Container
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=docker&amp;f=4">
+                                    (4) Use Dockerfile#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=docker&amp;f=5">
+                                    (5) Use Dockerfile#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=docker&amp;f=6">
+                                    (6) Use Docker-Registry#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=docker&amp;f=7">
+                                    (7) Use Docker-Registry#2
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=docker&amp;f=8">
+                                    (8) Use Persistent Storage
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=kubernetes">
+                                    &nbsp; Kubernetes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kubernetes&amp;f=1">
+                                    (1) Configure Admin Node
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kubernetes&amp;f=2">
+                                    (2) Configure Container Node
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=kubernetes&amp;f=3">
+                                    (3) Create Pods
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=kubernetes&amp;f=4">
+                                    (4) Use Persistent Storage
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=vbox">
+                                    &nbsp; VirtualBox
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=vbox&amp;f=1">
+                                    (1) Install VirtualBox
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=vbox&amp;f=2">
+                                    (2) Create a Virtual Machine#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=vbox&amp;f=3">
+                                    (3) Install GuestAdditions
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=vbox&amp;f=4">
+                                    (4) Create a Virtual Machine#2
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=openstack_newton">
+                            Cloud Compute
+                        </a>
+                        <ul style="position: absolute; margin-top: -9.2em; border-right: #696969 1px dashed; z-index:70;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton">
+                                    &nbsp; OpenStack Newton
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=1">
+                                    ( 1 ) Newton Overview
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=2">
+                                    ( 2 ) Pre-Requirements
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=3">
+                                    ( 3 ) Configure Keystone#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=4">
+                                    ( 4 ) Configure Keystone#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=5">
+                                    ( 5 ) Configure Glance
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=6">
+                                    ( 6 ) Configure Nova
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=7">
+                                    ( 7 ) Add Virt-images
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=8">
+                                    ( 8 ) Configure Networking
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=9">
+                                    ( 9 ) Boot Instances
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=10">
+                                    (10) Configure Horizon
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=11">
+                                    (11) Add Compute Nodes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=12">
+                                    (12) Conf Neutron(Control Node)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=13">
+                                    (13) Conf Neutron(Network Node)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=14">
+                                    (14) Conf Neutron(Compute Node)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=15">
+                                    (15) Neutron Networking(FLAT)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=16">
+                                    (16) Neutron Networking(VLAN)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=17">
+                                    (17) Neutron Networking(GRE)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=18">
+                                    (18) Conf Cinder(Control Node)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=19">
+                                    (19) Conf Cinder(Service Node)
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid; border-right: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton&amp;f=20">
+                                    (20) Use Virtual Storage(LVM)
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid; border-right: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_mitaka">
+                                    &nbsp; OpenStack Mitaka
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 0px solid; border-right: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_liberty">
+                                    &nbsp; OpenStack Liberty
+                                </a>
+                            </li>
+                        </ul>
+                        <ul style="position: absolute; margin-top: -9.2em; margin-left: 22.8em; z-index:60;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 250px; line-height: 19px;">
+                                &nbsp;
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=1">
+                                    (21) Use Virtual Storage(NFS)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=2">
+                                    (22) Use Virtual Storage(GlusterFS)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=3">
+                                    (23) Use Virtual Storage(Multi)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=4">
+                                    (24) Configure Swift (Control Node)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=5">
+                                    (25) Configure Swift (Proxy Node)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=6">
+                                    (26) Configure Swift (Storage Node)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=7">
+                                    (27) How to use Swift
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=8">
+                                    (28) Configure Heat#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=9">
+                                    (29) Configure Heat#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=10">
+                                    (30) How to use Heat
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=12">
+                                    (31) Configure Manila#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=13">
+                                    (32) Configure Manila#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=14">
+                                    (33) How to use Manila#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=15">
+                                    (34) How to use Manila#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=16">
+                                    (35) Configure Ceilometer#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=17">
+                                    (36) Configure Ceilometer#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=18">
+                                    (37) Configure Ceilometer#3
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=19">
+                                    (38) How to use Ceilometer
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_newton2&amp;f=11">
+                                    (39) Openstack Packstack
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_kilo">
+                                    &nbsp; OpenStack Kilo
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_juno">
+                                    &nbsp; OpenStack Juno
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 0px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openstack_icehouse">
+                                    &nbsp; OpenStack Icehouse
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=ipa">
+                            Directory Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -11.0em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ipa">
+                                    &nbsp; FreeIPA
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ipa&amp;f=1">
+                                    (1) Configure FreeIPA Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ipa&amp;f=2">
+                                    (2) Add User Accounts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ipa&amp;f=3">
+                                    (3) Configure FreeIPA Client
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ipa&amp;f=4">
+                                    (4) Basic Operation
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ipa&amp;f=5">
+                                    (5) Use Web GUI
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ipa&amp;f=6">
+                                    (6) FreeIPA Replication
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openldap">
+                                    &nbsp; OpenLDAP
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openldap&amp;f=1">
+                                    (1) Configure LDAP Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openldap&amp;f=2">
+                                    (2) Add User Accounts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openldap&amp;f=3">
+                                    (3) Configure LDAP Client
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openldap&amp;f=4">
+                                    (4) LDAP over TLS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openldap&amp;f=5">
+                                    (5) LDAP Replication
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=openldap&amp;f=6">
+                                    (6) Multi-Master Replication
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=openldap&amp;f=7">
+                                    (7) Install phpLDAPadmin
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=nis">
+                                    &nbsp; NIS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nis&amp;f=1">
+                                    (1) Configure NIS Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nis&amp;f=2">
+                                    (2) Configure NIS Client
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=nis&amp;f=3">
+                                    (3) Configure NIS Slave
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=httpd">
+                            WEB Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -12.8em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd">
+                                    &nbsp; Apache httpd
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=1">
+                                    ( 1 ) Install Apache httpd
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=2">
+                                    ( 2 ) Use Perl Scripts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=3">
+                                    ( 3 ) Use PHP Scripts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=4">
+                                    ( 4 ) Use Ruby Scripts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=17">
+                                    ( 5 ) Use Python Scripts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=5">
+                                    ( 6 ) Enable Userdir
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=6">
+                                    ( 7 ) Virtual Hostings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=7">
+                                    ( 8 ) Configure SSL
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=8">
+                                    ( 9 ) Enable Basic Auth
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=10">
+                                    (10) Basic Auth+PAM
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=11">
+                                    (11) Basic Auth+LDAP
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=9">
+                                    (12) Enable Kerberos Auth
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=12">
+                                    (13) Use WebDAV
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=18">
+                                    (14) Perl + mod_perl
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=19">
+                                    (15) PHP + PHP-FPM
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=20">
+                                    (16) Python + mod_wsgi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=21">
+                                    (17) WebMail : SquirrelMail
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=13">
+                                    (18) WebMail : RoundCube
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=14">
+                                    (19) WebMail : RainLoop
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=15">
+                                    (20) Log Analyzer : AWstats
+                                </a>
+                            </li>
+                        </ul>
+                        <ul style="position: absolute; margin-top: -12.8em; margin-left: 22.8em; border-left: #696969 1px dashed; z-index:70;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 250px; line-height: 19px;">
+                                &nbsp;
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd&amp;f=16">
+                                    (21) Log Analyzer : Piwik
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=6">
+                                    (22) Blog System : WordPress
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=7">
+                                    (23) Wiki System : MediaWiki
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=1">
+                                    (24) Use mod_proxy#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=2">
+                                    (25) Use mod_proxy#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=5">
+                                    (26) Use mod_proxy_wstunnel
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=3">
+                                    (27) Use mod_ratelimit
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=9">
+                                    (28) Use mod_limitipconn
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=4">
+                                    (29) Use mod_evasive
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=httpd2&amp;f=8">
+                                    (30) Use mod_security
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx">
+                                    &nbsp; Nginx
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=1">
+                                    ( 1 ) Install Nginx
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=2">
+                                    ( 2 ) Virtual Hostings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=3">
+                                    ( 3 ) Enable Userdir
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=4">
+                                    ( 4 ) Configure SSL
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=5">
+                                    ( 5 ) Enable Basic Auth
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=6">
+                                    ( 6 ) Reverse Proxy Settings#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=7">
+                                    ( 7 ) Reverse Proxy Settings#2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=8">
+                                    ( 8 ) Reverse Proxy Settings#3
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=nginx&amp;f=9">
+                                    ( 9 ) Nginx + PHP-FPM
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=mariadb">
+                            Database
+                        </a>
+                        <ul style="position: absolute; margin-top: -14.6em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=postgresql">
+                                    &nbsp; PostgreSQL 9.2
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=postgresql95">
+                                    &nbsp; PostgreSQL 9.5
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=postgresql95&amp;f=1">
+                                    ( 1 ) Install PostgreSQL 9.5
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=postgresql95&amp;f=2">
+                                    ( 2 ) Install phpPgAdmin
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=postgresql95&amp;f=3">
+                                    ( 3 ) Replication Settings
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=mariadb">
+                                    &nbsp; MariaDB 5.5
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=mariadb101">
+                                    &nbsp; MariaDB 10.1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mariadb101&amp;f=1">
+                                    ( 1 ) Install MariaDB 10.1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mariadb101&amp;f=2">
+                                    ( 2 ) Install phpMyAdmin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mariadb101&amp;f=3">
+                                    ( 3 ) Replication Settings
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=mariadb101&amp;f=4">
+                                    ( 4 ) MariaDB Galera Cluster
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=mysql56">
+                                    &nbsp; MySQL 5.6
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mysql56&amp;f=1">
+                                    ( 1 ) Install MySQL 5.6
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mysql56&amp;f=2">
+                                    ( 2 ) Install phpMyAdmin
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=mysql56&amp;f=3">
+                                    ( 3 ) Replication Settings
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=oracle12c">
+                                    &nbsp; Oracle Database 12c
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=oracle12c&amp;f=1">
+                                    ( 1 ) Pre-Requirements
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=oracle12c&amp;f=2">
+                                    ( 2 ) Install Oracle 12c
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=oracle12c&amp;f=3">
+                                    ( 3 ) Add Oracle Net Listener
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=oracle12c&amp;f=4">
+                                    ( 4 ) Create Database
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=oracle12c&amp;f=5">
+                                    ( 5 ) Use Enterprise Manager
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 0px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=oracle12c&amp;f=6">
+                                    ( 6 ) Create Systemd file
+                                </a>
+                            </li>
+                        </ul>
+                        <ul style="position: absolute; margin-top: -14.6em; margin-left: 22.8em; border-left: #696969 1px dashed; z-index:70;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=memcached">
+                                    &nbsp; Memcached
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=memcached&amp;f=1">
+                                    ( 1 ) Install Memcached
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=memcached&amp;f=2">
+                                    ( 2 ) Basic Usage
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=memcached&amp;f=3">
+                                    ( 3 ) Use it on Python
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=memcached&amp;f=4">
+                                    ( 4 ) Use it on PHP
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=memcached&amp;f=5">
+                                    ( 5 ) Use it on Node.js
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=redis">
+                                    &nbsp; Redis
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=1">
+                                    ( 1 ) Install Redis
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=2">
+                                    ( 2 ) Basic Usage#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=3">
+                                    ( 3 ) Basic Usage#2 (Keys)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=4">
+                                    ( 4 ) Basic Usage#3 (Lists)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=5">
+                                    ( 5 ) Basic Usage#4 (Hashes)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=6">
+                                    ( 6 ) Basic Usage#5 (Sets)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=8">
+                                    ( 7 ) Use it on Python
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=9">
+                                    ( 8 ) Use it on PHP
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=10">
+                                    ( 9 ) Use it on Node.js
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=7">
+                                    (10) Redis Replication
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=11">
+                                    (11) Redis Sentinel
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 0px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=redis&amp;f=12">
+                                    (12) Redis Benchmark
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=ftp">
+                            FTP Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -3.7em;">
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=1">
+                                    (1) Install Vsftpd
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=5">
+                                    (2) Install ProFTPD
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=7">
+                                    (3) Install Pure-FTPd
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=2">
+                                    (4) FTP Client : CentOS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=3">
+                                    (5) FTP Client : Windows
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=4">
+                                    (6) Vsftpd over TLS/SSL
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=6">
+                                    (7) ProFTPD over TLS/SSL
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=8">
+                                    (8) Pure-FTPd over TLS/SSL
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=ftp&amp;f=9">
+                                    (9) Pure-FTPd + Clamav
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=mail">
+                            MAIL Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -5.55em;">
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mail&amp;f=1">
+                                    (1) Install Postfix
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mail&amp;f=2">
+                                    (2) Install Dovecot
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mail&amp;f=3">
+                                    (3) Email Client's Setting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mail&amp;f=4">
+                                    (4) Configure SSL
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mail&amp;f=5">
+                                    (5) Virtual domain
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mail&amp;f=6">
+                                    (6) Postfix + Clamav + Amavisd
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mail&amp;f=7">
+                                    (7) Mail Log Analyze : pflogsumm
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=mail&amp;f=8">
+                                    (8) Mail Log Analyze : Awstats
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=samba">
+                            Samba Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -5.55em;">
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=samba&amp;f=1">
+                                    (1) Fully accessed shared Folder
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=samba&amp;f=2">
+                                    (2) Limited shared Folder
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=samba&amp;f=3">
+                                    (3) Samba Winbind
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=samba&amp;f=4">
+                                    (4) Samba AD DC : Install
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=samba&amp;f=5">
+                                    (5) Samba AD DC : User Manage
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=samba&amp;f=6">
+                                    (6) Samba AD DC : Join Domain
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=squid">
+                            Proxy Server
+                        </a>
+                        <ul style="position: absolute; margin-top: -5.55em;">
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=squid&amp;f=1">
+                                    (1) Install Squid
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=squid&amp;f=2">
+                                    (2) Configure Proxy Client
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=squid&amp;f=3">
+                                    (3) Use Basic Auth
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=squid&amp;f=4">
+                                    (4) Reverse Proxy Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=squid&amp;f=5">
+                                    (5) Squid + SquidClamav
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=squid&amp;f=6">
+                                    (6) Squid + SquidGuard
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=haproxy">
+                            Load Balancing
+                        </a>
+                        <ul style="position: absolute; margin-top: -23.7em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=pen">
+                                    &nbsp; Pen
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=pen&amp;f=1">
+                                    (1) HTTP Load Balancing
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=pen&amp;f=2">
+                                    (2) SSL Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=pen&amp;f=3">
+                                    (3) Refer to the Statics
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=pen&amp;f=4">
+                                    (4) MariaDB Load Balancing
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=pound">
+                                    &nbsp; Pound
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=pound&amp;f=1">
+                                    (1) HTTP Load Balancing
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=pound&amp;f=2">
+                                    (2) SSL Settings
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=pound&amp;f=3">
+                                    (3) URL Redirect
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=lvs">
+                                    &nbsp; LVS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=lvs&amp;f=1">
+                                    (1) Install LVS
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=lvs&amp;f=2">
+                                    (2) LVS + Keepalived
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=haproxy">
+                                    &nbsp; HAProxy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=haproxy&amp;f=1">
+                                    (1) HTTP Load Balancing
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=haproxy&amp;f=2">
+                                    (2) SSL Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=haproxy&amp;f=3">
+                                    (3) Refer to the Statistics#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=haproxy&amp;f=4">
+                                    (4) Refer to the Statistics#2
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 0px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=haproxy&amp;f=5">
+                                    (5) Load Balancing on Layer4
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=sysstat">
+                            Monitoring
+                        </a>
+                        <ul style="position: absolute; margin-top: -25.55em; z-index:60;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=osquery">
+                                    &nbsp; OSQuery
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=osquery&amp;f=1">
+                                    ( 1 ) Install OSQuery
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=osquery&amp;f=2">
+                                    ( 2 ) Scheduled Monitoring
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=munin">
+                                    &nbsp; Munin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=munin&amp;f=1">
+                                    ( 1 ) Install Munin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=munin&amp;f=2">
+                                    ( 2 ) Email Notification
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=munin&amp;f=3">
+                                    ( 3 ) Set Thresholds
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=munin&amp;f=4">
+                                    ( 4 ) Add Target Hosts
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=munin&amp;f=5">
+                                    ( 5 ) Add Target Items
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=sysstat">
+                                    &nbsp; SysStat
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=sysstat&amp;f=1">
+                                    ( 1 ) Install SysStat
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=sysstat&amp;f=2">
+                                    ( 2 ) How to use
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32">
+                                    &nbsp; Zabbix 3.2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=1">
+                                    ( 1 ) Install Zabbix 3.2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=2">
+                                    ( 2 ) Initial Setup
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=3">
+                                    ( 3 ) Change admin password
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=4">
+                                    ( 4 ) Set Monitoring Target
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=5">
+                                    ( 5 ) Set SMTP for Notifications
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=6">
+                                    ( 6 ) Notification email setting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=7">
+                                    ( 7 ) Add Monitoring Target(CentOS)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=8">
+                                    ( 8 ) Add Monitoring Target(Win)
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix32&amp;f=9">
+                                    ( 9 ) Add Monitoring Item
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix30">
+                                    &nbsp; Zabbix 3.0 LTS
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 0px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=zabbix">
+                                    &nbsp; Zabbix 2.4
+                                </a>
+                            </li>
+                        </ul>
+                        <ul style="position: absolute; margin-top: -25.55em; margin-left: 22.8em; border-left: #696969 1px dashed; z-index:70;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=mrtg">
+                                    &nbsp; MRTG
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mrtg&amp;f=1">
+                                    ( 1 ) Install MRTG
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mrtg&amp;f=2">
+                                    ( 2 ) Get CPU Load Average
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mrtg&amp;f=3">
+                                    ( 3 ) Get Memory Usage
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=mrtg&amp;f=4">
+                                    ( 4 ) Get Disk Usage
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=mrtg&amp;f=5">
+                                    ( 5 ) Get httpd Processes
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=cacti">
+                                    &nbsp; Cacti
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=cacti&amp;f=1">
+                                    ( 1 ) Install Cacti
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=cacti&amp;f=2">
+                                    ( 2 ) Setup Cacti
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=cacti&amp;f=3">
+                                    ( 3 ) Basic Monitoring Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=cacti&amp;f=4">
+                                    ( 4 ) Email Notification Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=cacti&amp;f=5">
+                                    ( 5 ) Enable Threshold
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=cacti&amp;f=6">
+                                    ( 6 ) Set Threshold
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=cacti&amp;f=7">
+                                    ( 7 ) Add Monitoring Host
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=nagios">
+                                    &nbsp; Nagios
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nagios&amp;f=1">
+                                    ( 1 ) Install Nagios
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nagios&amp;f=2">
+                                    ( 2 ) Notification Setting
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nagios&amp;f=3">
+                                    ( 3 ) Set Thresholds
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nagios&amp;f=4">
+                                    ( 4 ) Add Monitoring Target Item
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nagios&amp;f=5">
+                                    ( 5 ) Add Monitoring Target Host#1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nagios&amp;f=6">
+                                    ( 6 ) Add Monitoring Target Host#2
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=nagios&amp;f=7">
+                                    ( 7 ) Add Monitoring Target Host#3
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 0px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=monitorix">
+                                    &nbsp; Monitorix
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=ssh">
+                            Lang / Development
+                        </a>
+                        <ul style="position: absolute; margin-top: -27.4em;">
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=ruby22">
+                                    &nbsp; Ruby
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ruby22">
+                                    Install Ruby 2.2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ruby23">
+                                    Install Ruby 2.3
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=rails4">
+                                    Install Ruby on Rails 4
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=rails5">
+                                    Install Ruby on Rails 5
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=nodejs">
+                                    &nbsp; JavaScript
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=nodejs">
+                                    Install Node.js
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=nodejs4">
+                                    Install Node.js 4
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=php56">
+                                    &nbsp; PHP
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=php56">
+                                    Install PHP 5.6
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=php70">
+                                    Install PHP 7.0
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=php71">
+                                    Install PHP 7.1
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=python33">
+                                    &nbsp; Python
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=python33">
+                                    Install Python 3.3
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=python34">
+                                    Install Python 3.4
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=python35">
+                                    Install Python 3.5
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=django">
+                                    Install Django
+                                </a>
+                            </li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=jdk8">
+                                    &nbsp; Java
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=jdk8&amp;f=1">
+                                    Install JDK 8
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=jdk8&amp;f=2">
+                                    Install OpenJDK 8
+                                </a>
+                            </li>
+                            <li style="border-bottom: #696969 0px solid;">
+                                <a href="assets/note?os=CentOS_7&amp;p=tomcat8">
+                                    Install Tomcat 8
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=x">
+                            Desktop Env
+                        </a>
+                        <ul style="position: absolute; margin-top: -12.8em;">
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=5">
+                                    (10) Connect to Windows with RDP
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=10">
+                                    ( 9 ) VNC Client : noVNC
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=3">
+                                    ( 8 ) VNC Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=9">
+                                    ( 7 ) Xrdp Server
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=8">
+                                    ( 6 ) Xfce Desktop
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=7">
+                                    ( 5 ) MATE Desktop
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=6">
+                                    ( 4 ) Cinnamon Desktop
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=2">
+                                    ( 3 ) KDE Desktop
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=4">
+                                    ( 2 ) Use GNOME Shell
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=x&amp;f=1">
+                                    ( 1 ) GNOME Desktop
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="tree">
+                        <a href="assets/note?os=CentOS_7&amp;p=dhcp">
+                            Others #1
+                        </a>
+                        <ul style="position: absolute; margin-top: -31.0em;">
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=zarafa">
+                                    Zarafa
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Groupware
+                                    </span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=zarafa&amp;f=1">
+                                            (1) Install Zarafa
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=zarafa&amp;f=2">
+                                            (2) Access to Web UI
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=zimbra">
+                                    Zimbra
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Groupware
+                                    </span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=zimbra&amp;f=1">
+                                            (1) Install Zimbra
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=zimbra&amp;f=2">
+                                            (2) Setup Zimbra
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=bacula">
+                                    Bacula
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Backup
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=bacula&amp;f=1">
+                                            (1) Configure Bacula Server#1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=bacula&amp;f=2">
+                                            (2) Configure Bacula Server#2
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=bacula&amp;f=3">
+                                            (3) Configure Bacula Client
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=bacula&amp;f=4">
+                                            (4) Backup Operation
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=bacula&amp;f=5">
+                                            (5) Restore Operation
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=subversion">
+                                    Subversion
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Revision Control
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=subversion&amp;f=1">
+                                            (1) Install Subversion
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=subversion&amp;f=2">
+                                            (2) Set Access Control
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=subversion&amp;f=3">
+                                            (3) Windows Client
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=subversion&amp;f=4">
+                                            (4) HTTP Access
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=gitolite3">
+                                    Gitolite3
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Revision Control
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=gitolite3&amp;f=1">
+                                            (1) Install Gitolite
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=gitolite3&amp;f=2">
+                                            (2) Add Users
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=gitolite3&amp;f=3">
+                                            (3) Add Repositories
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=gitolite3&amp;f=4">
+                                            (4) Set Access Control
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=rabbitmq">
+                                    RabbitMQ
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Message Broker
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -3.7em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=rabbitmq&amp;f=1">
+                                            (1) Install RabbitMQ
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=rabbitmq&amp;f=2">
+                                            (2) Use on Python
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=rabbitmq&amp;f=3">
+                                            (3) Use on PHP
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=rabbitmq&amp;f=4">
+                                            (4) Use on Ruby
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=rabbitmq&amp;f=5">
+                                            (5) Use Web UI
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=rabbitmq&amp;f=6">
+                                            (6) Use rabbitmqadmin
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=rabbitmq&amp;f=7">
+                                            (7) Configure Cluster
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=func">
+                                    Func
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Remote Manage
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=func&amp;f=1">
+                                            (1) Install Func
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=func&amp;f=2">
+                                            (2) Basic Operation
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=func&amp;f=3">
+                                            (3) Use YumModule
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=func&amp;f=4">
+                                            (4) Use CopyFileModule
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=func&amp;f=5">
+                                            (5) Use CommandModule
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=salt">
+                                    Salt
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Config Manage
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=salt&amp;f=1">
+                                            (1) Install Salt
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=salt&amp;f=2">
+                                            (2) Salt Basic Usage
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=salt&amp;f=3">
+                                            (3) Use Salt State File#1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=salt&amp;f=4">
+                                            (4) Use Salt State File#2
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=salt&amp;f=5">
+                                            (5) Use Salt-cp
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=puppet">
+                                    Puppet
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Config Manage
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -3.7em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=1">
+                                            ( 1 ) Install Puppet
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=2">
+                                            ( 2 ) file Resource
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=3">
+                                            ( 3 ) package Resource
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=4">
+                                            ( 4 ) service Resource
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=5">
+                                            ( 5 ) group Resource
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=6">
+                                            ( 6 ) user Resource
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=7">
+                                            ( 7 ) exec Resource
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=8">
+                                            ( 8 ) node Section
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=9">
+                                            ( 9 ) class Section
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=puppet&amp;f=10">
+                                            (10) facter Variable
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=ansible">
+                                    Ansible
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Config Manage
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=ansible&amp;f=1">
+                                            (1) Install Ansible
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=ansible&amp;f=2">
+                                            (2) Basic Usage
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=ansible&amp;f=3">
+                                            (3) Use Playbook#1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=ansible&amp;f=4">
+                                            (4) Use Playbook#2
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=ansible&amp;f=5">
+                                            (5) Use Playbook#3
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=ansible&amp;f=6">
+                                            (6) Use Playbook#4
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=ansible&amp;f=7">
+                                            (7) Use Playbook#5
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=ansible&amp;f=8">
+                                            (8) Use Playbook#6
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=spacewalk">
+                                    Spacewalk
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; System Manage
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=spacewalk&amp;f=1">
+                                            (1) Install Spacewalk
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=spacewalk&amp;f=2">
+                                            (2) Initial Settings
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=spacewalk&amp;f=3">
+                                            (3) Clients' Settings
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=pacemaker">
+                                    Pacemaker
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; HA Cluster
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=pacemaker&amp;f=1">
+                                            (1) Install Pacemaker
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=pacemaker&amp;f=2">
+                                            (2) Add Resource (httpd)
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=pacemaker&amp;f=3">
+                                            (3) CLVM + GFS2
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=drbd">
+                                    DRBD
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Distributed Storage
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -0.1em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=drbd&amp;f=1">
+                                            (1) Install DRBD
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=drbd&amp;f=2">
+                                            (2) Configure DRBD
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=pxe">
+                                    PXE Boot
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; PXE Server
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=pxe&amp;f=1">
+                                            (1) Configure PXE Server
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=pxe&amp;f=2">
+                                            (2) Network Install
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=pxe&amp;f=3">
+                                            (3) Kickstart Install
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=pxe&amp;f=4">
+                                            (4) Diskless Client
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=openvpn">
+                                    OpenVPN
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; VPN Server
+                                    </span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=openvpn&amp;f=1">
+                                            (1) Configure VPN Server
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=openvpn&amp;f=2">
+                                            (2) Configure VPN Client
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=lvm">
+                                    LVM
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; LVM Manage
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.9em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=lvm&amp;f=1">
+                                            (1) Manage Phisical Volumes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=lvm&amp;f=2">
+                                            (2) Manage Volume Groups
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=lvm&amp;f=3">
+                                            (3) Manage Logical Volumes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=lvm&amp;f=4">
+                                            (4) Create Mirroring Volume
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=lvm&amp;f=5">
+                                            (5) Create Striped Volume
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=rsyslog">
+                                    Rsyslog
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Syslog Server
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -0.1em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=rsyslog&amp;f=1">
+                                            (1) Output Logs to Remote Host
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=rsyslog&amp;f=2">
+                                            (2) Output Logs to Database
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=audit">
+                                    Auditd
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Audit
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -5.6em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=audit&amp;f=1">
+                                            (1) Install Auditd
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=audit&amp;f=2">
+                                            (2) Output Logs to Remote Host
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=audit&amp;f=3">
+                                            (3) Search Logs with ausearch
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=audit&amp;f=4">
+                                            (4) Display Logs with aureport
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=audit&amp;f=5">
+                                            (5) Add Audit Rules
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2">
+                                <a href="assets/note?os=CentOS_7&amp;p=selinux">
+                                    SELinux
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Access Control
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -16.45em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=1">
+                                            ( 1 ) SELinux Operating Mode
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=2">
+                                            ( 2 ) SELinux Policy Type
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=3">
+                                            ( 3 ) SELinux Context
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=4">
+                                            ( 4 ) Change Boolean Values
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=5">
+                                            ( 5 ) Change File Types
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=6">
+                                            ( 6 ) Change Port Types
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=7">
+                                            ( 7 ) Search Logs
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=8">
+                                            ( 8 ) Use SETroubleShoot
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=9">
+                                            ( 9 ) Use audit2allow
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=10">
+                                            (10) Use matchpathcon
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=selinux&amp;f=11">
+                                            (11) Use sesearch
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="tree2" style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=firewalld">
+                                    Firewalld
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Packet Filter
+                                    </span>
+                                </a>
+                                <ul style="position: absolute; margin-top: -1.8em;">
+                                    <li>
+                                        <a href="assets/note?os=CentOS_7&amp;p=firewalld&amp;f=1">
+                                            (1) Basic Operation
+                                        </a>
+                                    </li>
+                                    <li style="border-bottom: 0px">
+                                        <a href="assets/note?os=CentOS_7&amp;p=firewalld&amp;f=2">
+                                            (2) IP Masquerade
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="other">
+                        <a href="assets/note?os=CentOS_7&amp;p=hostname">
+                            Others #2
+                        </a>
+                        <ul style="position: absolute; margin-top: -27.4em; margin-left: 22.8em; border-left: #696969 1px dashed; z-index:60;">
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=iperf3">
+                                    Check Network Bandwidth
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=sshfs">
+                                    Mount with SSHFS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=lshw">
+                                    Display Hardware Info
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=raid1">
+                                    Configure RAID 1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=quota">
+                                    Set Disk Quota
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=hdparm">
+                                    Display HDD Info
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=add_hd">
+                                    Add Hard Drive
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ssl">
+                                    Create SSL Certificates
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=resetpass">
+                                    Reset root Password
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=psacct">
+                                    Monitor User Activity
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=pam_tally">
+                                    Count attempted Accesses
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=runlevel">
+                                    Change RunLevel
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=timezone">
+                                    Set Timezone
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=keymap">
+                                    Set Keymap
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=locale">
+                                    Set System Language
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=password">
+                                    Set Password Rules
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=hostname">
+                                    Set Hostname
+                                </a>
+                            </li>
+                        </ul>
+                        <ul style="position: absolute; margin-top: -32.85em; z-index:55;">
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=virtualmin">
+                                    Virtualmin
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; System Manage
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=usermin">
+                                    Usermin
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; System Manage
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=webmin">
+                                    Webmin
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; System Manage
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=ajenti">
+                                    Ajenti
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; System Manage
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=cockpit">
+                                    Cockpit
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; System Manage
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=redmine">
+                                    Redmine
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Project Manage
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=gitlab">
+                                    GitLab
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Project Manage
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=owncloud">
+                                    ownCloud
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Cloud Storage
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=hadoop">
+                                    Hadoop
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Distributed File Sys
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=powershell">
+                                    PowerShell
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; CommandLine Shell
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=lynis">
+                                    Lynis
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Security Audit
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=tripwire">
+                                    Tripwire
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Host Bsed IDS
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=aide">
+                                    AIDE
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Host Bsed IDS
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=rkhunter">
+                                    RKHunter
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Detect Rootkit
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=lsync">
+                                    Lsync
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; File Sync
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=rsync">
+                                    Rsync
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; File Sync
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=tcp_wrapper">
+                                    TCP Wrapp
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Access Controls
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=acl">
+                                    ACL
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Access Controls
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="assets/note?os=CentOS_7&amp;p=realmd">
+                                    Realmd
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; Join in AD Domain
+                                    </span>
+                                </a>
+                            </li>
+                            <li style="border-bottom: 0px">
+                                <a href="assets/note?os=CentOS_7&amp;p=clamav">
+                                    Clamav
+                                    <span style="display:inline;position:absolute;left:90px;">
+                                        - &nbsp; AntiVirus
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+<!-- LEFT END -->
+
+<!-- CONTENTS BEGIN -->
+<div id="contents">
+
+	<div class="subject">用Puppet推送Zabbix Agent</div>
+
+	<div class="wrapper">
+		<p>[1] 创建zabbix模块目录。</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>mkdir -p /etc/puppet/modules/zabbix/<span class="o">{</span>manifests,templates<span class="o">}</span></code></pre></figure>
+
+<hr />
+
+<p>[2] 创建init.pp清单：</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>cat /etc/puppet/modules/zabbix/manifests/init.pp 
+class zabbix <span class="o">{</span>
+  package <span class="o">{</span> <span class="s1">'epel-release'</span>:
+    ensure <span class="o">=</span>&gt; installed,
+  <span class="o">}</span>
+  package <span class="o">{</span> <span class="s1">'zabbix22-agent'</span>:
+    ensure <span class="o">=</span>&gt; installed,
+  <span class="o">}</span>
+  file <span class="o">{</span> <span class="s1">'/etc/zabbix/zabbix_agentd.conf'</span>:
+    content <span class="o">=</span>&gt; template<span class="o">(</span><span class="s2">"zabbix/zabbix_agentd.conf.erb"</span><span class="o">)</span>,
+    ensure <span class="o">=</span>&gt; file,
+  <span class="o">}</span>
+  service <span class="o">{</span> <span class="s1">'zabbix-agent'</span>:
+    ensure <span class="o">=</span>&gt; <span class="s2">"running"</span>,
+    hasstatus <span class="o">=</span>&gt; <span class="nb">true</span>,
+    <span class="nb">enable</span> <span class="o">=</span>&gt; <span class="nb">true</span>,
+  <span class="o">}</span>
+  Package[<span class="s2">"zabbix22-agent"</span><span class="o">]</span> -&gt; File[<span class="s2">"/etc/zabbix/zabbix_agentd.conf"</span><span class="o">]</span> -&gt; Service[<span class="s2">"zabbix-agent"</span><span class="o">]</span>
+<span class="o">}</span></code></pre></figure>
+
+<hr />
+
+<p>[3] 创建zabbix_agentd.conf.erb模板：</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>cp /etc/zabbix/zabbix_agentd.conf /etc/puppet/modules/zabbix/templates/zabbix_agentd.conf.erb
+
+<span class="gp">$ </span>cat /etc/puppet/modules/zabbix/templates/zabbix_agentd.conf.erb
+<span class="nv">Server</span><span class="o">=</span>&lt;%<span class="o">=</span> zabbix_server %&gt;
+<span class="nv">ServerActive</span><span class="o">=</span>&lt;%<span class="o">=</span> zabbix_server %&gt;
+<span class="nv">Hostname</span><span class="o">=</span>&lt;%<span class="o">=</span> fqdn %&gt;
+... ... ... ...</code></pre></figure>
+
+<hr />
+
+<p>[4] 编辑site.pp：</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$# </span>cat /etc/puppet/manifests/site.pp 
+Package <span class="o">{</span>
+  allow_virtual <span class="o">=</span>&gt; <span class="nb">true</span>,
+<span class="o">}</span>
+
+node default <span class="o">{</span>
+  <span class="nv">$zabbix_server</span> <span class="o">=</span> <span class="s2">"192.168.154.137"</span>
+  include zabbix
+<span class="o">}</span></code></pre></figure>
+
+
+    </div>
+
+</div>
+
+<!-- CONTENTS END -->
+
+
+
+        
+    </body>
+
+</html>
