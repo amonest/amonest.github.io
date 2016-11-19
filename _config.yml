@@ -1,3 +1,11 @@
+title : 随风的工作笔记
+tagline: 记录工作中发生的点点滴滴
+author :
+  name : 随风
+  email : eastson@outlook.com
+  github : amonest
+  qq : 1787585212
+
 # 生成的HTML路径格式
 permalink: /:year/:month/:day/:title
 
