@@ -72,7 +72,7 @@ table {
 	height: 100%;
 	background-color: #f5f5f5;
 	border-right: 1px solid #696969;
-	padding-top: 0px;
+	padding-top: 17px;
 	z-index: 4;
 }
 #right {
@@ -88,7 +88,7 @@ table {
 }
 #contents {
     background-color: #ffffff;
-    padding: 15px 10px 10px 180px;
+    padding: 40px 10px 30px 180px;
 	z-index: 1;
 }
 #toolbar0 {
@@ -211,6 +211,7 @@ a.fb-like:hover {
 }
 .wrapper {
     padding: 10px 5px;
+    background: url(img/bgcom.gif);
 }
 .wrapper p, .wrapper finger, 
 .wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
@@ -232,7 +233,7 @@ a.fb-like:hover {
     padding: 12px 12px 12px 12px;
 }
 .highlight code {
-    font-family: Tahoma, Arial, sans-serif;
+    font-family: Consolas,monaco,Tahoma, Arial, sans-serif;
 }
 #bann {
     width: 100%;

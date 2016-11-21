@@ -1,6 +1,7 @@
 ---
 layout: post
-title: 用Puppet推送Zabbix Agent
+title: 使用Puppet安装Zabbix Agent
+tag : [Puppet, Zabbix]
 ---
 
 [1] 创建zabbix模块目录。
@@ -10,7 +11,6 @@ $ mkdir -p /etc/puppet/modules/zabbix/{manifests,templates}
 {% endhighlight %}
 
 ---
-
 
 [2] 创建init.pp清单：
 
@@ -38,7 +38,6 @@ class zabbix {
 
 ---
 
-
 [3] 创建zabbix_agentd.conf.erb模板：
 
 {% highlight shell %}
@@ -53,7 +52,6 @@ Hostname=<%= fqdn %>
 
 ---
 
-
 [4] 编辑site.pp：
 {% highlight shell %}
 $# cat /etc/puppet/manifests/site.pp 
@@ -66,4 +64,3 @@ node default {
   include zabbix
 }
 {% endhighlight %}
-

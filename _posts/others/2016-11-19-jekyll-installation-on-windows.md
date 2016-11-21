@@ -1,7 +1,6 @@
 ---
 layout : post
 title : Windows下安装Jekyll+Rouge
-category : Others
 tag : [Jekyll, Rouge]
 ---
 
@@ -32,7 +31,6 @@ C:\Ruby23-x64\DevKit>ruby dk.rb install
 ---
 
 [4] 安装Jekyll。
-
 {% highlight shell %}
 C:\Ruby23-x64>gem install jekyll
 {% endhighlight %}
