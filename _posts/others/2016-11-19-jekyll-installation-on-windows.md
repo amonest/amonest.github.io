@@ -12,7 +12,7 @@ Rouge支持的语言：[List of supported languages and lexers](https://github.c
 
 [1] 进入<http://rubyinstaller.org/downloads/>, 根据自己的系统选择64-bit或32-bit的Ruby下载安装。
 
-![ruby-setup-2](/images/ruby-setup-2.png)
+![ruby-setup-2](/assets/img/posts/ruby-setup-2.png)
 
 ---
 
