@@ -4,13 +4,11 @@ title: Spring Boot Web集成JSP视图
 tag : [Spring, Spring Boot]
 ---
 
-[1] 执行[《Spring Boot Web快速创建Web项目》](/2016/12/09/spring-boot-web-create-project)。
-
-参考：[《Serving Web Content with Spring MVC》](https://spring.io/guides/gs/serving-web-content/)。
+[1] 参考[《Serving Web Content with Spring MVC》](https://spring.io/guides/gs/serving-web-content/)。
 
 ---
 
-[2] 修改pom.xml，增加Thymeleaf依赖。
+[2] 修改pom.xml。
 
 {% highlight xml %}
 <dependency>
@@ -56,10 +54,6 @@ Spring Boot默认模板目录是classpath:/templates，所以模板文件可以�
 
 ---
 
-[5] 启动应用程序。
-
----
-
-[6] 访问http://localhost:8080/hello，测试是否成功。
+[5] 启动应用程序，访问http://localhost:8080/hello，测试是否成功。
 
 ![spring-boot-web-integrate-thymeleaf](/assets/img/posts/spring-boot-web-integrate-thymeleaf.png)
