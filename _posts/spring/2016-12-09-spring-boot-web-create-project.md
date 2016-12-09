@@ -145,4 +145,4 @@ public class SimpleController {
 
 [6] 访问http://localhost:8080/hello，测试是否成功。
 
-![spring-boot-web-create-project](/assets/img/posts/spring-boot-web-create-project.png)
+![spring-boot-web-integrate-thymeleaf](/assets/img/posts/spring-boot-web-integrate-thymeleaf.png)
