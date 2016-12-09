@@ -27,7 +27,7 @@ public class SimpleController {
 
     @RequestMapping(value ="/hello", method = RequestMethod.GET)
     public String hello(Model model) {
-      model.addAttribute("name", "mingyang");
+        model.addAttribute("name", "mingyang");
         return "hello";
     }
 }
@@ -35,7 +35,8 @@ public class SimpleController {
 
 ---
 
-[4] 创建模板src/resources/templates/hello.html。Spring Boot默认模板目录是classpath://templates，所以模板文件可以放在src/main/resources/templates或src/main/java/templates。
+[4] 创建模板src/resources/templates/hello.html。
+Spring Boot默认模板目录是classpath://templates，所以模板文件可以放在src/main/resources/templates或src/main/java/templates。
 
 {% highlight html %}
 <!DOCTYPE HTML>
