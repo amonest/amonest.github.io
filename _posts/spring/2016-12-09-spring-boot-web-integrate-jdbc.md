@@ -14,7 +14,7 @@ title: Spring Boot Web集成JDBC
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
- </dependency>
+</dependency>
 {% endhighlight %}
 
 ---

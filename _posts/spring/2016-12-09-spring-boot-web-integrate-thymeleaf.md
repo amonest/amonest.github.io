@@ -1,7 +1,6 @@
 ---
 layout: post
-title: Spring Boot Web集成JSP视图
-tag : [Spring, Spring Boot]
+title: Spring Boot Web集成Thymeleaf
 ---
 
 [1] 参考[《Serving Web Content with Spring MVC》](https://spring.io/guides/gs/serving-web-content/)。
