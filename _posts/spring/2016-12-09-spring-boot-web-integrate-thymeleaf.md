@@ -36,6 +36,7 @@ public class SimpleController {
 ---
 
 [4] 创建模板src/resources/templates/hello.html。
+
 Spring Boot默认模板目录是classpath://templates，所以模板文件可以放在src/main/resources/templates或src/main/java/templates。
 
 {% highlight html %}
