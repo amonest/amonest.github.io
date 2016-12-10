@@ -3,7 +3,16 @@ layout: post
 title: Spring Boot Web集成JDBC
 ---
 
-[1] 修改pom.xml：
+[1] 执行[《创建Web项目》](/2016/12/09/spring-boot-web-create-project)。
+
+---
+
+[2] 执行[《集成Thymeleaf》](/2016/12/09/spring-boot-web-integrate-thymeleaf)。
+
+
+---
+
+[3] 修改pom.xml：
 
 {% highlight xml %}
 <dependency>
@@ -19,7 +28,7 @@ title: Spring Boot Web集成JDBC
 
 ---
 
-[2] 创建Student.java。
+[4] 创建Student.java。
 
 {% highlight java %}
 package net.mingyang.spring_cloth_sample;
@@ -79,7 +88,7 @@ public class Student implements Serializable {
 
 ---
 
-[3] 创建StudentService.java。
+[5] 创建StudentService.java。
 
 {% highlight java %}
 package net.mingyang.spring_cloth_sample;
@@ -120,7 +129,7 @@ public class StudentService {
 
 ---
 
-[4] 创建StudentController.java。
+[6] 创建StudentController.java。
 
 {% highlight java %}
 package net.mingyang.spring_cloth_sample;
@@ -150,7 +159,7 @@ public class StudentController {
 
 ---
 
-[5] 创建模板src/resources/templates/student_list.html。
+[7] 创建模板src/resources/templates/student_list.html。
 
 {% highlight html %}
 <!DOCTYPE HTML>
@@ -182,6 +191,6 @@ public class StudentController {
 
 ---
 
-[6] 启动应用程序，访问http://localhost:8080/student，测试是否成功。
+[8] 启动应用程序，访问http://localhost:8080/student，测试是否成功。
 
 ![spring-boot-web-integrate-jdbc](/assets/img/posts/spring-boot-web-integrate-jdbc.png)

@@ -7,7 +7,11 @@ title: Spring Boot Web集成Thymeleaf
 
 ---
 
-[2] 修改pom.xml。
+[2] 执行[《创建Web项目》](/2016/12/09/spring-boot-web-create-project)。
+
+---
+
+[3] 修改pom.xml。
 
 {% highlight xml %}
 <dependency>
@@ -18,7 +22,7 @@ title: Spring Boot Web集成Thymeleaf
 
 ---
 
-[3] 修改SimpleController.java。
+[4] 修改SimpleController.java。
 
 {% highlight java %}
 @Controller
@@ -34,7 +38,7 @@ public class SimpleController {
 
 ---
 
-[4] 创建模板src/resources/templates/hello.html。
+[5] 创建模板src/resources/templates/hello.html。
 
 Spring Boot默认模板目录是classpath:/templates，所以模板文件可以放在src/main/resources/templates或src/main/java/templates。
 
@@ -53,6 +57,6 @@ Spring Boot默认模板目录是classpath:/templates，所以模板文件可以�
 
 ---
 
-[5] 启动应用程序，访问http://localhost:8080/hello，测试是否成功。
+[6] 启动应用程序，访问http://localhost:8080/hello，测试是否成功。
 
 ![spring-boot-web-integrate-thymeleaf](/assets/img/posts/spring-boot-web-integrate-thymeleaf.png)
