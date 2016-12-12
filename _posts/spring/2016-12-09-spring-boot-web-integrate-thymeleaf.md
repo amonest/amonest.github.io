@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot Web集成Thymeleaf
+title: Spring Boot Web：集成Thymeleaf
 ---
 
 [1] 参考[《Serving Web Content with Spring MVC》](https://spring.io/guides/gs/serving-web-content/)。

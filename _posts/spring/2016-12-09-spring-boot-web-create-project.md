@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot Web快速创建Web项目
+title: Spring Boot Web：创建Web项目
 tag : [Spring, Spring Boot]
 ---
 
