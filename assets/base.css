@@ -217,20 +217,23 @@ a.fb-like:hover {
 .wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
     margin-bottom: 10px; 
 }
-
 .wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
     font-size: 1.00em; 
     font-weight: normal; 
 }
-
 .wrapper hr { 
     margin-bottom: 20px; 
     border: 0px;
 }
+.wrapper a { 
+    text-decoration: none;
+}
+
 .highlight {
     font-size: 15px;
     line-height: 20px;
     padding: 12px 12px 12px 12px;
+    margin-bottom: 10px; 
 }
 .highlight code {
     font-family: Consolas,monaco,Tahoma, Arial, sans-serif;

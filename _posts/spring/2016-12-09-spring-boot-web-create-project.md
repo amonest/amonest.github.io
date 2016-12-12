@@ -16,12 +16,12 @@ tag : [Spring, Spring Boot]
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.mingyang</groupId>
-  <artifactId>spring-cloth-sample</artifactId>
+  <artifactId>spring-boot-helloworld</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>spring-cloth-sample</name>
-  <url>http://maven.apache.org</url>
+  <name>spring-boot-helloworld</name>
+  <description>Demo project for Spring Boot</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -66,7 +66,7 @@ tag : [Spring, Spring Boot]
 [3] 创建Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_cloth_sample;
+package net.mingyang.spring_boot_helloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -85,7 +85,7 @@ public class Application
 [4] 创建SimpleController.java：
 
 {% highlight java %}
-package net.mingyang.spring_cloth_sample;
+package net.mingyang.spring_boot_helloworld;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -116,8 +116,8 @@ public class SimpleController {
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v1.4.1.RELEASE)
 
-2016-12-09 08:30:25.900  INFO 97316 --- [           main] n.m.spring_cloth_sample.Application      : Starting Application on C60602111 with PID 97316 (X:\dev\spring-test-suite\spring-cloth-sample\target\classes started by lbin in X:\dev\spring-test-suite\spring-cloth-sample)
-2016-12-09 08:30:25.903  INFO 97316 --- [           main] n.m.spring_cloth_sample.Application      : No active profile set, falling back to default profiles: default
+2016-12-09 08:30:25.900  INFO 97316 --- [           main] n.m.spring_boot_helloworld.Application   : Starting Application on C60602111 with PID 97316 (X:\dev\spring-test-suite\spring-cloth-sample\target\classes started by lbin in X:\dev\spring-test-suite\spring-cloth-sample)
+2016-12-09 08:30:25.903  INFO 97316 --- [           main] n.m.spring_boot_helloworld.Application   : No active profile set, falling back to default profiles: default
 2016-12-09 08:30:25.952  INFO 97316 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a43bd4: startup date [Fri Dec 09 08:30:25 CST 2016]; root of context hierarchy
 2016-12-09 08:30:27.096  INFO 97316 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
 2016-12-09 08:30:27.103  INFO 97316 --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
@@ -130,7 +130,7 @@ public class SimpleController {
 2016-12-09 08:30:27.298  INFO 97316 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
 2016-12-09 08:30:27.299  INFO 97316 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
 2016-12-09 08:30:27.538  INFO 97316 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a43bd4: startup date [Fri Dec 09 08:30:25 CST 2016]; root of context hierarchy
-2016-12-09 08:30:27.594  INFO 97316 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/hello],methods=[GET]}" onto public java.lang.String net.mingyang.spring_cloth_sample.SimpleController.hello()
+2016-12-09 08:30:27.594  INFO 97316 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/hello],methods=[GET]}" onto public java.lang.String net.mingyang.spring_boot_helloworld.SimpleController.hello()
 2016-12-09 08:30:27.597  INFO 97316 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
 2016-12-09 08:30:27.597  INFO 97316 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
 2016-12-09 08:30:27.627  INFO 97316 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
@@ -138,11 +138,11 @@ public class SimpleController {
 2016-12-09 08:30:27.660  INFO 97316 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
 2016-12-09 08:30:27.835  INFO 97316 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
 2016-12-09 08:30:27.873  INFO 97316 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
-2016-12-09 08:30:27.877  INFO 97316 --- [           main] n.m.spring_cloth_sample.Application      : Started Application in 2.359 seconds (JVM running for 2.59)
+2016-12-09 08:30:27.877  INFO 97316 --- [           main] n.m.spring_boot_helloworld.Application   : Started Application in 2.359 seconds (JVM running for 2.59)
 {% endhighlight %}
 
 ---
 
 [6] 访问http://localhost:8080/hello，测试是否成功。
 
-![spring-boot-web-integrate-thymeleaf](/assets/img/posts/spring-boot-web-integrate-thymeleaf.png)
+![spring-boot-web-create-project](/assets/img/posts/spring-boot-web-create-project.png)
