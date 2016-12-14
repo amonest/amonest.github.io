@@ -1,7 +1,6 @@
 ---
 layout: post
-title: Spring Boot配置文件application.properties
-tag : [Spring, Spring Boot]
+title: Spring Boot：application.properties
 ---
 
 {% highlight ini %}
