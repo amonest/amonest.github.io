@@ -3,10 +3,6 @@ layout: post
 title: Spring Boot Web：集成jTDS
 ---
 
-jTDS是一个开放源代码的100%纯Java实现的JDBC3.0驱动，它用于连接 Microsoft SQL Server（6.5，7，2000，2005，2008 和 2012）和Sybase（10 ，11 ，12 ，15）。
-
----
-
 [1] 执行[《创建Web项目》](/2016/12/09/spring-boot-web-create-project)。
 
 ---
