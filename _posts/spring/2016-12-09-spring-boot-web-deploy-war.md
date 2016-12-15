@@ -28,7 +28,26 @@ title: Spring Boot Web：发布war
 
 ---
 
-[3] 发布war。
+[3] 修改Application.java：
+
+{% highlight java %}
+@SpringBootApplication
+public class Application extends SpringBootServletInitializer
+{
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
+  
+  @Override
+  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    return application.sources(Application.class);
+  }
+}
+{% endhighlight %}
+
+---
+
+[4] 发布war。
 
 {% highlight shell %}
 $ mvn package
