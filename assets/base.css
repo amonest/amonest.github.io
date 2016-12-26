@@ -216,6 +216,7 @@ a.fb-like:hover {
 .wrapper p, .wrapper finger, 
 .wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
     margin-bottom: 10px; 
+    line-height: 20px;
 }
 .wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
     font-size: 1.00em; 
