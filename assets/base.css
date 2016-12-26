@@ -228,6 +228,9 @@ a.fb-like:hover {
 .wrapper a { 
     text-decoration: none;
 }
+.wrapper ul { 
+    padding-left: 20px;
+}
 
 .highlight {
     font-size: 15px;
