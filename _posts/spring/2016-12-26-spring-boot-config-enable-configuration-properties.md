@@ -1,10 +1,6 @@
 ---
 layout: post
-title: ApplicationContext
----
-
-Spring的ApplicationContext可以通过@Autowired直接注入。
-
+title: "@EnableConfigurationProperties"
 ---
 
 [1] 创建Maven项目。
@@ -53,34 +49,76 @@ Spring的ApplicationContext可以通过@Autowired直接注入。
 {% highlight java %}
 package net.mingyang.spring_boot_config;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@EnableConfigurationProperties(Application.HelloProperties.class)
 public class Application {
     
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
     
-    @Component
-    static class Runner implements ApplicationRunner {  
-        @Autowired
-        private ApplicationContext ctx;
+    @ConfigurationProperties(prefix = "hello")
+    public static class HelloProperties {
+        private String text;
+        
+        public HelloProperties() {
+            super();
+        }
 
-        public void run(ApplicationArguments args) throws Exception {
-            String[] beanNames = ctx.getBeanDefinitionNames();
-            Arrays.sort(beanNames);
-            for (String beanName : beanNames) {
-                System.out.println(beanName);
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("HelloProperties [text=");
+            builder.append(text);
+            builder.append("]");
+            return builder.toString();
+        }
+    }
+    
+    @Autowired
+    private HelloProperties helloProperties;
+    
+    @Bean
+    public ApplicationRunner runner() {
+        return new ApplicationRunner() {
+            public void run(ApplicationArguments args) throws Exception {
+                System.out.println(helloProperties);
             }
-        }  
-    }    
+        };
+    }
 }
+{% endhighlight %}
+
+---
+
+[4] src/main/resources/application.properties:
+
+{% highlight property %}
+hello.text = Hello World!
+{% endhighlight %}
+
+---
+
+[5] 执行结果：
+
+{% highlight shell %}
+D:\dev\spring-boot-config> mvn spring-boot:run
+HelloProperties [text=Hello World!]
 {% endhighlight %}

@@ -1,6 +1,6 @@
 ---
 layout : post
-title : Windows下安装Jekyll+Rouge
+title : 安装Jekyll+Rouge
 tag : [Jekyll, Rouge]
 ---
 

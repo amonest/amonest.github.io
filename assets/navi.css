@@ -101,7 +101,7 @@
 .navi ul li a:hover ul {
     visibility: visible;
     position: absolute;
-    width: 250px;
+    width: 260px;
     height: auto;
     border: #696969 1px solid;
     background: #f5f5f5;
@@ -113,7 +113,7 @@
     background: transparent;
     color: #000000;
     line-height: 19px;
-    width: 240px;
+    width: 250px;
     height: auto;
     text-decoration: none;
 }
