@@ -1,50 +1,13 @@
 ---
 layout: post
-title: ApplicationEvent
+title: 自定义事件
 ---
 
-[1] 创建Maven项目。
-
----
-
-[2] pom.xml：
-
-{% highlight xml %}
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>net.mingyang</groupId>
-    <artifactId>spring-boot-config</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>spring-boot-config</name>
-    <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
-        <relativePath />
-    </parent>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-    </dependencies>
-</project>
-{% endhighlight %}
+[1] [《创建Maven项目》](/2016/12/28/spring-create-maven-project)
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[2] src/main/java/net/mingyang/spring_boot_config/Application.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_config;
@@ -131,9 +94,9 @@ public class Application {
 
 ---
 
-[4] Run:
+[3] Run:
 
 {% highlight shell %}
-D:\dev\spring-boot-config> mvn spring-boot:run
+X:\dev\spring-boot-config> mvn spring-boot:run
 DemoEvent [msg=hello, source=net.mingyang.spring_boot_config.Application$DemoPublisher@6caa5e85]
 {% endhighlight %}

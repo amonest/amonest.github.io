@@ -3,7 +3,7 @@ layout: post
 title: 安装Spring Boot CLI
 ---
 
-[1] 参考[《Installing the Spring Boot CLI》](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started-installing-the-cli)。
+[1] 参考[《Installing the Spring Boot CLI》](http://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-installing-the-cli)。
 
 ---
 
