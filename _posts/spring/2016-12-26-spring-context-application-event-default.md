@@ -25,10 +25,10 @@ SpringApplication会发送一些应用事件，这些事件是在ApplicationCont
 
 ---
 
-[2] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[2] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -43,7 +43,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -7,10 +7,10 @@ title: 自定义事件
 
 ---
 
-[2] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[2] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -97,6 +97,6 @@ public class Application {
 [3] Run:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> mvn spring-boot:run
-DemoEvent [msg=hello, source=net.mingyang.spring_boot_config.Application$DemoPublisher@6caa5e85]
+X:\dev\spring-boot-test> mvn spring-boot:run
+DemoEvent [msg=hello, source=net.mingyang.spring_boot_test.Application$DemoPublisher@6caa5e85]
 {% endhighlight %}

@@ -24,10 +24,10 @@ title: JdbcTemplate
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/Student.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Student.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import java.io.Serializable;
 
@@ -79,10 +79,10 @@ public class Student implements Serializable {
 
 ---
 
-[4] src/main/java/net/mingyang/spring_boot_config/StudentService.java：
+[4] src/main/java/net/mingyang/spring_boot_test/StudentService.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -116,10 +116,10 @@ public class StudentService {
 
 ---
 
-[5] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[5] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import java.util.List;
 
@@ -170,7 +170,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 [7] Run:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> mvn spring-boot:run
+X:\dev\spring-boot-test> mvn spring-boot:run
 Student [id=1, name=张三, score=95.0]
 Student [id=2, name=李四, score=90.0]
 Student [id=3, name=王五, score=100.0]

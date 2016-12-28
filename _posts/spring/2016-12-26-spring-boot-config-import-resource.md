@@ -15,11 +15,11 @@ title: "@ImportResource"
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.mingyang</groupId>
-    <artifactId>spring-boot-config</artifactId>
+    <artifactId>spring-boot-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring-boot-config</name>
+    <name>spring-boot-test</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -44,10 +44,10 @@ title: "@ImportResource"
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/StringService.java：
+[3] src/main/java/net/mingyang/spring_boot_test/StringService.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 public class StringService {
     private String text;
@@ -95,7 +95,7 @@ public class StringService {
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <bean class="net.mingyang.spring_boot_config.StringService">
+    <bean class="net.mingyang.spring_boot_test.StringService">
         <property name="text" value="HelloWorld" />
     </bean>
     
@@ -104,10 +104,10 @@ public class StringService {
 
 ---
 
-[5] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[5] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -146,6 +146,6 @@ public class Application {
 [6] Run:
 
 {% highlight shell %}
-D:\dev\spring-boot-config> mvn spring-boot:run
+D:\dev\spring-boot-test> mvn spring-boot:run
 StringService [text=HelloWorld]
 {% endhighlight %}

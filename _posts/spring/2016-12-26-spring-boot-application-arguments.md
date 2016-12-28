@@ -11,10 +11,10 @@ title: 应用参数
 
 ---
 
-[2] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[2] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -52,7 +52,7 @@ public class Application {
 [3] Package:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> mvn package
+X:\dev\spring-boot-test> mvn package
 {% endhighlight %}
 
 ---
@@ -60,7 +60,7 @@ X:\dev\spring-boot-config> mvn package
 [4] Run:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> java -jar target\spring-boot-config-0.0.1-SNAPSHOT.jar foo bar --name=suifeng --age=30 --sex=men
+X:\dev\spring-boot-test> java -jar target\spring-boot-test-0.0.1-SNAPSHOT.jar foo bar --name=suifeng --age=30 --sex=men
 Source: foo
 Source: bar
 Source: --name=suifeng

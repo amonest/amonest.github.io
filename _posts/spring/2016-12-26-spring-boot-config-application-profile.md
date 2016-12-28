@@ -19,11 +19,11 @@ Spring Boot支持application-{profile}.properties配置方式。
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.mingyang</groupId>
-    <artifactId>spring-boot-config</artifactId>
+    <artifactId>spring-boot-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring-boot-config</name>
+    <name>spring-boot-test</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -72,10 +72,10 @@ spring.profiles.active=dev
 
 ---
 
-[6] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[6] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -110,7 +110,7 @@ public class Application {
 [7] Run: 
 
 {% highlight shell %}
-D:\dev\spring-boot-config> mvn spring-boot:run
+D:\dev\spring-boot-test> mvn spring-boot:run
 Server Port: 8080
 {% endhighlight %}
 
@@ -119,6 +119,6 @@ Server Port: 8080
 [8] 使用-D可以覆盖application.properties里的设置：
 
 {% highlight shell %}
-D:\dev\spring-boot-config> mvn spring-boot:run -Dspring.profiles.active=prod
+D:\dev\spring-boot-test> mvn spring-boot:run -Dspring.profiles.active=prod
 Server Port: 80
 {% endhighlight %}

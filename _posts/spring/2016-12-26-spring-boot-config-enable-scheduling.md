@@ -15,11 +15,11 @@ title: "@Scheduled"
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.mingyang</groupId>
-    <artifactId>spring-boot-config</artifactId>
+    <artifactId>spring-boot-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring-boot-config</name>
+    <name>spring-boot-test</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -44,10 +44,10 @@ title: "@Scheduled"
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -78,7 +78,7 @@ public class Application {
 [4] Run:
 
 {% highlight shell %}
-D:\dev\spring-boot-config> mvn spring-boot:run
+D:\dev\spring-boot-test> mvn spring-boot:run
 Current Time: 14:02:53
 Current Time: 14:02:58
 Current Time: 14:03:03

@@ -7,7 +7,7 @@ Spring Boot自动配置的关键是 **@EnableAutoConfiguration**。
 
 ---
 
-参考[《@SpringBootApplication》](/2016/12/26/spring-boot-config-spring-boot-application)。
+参考[《@SpringBootApplication》](/2016/12/26/spring-boot-test-spring-boot-application)。
 
 ---
 
@@ -231,7 +231,7 @@ org.springframework.boot.autoconfigure.web.JspTemplateAvailabilityProvider
 使用 **-Ddebug** 可以查询Spring Boot自动配置过程。
 
 {% highlight shell %}
-D:\dev\spring-boot-config> mvn spring-boot:run -Ddebug
+D:\dev\spring-boot-test> mvn spring-boot:run -Ddebug
 =========================
 AUTO-CONFIGURATION REPORT
 =========================

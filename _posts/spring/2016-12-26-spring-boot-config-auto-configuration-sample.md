@@ -7,7 +7,7 @@ title: 自动配置实例
 
 ---
 
-[1] 参考[《@EnableAutoConfiguration》](/2016/12/26/spring-boot-config-enable-auto-configuration)。
+[1] 参考[《@EnableAutoConfiguration》](/2016/12/26/spring-boot-test-enable-auto-configuration)。
 
 ---
 
@@ -23,11 +23,11 @@ title: 自动配置实例
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.mingyang</groupId>
-    <artifactId>spring-boot-config</artifactId>
+    <artifactId>spring-boot-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring-boot-config</name>
+    <name>spring-boot-test</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -52,10 +52,10 @@ title: 自动配置实例
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/HelloService.java：
+[3] src/main/java/net/mingyang/spring_boot_test/HelloService.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 public class HelloService {
    private String text;
@@ -81,10 +81,10 @@ public class HelloService {
 
 ---
 
-[4] src/main/java/net/mingyang/spring_boot_config/HelloServiceProperties.java：
+[4] src/main/java/net/mingyang/spring_boot_test/HelloServiceProperties.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -107,10 +107,10 @@ public class HelloServiceProperties {
 
 ---
 
-[6] src/main/java/net/mingyang/spring_boot_config/HelloServiceAutoConfiguration.java：
+[6] src/main/java/net/mingyang/spring_boot_test/HelloServiceAutoConfiguration.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -143,7 +143,7 @@ public class HelloServiceAutoConfiguration {
 
 {% highlight ini %}
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-net.mingyang.spring_boot_config.HelloServiceAutoConfiguration
+net.mingyang.spring_boot_test.HelloServiceAutoConfiguration
 {% endhighlight %}
 
 ---
@@ -151,7 +151,7 @@ net.mingyang.spring_boot_config.HelloServiceAutoConfiguration
 [8] Install:
 
 {% highlight shell %}
-D:\dev\spring-boot-config> mvn install
+D:\dev\spring-boot-test> mvn install
 {% endhighlight %}
 
 ---
@@ -166,7 +166,7 @@ D:\dev\spring-boot-config> mvn install
 
 <dependency>
    <groupId>net.mingyang</groupId>
-   <artifactId>spring-boot-config</artifactId>
+   <artifactId>spring-boot-test</artifactId>
    <version>0.0.1-SNAPSHOT</version>
 </dependency>
 {% endhighlight %}
@@ -187,7 +187,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import net.mingyang.spring_boot_config.HelloService;
+import net.mingyang.spring_boot_test.HelloService;
 
 @SpringBootApplication
 public class Application {
@@ -235,7 +235,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import net.mingyang.spring_boot_config.HelloService;
+import net.mingyang.spring_boot_test.HelloService;
 
 @SpringBootApplication
 public class Application {
@@ -289,7 +289,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import net.mingyang.spring_boot_config.HelloService;
+import net.mingyang.spring_boot_test.HelloService;
 
 @SpringBootApplication
 public class Application {

@@ -1,21 +1,13 @@
 ---
 layout: post
-title: Spring Boot Web：集成jTDS
+title: 集成jTDS
 ---
 
-[1] 执行[《创建Web项目》](/2016/12/09/spring-boot-web-create-project)。
-
----
-
-[2] 执行[《集成Thymeleaf》](/2016/12/09/spring-boot-web-integrate-thymeleaf)。
+[1] 参考[《JdbcTemplate》](/2016/12/28/spring-jpa-jdbc-template)。
 
 ---
 
-[3] 参考[《集成JDBC》](/2016/12/09/spring-boot-web-integrate-jdbc)。
-
----
-
-[4] 修改pom.xml：
+[2] pom.xml：
 
 {% highlight xml %}
 <dependency>
@@ -26,12 +18,13 @@ title: Spring Boot Web：集成jTDS
 <dependency>
     <groupId>net.sourceforge.jtds</groupId>
     <artifactId>jtds</artifactId>
+    <scope>runtime</scope>
 </dependency>
 {% endhighlight %}
 
 ---
 
-[5] 修改application.properties。
+[3] src/main/resources/application.properties:
 
 {% highlight ini %}
 spring.datasource.url=jdbc:jtds:sqlserver://10.3.1.44:1433/test
@@ -48,10 +41,11 @@ spring.datasource.url=jdbc:jtds:sqlserver://10.3.1.44:1433/test;instance=spdb
 
 ---
 
-[6] 参考[《集成JDBC》](/2016/12/09/spring-boot-web-integrate-jdbc)创建Student.java、StudentService.java、StudentController.java和student_list.html。
+[4] Run:
 
----
-
-[7] 启动应用程序，访问http://localhost:8080/student，测试是否成功。
-
-![spring-boot-web-integrate-jdbc](/assets/img/posts/spring-boot-web-integrate-jdbc.png)
+{% highlight shell %}
+X:\dev\spring-boot-test> mvn spring-boot:run
+Student [id=1, name=张三, score=95.0]
+Student [id=2, name=李四, score=90.0]
+Student [id=3, name=王五, score=100.0]
+{% endhighlight %}

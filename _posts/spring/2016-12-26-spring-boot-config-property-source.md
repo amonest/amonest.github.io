@@ -15,11 +15,11 @@ title: "@PropertySource"
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.mingyang</groupId>
-    <artifactId>spring-boot-config</artifactId>
+    <artifactId>spring-boot-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring-boot-config</name>
+    <name>spring-boot-test</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -44,10 +44,10 @@ title: "@PropertySource"
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -24,10 +24,10 @@ title: JPA Repository
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/Teacher.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Teacher.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import java.io.Serializable;
 
@@ -91,10 +91,10 @@ public class Teacher implements Serializable {
 
 ---
 
-[4] src/main/java/net/mingyang/spring_boot_config/TeacherRepository.java：
+[4] src/main/java/net/mingyang/spring_boot_test/TeacherRepository.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -105,10 +105,10 @@ public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
 
 ---
 
-[5] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[5] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -156,7 +156,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 [7] Run:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> mvn spring-boot:run
+X:\dev\spring-boot-test> mvn spring-boot:run
 Teacher [id=1, name=张老师, age=35]
 Teacher [id=2, name=王老师, age=26]
 Teacher [id=3, name=刘老师, age=47]

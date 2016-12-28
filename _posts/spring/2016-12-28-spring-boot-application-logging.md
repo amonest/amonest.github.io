@@ -15,10 +15,10 @@ title: 应用日志
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +53,7 @@ public class Application {
 [4] src/main/resources/application.properties:
 
 {% highlight ini %}
-logging.file = logs/spring-boot-config.log
+logging.file = logs/spring-boot-test.log
 
 # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
 logging.level.org.springframework = DEBUG
@@ -66,5 +66,5 @@ logging.level = DEBUG
 [5] Run:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> mvn spring-boot:run
+X:\dev\spring-boot-test> mvn spring-boot:run
 {% endhighlight %}

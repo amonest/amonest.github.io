@@ -25,10 +25,10 @@ title: 可执行jar
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import java.util.concurrent.TimeUnit;
 
@@ -65,7 +65,7 @@ public class Application {
 [4] Package:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> mvn package
+X:\dev\spring-boot-test> mvn package
 {% endhighlight %}
 
 ---
@@ -73,7 +73,7 @@ X:\dev\spring-boot-config> mvn package
 [5] Run:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> java -jar target\spring-boot-config-0.0.1-SNAPSHOT.jar
+X:\dev\spring-boot-test> java -jar target\spring-boot-test-0.0.1-SNAPSHOT.jar
 one-0
 one-1
 one-2

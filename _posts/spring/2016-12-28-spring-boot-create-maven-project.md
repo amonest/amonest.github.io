@@ -16,7 +16,7 @@ title: 创建Maven项目
 
 {% highlight shell %}
 X:\dev> mvn archetype:generate -DgroupId=net.mingyang ^
-            -DartifactId=spring-boot-config ^
+            -DartifactId=spring-boot-test ^
             -DarchetypeArtifactId=maven-archetype-quickstart ^
             -DinteractiveMode=false ^
             -DarchetypeCatalog=local
@@ -33,11 +33,11 @@ X:\dev> mvn archetype:generate -DgroupId=net.mingyang ^
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.mingyang</groupId>
-    <artifactId>spring-boot-config</artifactId>
+    <artifactId>spring-boot-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring-boot-config</name>
+    <name>spring-boot-test</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -62,10 +62,10 @@ X:\dev> mvn archetype:generate -DgroupId=net.mingyang ^
 
 ---
 
-[5] src/main/java/net/mingyang/spring_boot_config/Application.java：
+[5] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
-package net.mingyang.spring_boot_config;
+package net.mingyang.spring_boot_test;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -96,6 +96,6 @@ public class Application {
 [6] Run:
 
 {% highlight shell %}
-X:\dev\spring-boot-config> mvn spring-boot:run
+X:\dev\spring-boot-test> mvn spring-boot:run
 Hello, Spring!
 {% endhighlight %}
