@@ -3,7 +3,7 @@ layout: post
 title: 自定义事件
 ---
 
-[1] [《创建Maven项目》](/2016/12/28/spring-create-maven-project)
+[1] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
 
 ---
 

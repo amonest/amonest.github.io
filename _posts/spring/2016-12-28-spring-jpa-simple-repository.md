@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JdbcTemplate
+title: JPA Repository
 ---
 
 [1] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
@@ -12,7 +12,7 @@ title: JdbcTemplate
 {% highlight xml %}
 <dependency>
     <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-jdbc</artifactId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
 </dependency>
 
 <dependency>
@@ -24,19 +24,31 @@ title: JdbcTemplate
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_config/Student.java：
+[3] src/main/java/net/mingyang/spring_boot_config/Teacher.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_config;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
-public class Student implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity(name = "teacher")
+@SuppressWarnings("serial")
+public class Teacher implements Serializable {
+
+    @Id
+    @GeneratedValue
     private int id;
+    
+    @Column(nullable = false)
     private String name;
-    private float score;
+    
+    @Column(nullable = false)
+    private int age;
     
     public int getId() {
         return id;
@@ -54,23 +66,23 @@ public class Student implements Serializable {
         this.name = name;
     }
 
-    public float getScore() {
-        return score;
+    public int getAge() {
+        return age;
     }
 
-    public void setScore(float score) {
-        this.score = score;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Student [id=");
+        builder.append("Teacher [id=");
         builder.append(id);
         builder.append(", name=");
         builder.append(name);
-        builder.append(", score=");
-        builder.append(score);
+        builder.append(", age=");
+        builder.append(age);
         builder.append("]");
         return builder.toString();
     }
@@ -79,38 +91,15 @@ public class Student implements Serializable {
 
 ---
 
-[4] src/main/java/net/mingyang/spring_boot_config/StudentService.java：
+[4] src/main/java/net/mingyang/spring_boot_config/TeacherRepository.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_config;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Service;
+public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
 
-@Service
-public class StudentService {
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    public List<Student> getList() {
-        String sql = "SELECT ID, NAME, SCORE FROM STUDENT";
-        return (List<Student>) jdbcTemplate.query(sql, new RowMapper<Student>() {
-            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Student student = new Student();
-                student.setId(rs.getInt("ID"));
-                student.setName(rs.getString("NAME"));
-                student.setScore(rs.getFloat("SCORE"));
-                return student;
-            }
-        });
-    }
 }
 {% endhighlight %}
 
@@ -120,8 +109,6 @@ public class StudentService {
 
 {% highlight java %}
 package net.mingyang.spring_boot_config;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -135,18 +122,17 @@ public class Application {
     
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-    }    
+    }
     
     @Bean
     public ApplicationRunner runner() {
         return new ApplicationRunner() {
             @Autowired
-            StudentService studentService;
+            TeacherRepository teacherRepository;
             
             public void run(ApplicationArguments args) throws Exception {
-                List<Student> studentList = studentService.getList();
-                for (Student student : studentList) {
-                    System.out.println(student);
+                for (Teacher teacher : teacherRepository.findAll()) {
+                    System.out.println(teacher);
                 }
             }
         };
@@ -171,7 +157,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 
 {% highlight shell %}
 X:\dev\spring-boot-config> mvn spring-boot:run
-Student [id=1, name=张三, score=95.0]
-Student [id=2, name=李四, score=90.0]
-Student [id=3, name=王五, score=100.0]
+Teacher [id=1, name=张老师, age=35]
+Teacher [id=2, name=王老师, age=26]
+Teacher [id=3, name=刘老师, age=47]
 {% endhighlight %}

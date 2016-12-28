@@ -4,11 +4,11 @@ title: 创建Maven项目
 ---
 
 
-[1] [《Inheriting the starter parent》](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-maven-parent-pom)
+[1] 参考[《Inheriting the starter parent》](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-maven-parent-pom)。
 
 ---
 
-[2] [《创建新项目》](/2016/12/28/maven-create-project)
+[2] 参考[《创建新项目》](/2016/12/28/maven-create-project)。
 
 ---
 

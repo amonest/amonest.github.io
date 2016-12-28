@@ -11,7 +11,7 @@ title: 应用日志
 
 ---
 
-[2] [《创建Maven项目》](/2016/12/28/spring-create-maven-project)
+[2] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
 
 ---
 

@@ -21,7 +21,7 @@ SpringApplication会发送一些应用事件，这些事件是在ApplicationCont
 
 ---
 
-[1] [《创建Maven项目》](/2016/12/28/spring-create-maven-project)
+[1] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
 
 ---
 
