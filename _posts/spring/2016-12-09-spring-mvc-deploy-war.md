@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Spring Boot Web：发布war
+title: 发布war
 ---
 
 [1] 参考[《Converting a Spring Boot JAR Application to a WAR》](http://spring.io/guides/gs/convert-jar-to-war/)。
 
 ---
 
-[2] 修改pom.xml：
+[2] pom.xml：
 
 {% highlight xml %}
 <packaging>war</packaging>
@@ -28,27 +28,27 @@ title: Spring Boot Web：发布war
 
 ---
 
-[3] 修改Application.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer
 {
-  public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
-  }
+    public static void main(String[] args) {
+      SpringApplication.run(Application.class, args);
+    }
   
-  @Override
-  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-    return application.sources(Application.class);
-  }
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+      return application.sources(Application.class);
+    }
 }
 {% endhighlight %}
 
 ---
 
-[4] 发布war。
+[4] Deploy:
 
 {% highlight shell %}
-$ mvn package
+X:\dev\spring-boot-test> mvn package
 {% endhighlight %}

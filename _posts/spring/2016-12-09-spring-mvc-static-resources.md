@@ -1,7 +1,12 @@
 ---
 layout: post
-title: Spring Boot Web：静态资源
+title: 静态资源
 ---
+
+[1] [《创建Web项目》](/2016/12/09/spring-mvc-web-controller)。
+
+---
+
 
 [1] 增加src/main/resources/static目录。
 
