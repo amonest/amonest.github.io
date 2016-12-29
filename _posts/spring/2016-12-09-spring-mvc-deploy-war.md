@@ -35,19 +35,19 @@ title: 发布war
 public class Application extends SpringBootServletInitializer
 {
     public static void main(String[] args) {
-      SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
   
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-      return application.sources(Application.class);
+        return application.sources(Application.class);
     }
 }
 {% endhighlight %}
 
 ---
 
-[4] Deploy:
+[4] Package:
 
 {% highlight shell %}
 X:\dev\spring-boot-test> mvn package
