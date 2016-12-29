@@ -3,11 +3,7 @@ layout: post
 title: JPA Repository
 ---
 
-[1] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
-
----
-
-[2] pom.xml：
+[1] pom.xml：
 
 {% highlight xml %}
 <dependency>
@@ -24,7 +20,7 @@ title: JPA Repository
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_test/Teacher.java：
+[2] src/main/java/net/mingyang/spring_boot_test/Teacher.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -91,7 +87,7 @@ public class Teacher implements Serializable {
 
 ---
 
-[4] src/main/java/net/mingyang/spring_boot_test/TeacherRepository.java：
+[3] src/main/java/net/mingyang/spring_boot_test/TeacherRepository.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -105,7 +101,7 @@ public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
 
 ---
 
-[5] src/main/java/net/mingyang/spring_boot_test/Application.java：
+[4] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -142,7 +138,7 @@ public class Application {
 
 ---
 
-[6] src/main/resources/application.properties:
+[5] src/main/resources/application.properties:
 
 {% highlight ini %}
 spring.datasource.url=jdbc:mysql://10.3.1.90:3306/test
@@ -153,7 +149,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 
 ---
 
-[7] Run:
+[6] Run:
 
 {% highlight shell %}
 X:\dev\spring-boot-test> mvn spring-boot:run

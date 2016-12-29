@@ -3,11 +3,7 @@ layout: post
 title: 测试服务
 ---
 
-[1] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
-
----
-
-[2] pom.xml：
+[1] pom.xml：
 
 {% highlight xml %}
 <dependency>
@@ -24,7 +20,7 @@ title: 测试服务
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_test/NumberService.java：
+[2] src/main/java/net/mingyang/spring_boot_test/NumberService.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -46,7 +42,7 @@ public class NumberService {
 
 ---
 
-[4] src/main/java/net/mingyang/spring_boot_test/Application.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -65,7 +61,7 @@ public class Application {
 
 ---
 
-[5] src/test/java/net/mingyang/spring_boot_test/NumberServiceTest.java：
+[4] src/test/java/net/mingyang/spring_boot_test/NumberServiceTest.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;

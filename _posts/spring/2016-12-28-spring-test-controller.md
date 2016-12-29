@@ -3,11 +3,7 @@ layout: post
 title: 测试控制器
 ---
 
-[1] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
-
----
-
-[2] pom.xml：
+[1] pom.xml：
 
 {% highlight xml %}
 <dependency>
@@ -29,7 +25,7 @@ title: 测试控制器
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_test/NumberController.java：
+[2] src/main/java/net/mingyang/spring_boot_test/NumberController.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -67,7 +63,7 @@ public class NumberController {
 
 ---
 
-[4] src/main/java/net/mingyang/spring_boot_test/Application.java：
+[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -86,7 +82,7 @@ public class Application {
 
 ---
 
-[5] src/main/resources/templates/success.html:
+[4] src/main/resources/templates/success.html:
 
 {% highlight html %}
 <!DOCTYPE HTML>
@@ -103,7 +99,7 @@ public class Application {
 
 ---
 
-[6] src/test/java/net/mingyang/spring_boot_test/NumberControllerTest.java：
+[5] src/test/java/net/mingyang/spring_boot_test/NumberControllerTest.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;

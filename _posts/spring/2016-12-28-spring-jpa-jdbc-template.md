@@ -3,11 +3,7 @@ layout: post
 title: JdbcTemplate
 ---
 
-[1] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
-
----
-
-[2] pom.xml：
+[1] pom.xml：
 
 {% highlight xml %}
 <dependency>
@@ -24,7 +20,7 @@ title: JdbcTemplate
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_test/Student.java：
+[2] src/main/java/net/mingyang/spring_boot_test/Student.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -79,7 +75,7 @@ public class Student implements Serializable {
 
 ---
 
-[4] src/main/java/net/mingyang/spring_boot_test/StudentService.java：
+[3] src/main/java/net/mingyang/spring_boot_test/StudentService.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -116,7 +112,7 @@ public class StudentService {
 
 ---
 
-[5] src/main/java/net/mingyang/spring_boot_test/Application.java：
+[4] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -156,7 +152,7 @@ public class Application {
 
 ---
 
-[6] src/main/resources/application.properties:
+[5] src/main/resources/application.properties:
 
 {% highlight ini %}
 spring.datasource.url=jdbc:mysql://10.3.1.90:3306/test
@@ -167,7 +163,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 
 ---
 
-[7] Run:
+[6] Run:
 
 {% highlight shell %}
 X:\dev\spring-boot-test> mvn spring-boot:run
