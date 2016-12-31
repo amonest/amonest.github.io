@@ -7,27 +7,9 @@ title: 安装Subversion
 
 {% highlight shell %}
 [root@localhost ~]# yum install subversion
-
-[root@localhost ~]# systemctl cat svnserve #服务文件
-# /usr/lib/systemd/system/svnserve.service
-[Unit]
-Description=Subversion protocol daemon
-After=syslog.target network.target
-
-[Service]
-Type=forking
-EnvironmentFile=/etc/sysconfig/svnserve
-ExecStart=/usr/bin/svnserve --daemon --pid-file=/run/svnserve/svnserve.pid $OPTIONS
-
-[Install]
-WantedBy=multi-user.target
-
-[root@localhost ~]# cat /etc/sysconfig/svnserve #配置文件
-# OPTIONS is used to pass command-line arguments to svnserve.
-# 
-# Specify the repository location in -r parameter:
-OPTIONS="-r /var/svn" #仓库默认目录
 {% endhighlight %}
+
+仓库默认目录是 **/var/svn**，可以通过 **/etc/sysconfig/svnserve** 修改。
 
 ---
 
