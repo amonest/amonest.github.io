@@ -96,7 +96,7 @@ welcome.message=Hello World!
 {% highlight shell %}
 X:\dev> cd spring-boot-quickstart
 
-X:\dev\spring-boot-quickstart> mvn clean compile archetype:create-from-project
+X:\dev\spring-boot-quickstart> mvn archetype:create-from-project
 {% endhighlight %}
 
 Maven 使用 **archetype:create-from-project** 在 **target\generated-sources\archetype** 目录下生成脚手架模板。
@@ -105,7 +105,7 @@ Maven 使用 **archetype:create-from-project** 在 **target\generated-sources\ar
 
 ---
 
-[3] 修改模板描述文件。 
+[3] 查看模板描述文件。 
 
 **archetype\src\main\resources\META-INF\maven\archetype-metadata.xml** 是模板描述文件，说明了如何生成新项目。
 
@@ -157,7 +157,7 @@ Archetype的一些built-in参数：
 
 ---
 
-[4] 修改脚手架文件。 
+[4] 查看脚手架文件。 
 
 archetype\src\main\resources\archetype-resources\pom.xml:
 
@@ -243,7 +243,7 @@ welcome.message=Hello World!
 {% highlight shell %}
 X:\dev\spring-boot-quickstart> target\generated-sources\archetype 
 
-X:\dev\spring-boot-quickstart\target\generated-sources\archetype> mvn clean compile install
+X:\dev\spring-boot-quickstart\target\generated-sources\archetype> mvn install
 {% endhighlight %}
 
 这里的mvn是对 **archetype** 目录操作。
@@ -255,6 +255,7 @@ X:\dev\spring-boot-quickstart\target\generated-sources\archetype> mvn clean comp
 {% highlight shell %}
 X:\dev> mvn archetype:generate -DgroupId=net.mingyang ^
             -DartifactId=spring-boot-helloworld ^
+            -Dpackage=net.mingyang.spring_boot_helloworld ^
             -DarchetypeGroupId=net.mingyang ^
             -DarchetypeArtifactId=spring-boot-quickstart-archetype ^
             -DinteractiveMode=false ^
@@ -262,3 +263,5 @@ X:\dev> mvn archetype:generate -DgroupId=net.mingyang ^
 {% endhighlight %}
 
 注意这里的脚手架Id默认会带一个 **-archetype** 结尾。
+
+**package** 参数最好能够指定，默认是与 **groupId** 相同。**artifactId** 不能作为包名，因为 **artifactId** 会包含一些特殊符号，这是Java不允许的。
