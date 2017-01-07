@@ -7,7 +7,7 @@ Spring Boot自动配置的关键是 **@EnableAutoConfiguration**。
 
 ---
 
-参考[《@SpringBootApplication》](/2016/12/26/spring-boot-test-spring-boot-application)。
+参考[《@SpringBootApplication》](/2016/12/26/spring-boot-config-spring-boot-application)。
 
 ---
 
