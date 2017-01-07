@@ -1,17 +1,13 @@
 ---
 layout: post
-title: 应用参数
+title: Spring Boot - 获取Spring Boot启动参数
 ---
 
-通过 **org.springframework.boot.ApplicationArguments** 可以访问 **SpringApplication.run(...)** 参数。
-
----
-
-[1] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
+通过 **ApplicationArguments** 类可以获取 **SpringApplication.run(...)** 参数。
 
 ---
 
-[2] src/main/java/net/mingyang/spring_boot_test/Application.java：
+[1] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -30,9 +26,9 @@ public class Application {
     }
     
     @Component
-    static class MyBean {
+    static class TestApplicationArguments {
         @Autowired
-        public MyBean(ApplicationArguments args) {
+        public TestApplicationArguments(ApplicationArguments args) {
             for (String arg : args.getSourceArgs()) {
                 System.out.println("Source: " + arg);
             }
@@ -49,7 +45,7 @@ public class Application {
 
 ---
 
-[3] Package:
+[2] Package:
 
 {% highlight shell %}
 X:\dev\spring-boot-test> mvn package
@@ -57,7 +53,7 @@ X:\dev\spring-boot-test> mvn package
 
 ---
 
-[4] Run:
+[3] Run:
 
 {% highlight shell %}
 X:\dev\spring-boot-test> java -jar target\spring-boot-test-0.0.1-SNAPSHOT.jar foo bar --name=suifeng --age=30 --sex=men
