@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 创建新项目
+title: Apache Maven - 缓存ArchetypeCatalog
 ---
 
 Maven使用 **archetype:generate** 创建新项目：

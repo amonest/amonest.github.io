@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "@Scope"
+title: Spring Boot - Bean的作用域范围
 ---
 
 Spring容器最初提供了两种Bean的scope类型：singleton和prototype。但发布2.0以后，又引入了另外三种scope类型：request、session和global session，这三种只能在Web应用中才可以使用。
@@ -20,49 +20,6 @@ Spring容器最初提供了两种Bean的scope类型：singleton和prototype。�
 ***Spring的默认scope是singleton。***
 
 ---
-
-[1] 创建Maven项目。
-
----
-
-[2] pom.xml：
-
-{% highlight xml %}
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>net.mingyang</groupId>
-    <artifactId>spring-boot-test</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>spring-boot-test</name>
-    <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
-        <relativePath />
-    </parent>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-    </dependencies>
-</project>
-{% endhighlight %}
-
----
-
-[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -122,7 +79,7 @@ public class Application {
 
 ---
 
-[4] 执行结果：
+执行结果：
 
 {% highlight shell %}
 f1 == f2 ? true

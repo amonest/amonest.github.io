@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 创建脚手架
+title: Apache Maven - 创建Maven脚手架模板
 ---
 
 创建Maven脚手架，快速创建 Spring Boot 项目。

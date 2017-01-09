@@ -1,21 +1,19 @@
 ---
 layout: post
-title: 应用日志
+title: Spring Boot - 启用应用程序日志
 ---
 
-默认情况下，Spring Boot只会将日志记录到控制台而不会写进日志文件。如果除了输出到控制台你还想写入到日志文件，那需要设置 **logging.file** 或 **logging.path** 属性。
+默认情况下，Spring Boot只会将日志记录到控制台而不会写进日志文件。
 
----
-
-[1] [《73. Logging》](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-logging.html)
-
----
-
-[2] [《创建Maven项目》](/2016/12/28/spring-boot-create-maven-project)
+如果除了输出到控制台还想写入到日志文件，那需要设置 **logging.file** 或 **logging.path** 属性。
 
 ---
 
-[3] src/main/java/net/mingyang/spring_boot_test/Application.java：
+参考 [《73. Logging》](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-logging.html)
+
+---
+
+[1] src/main/java/net/mingyang/spring_boot_test/Application.java：
 
 {% highlight java %}
 package net.mingyang.spring_boot_test;
@@ -50,7 +48,7 @@ public class Application {
 
 ---
 
-[4] src/main/resources/application.properties:
+[2] src/main/resources/application.properties:
 
 {% highlight ini %}
 logging.file = logs/spring-boot-test.log
@@ -59,12 +57,4 @@ logging.file = logs/spring-boot-test.log
 logging.level.org.springframework = DEBUG
 logging.level.org.hibernate = INFO
 logging.level = DEBUG
-{% endhighlight %}
-
----
-
-[5] Run:
-
-{% highlight shell %}
-X:\dev\spring-boot-test> mvn spring-boot:run
 {% endhighlight %}

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Maven镜像
+title: Apache Maven - Maven仓库国内镜像
 ---
 
 使用Maven国内镜像，可以解决构建项目时太慢的问题。
