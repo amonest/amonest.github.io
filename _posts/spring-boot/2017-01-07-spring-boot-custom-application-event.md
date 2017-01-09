@@ -117,12 +117,3 @@ public class Application {
     }
 }
 {% endhighlight %}
-
----
-
-[4] Run:
-
-{% highlight shell %}
-X:\dev\spring-boot-test> mvn spring-boot:run
-MessageApplicationEvent [message=hello]
-{% endhighlight %}

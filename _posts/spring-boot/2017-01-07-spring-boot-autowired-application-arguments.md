@@ -3,7 +3,7 @@ layout: post
 title: Spring Boot - 获取Spring Boot启动参数
 ---
 
-通过 **ApplicationArguments** 类可以获取 **SpringApplication.run(...)** 参数。
+使用 **ApplicationArguments** 类，可以获取 **SpringApplication.run(...)** 参数。
 
 ---
 
