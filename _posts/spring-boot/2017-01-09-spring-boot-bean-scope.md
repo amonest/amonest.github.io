@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot - Bean的作用域范围
+title: Spring Boot - Bean的作用域
 ---
 
 Spring容器最初提供了两种Bean的scope类型：singleton和prototype。但发布2.0以后，又引入了另外三种scope类型：request、session和global session，这三种只能在Web应用中才可以使用。

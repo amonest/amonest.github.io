@@ -211,16 +211,11 @@ a.fb-like:hover {
 }
 .wrapper {
     padding: 10px 5px;
-    background: url(img/bgcom.gif);
+    xxbackground: url(img/bgcom.gif);
 }
-.wrapper p, .wrapper finger, 
-.wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
+.wrapper p, .wrapper finger { 
     margin-bottom: 10px; 
     line-height: 20px;
-}
-.wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
-    font-size: 1.00em; 
-    font-weight: normal; 
 }
 .wrapper hr { 
     margin-bottom: 20px; 
@@ -229,9 +224,85 @@ a.fb-like:hover {
 .wrapper a { 
     text-decoration: none;
 }
-.wrapper ul { 
+.wrapper ul, .wrapper ol { 
     padding-left: 20px;
 }
+
+
+
+/* h1, h2, h3, h4, h5, h6 */
+
+
+.wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
+    margin-bottom: 15px; 
+}
+/*
+.wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 { 
+    font-size: 1.00em; 
+    font-weight: normal; 
+}
+*/
+
+
+
+/* .wrapper table */
+
+.wrapper table {
+    xxborder: 1px solid #dddddd;
+    width: 100%;
+}
+.wrapper table th, .wrapper table td {
+    padding: 8px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.wrapper table th, .wrapper table td {
+    border-bottom: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+}
+.wrapper table th:first-child, .wrapper table td:first-child {
+    border-left: 1px solid #cccccc;
+}
+.wrapper table th:last-child, .wrapper table td:last-child {
+    border-right: 1px solid #cccccc;
+}
+.wrapper table tr:first-child td, .wrapper table tr:first-child th {
+    border-top: 1px solid #cccccc;
+}
+.wrapper table tr:last-child td, .wrapper table tr:last-child th {
+    border-bottom: 1px solid #cccccc;
+}
+
+.wrapper table.outerless th:first-child, .wrapper table.outerless td:first-child {
+    border-left: 0px;
+}
+.wrapper table.outerless th:last-child, .wrapper table.outerless td:last-child {
+    border-right: 0px;
+}
+.wrapper table.outerless tr:first-child td, .wrapper table.outerless tr:first-child th {
+    border-top: 0px;
+}
+.wrapper table.outerless tr:last-child td, .wrapper table.outerless tr:last-child th {
+    border-bottom: 0px;
+}
+
+
+/* .toc */
+
+.toc {
+    margin-left: 20px;
+}
+
+.toc > li {
+    xxxxdisplay: block;
+    xxxmargin-bottom: 20px;
+}
+
+
+
+/* highlight */
 
 .highlight {
     font-size: 15px;

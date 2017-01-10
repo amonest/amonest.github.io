@@ -27,6 +27,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/X/dev/suifeng-java-projects/.gitignore",
+			"settings":
+			{
+				"buffer_size": 14,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -64,11 +72,29 @@
 	},
 	"expanded_folders":
 	[
-		"/X/dev/amonest.github.io"
+		"/X/dev/amonest.github.io",
+		"/X/dev/amonest.github.io/_drafts",
+		"/X/dev/amonest.github.io/_includes",
+		"/X/dev/amonest.github.io/_includes/html",
+		"/X/dev/amonest.github.io/assets"
 	],
 	"file_history":
 	[
+		"/X/dev/gen-md5-password/build.xml",
 		"/X/dev/amonest.github.io/_includes/html/left.html",
+		"/X/dev/suifeng-java-projects/.gitignore",
+		"/X/dev/amonest.github.io/assets/base.css",
+		"/X/dev/amonest.github.io/_layouts/post.html",
+		"/X/dev/amonest.github.io/_drafts/personal-library-system-requirements.md",
+		"/X/dev/amonest.github.io/_posts/spring-boot/2017-01-09-spring-boot-bean-scope.md",
+		"/X/dev/amonest.github.io/_posts/spring-boot/2017-01-09-spring-boot-multi-datasources.md",
+		"/X/dev/amonest.github.io/_drafts/personal-library-system-docs.md",
+		"/X/dev/amonest.github.io/_drafts/ruby/cnblogs-converter/CNBlogs_BlogBackup_131_201001_201611.xml",
+		"/X/dev/amonest.github.io/_posts/spring-boot/2016-12-28-spring-boot-application-logging.md",
+		"/X/dev/amonest.github.io/_posts/spring-boot/2017-01-09-spring-boot-multi-profiles.md",
+		"/X/dev/amonest.github.io/_posts/spring/2016-12-28-spring-boot-create-maven-project.md",
+		"/X/dev/amonest.github.io/_posts/spring/2016-12-26-spring-boot-config-application-profile.md",
+		"/X/dev/amonest.github.io/_posts/spring/2016-12-26-spring-boot-config-bean-profile.md",
 		"/X/dev/amonest.github.io/amonest.github.io.sublime-project",
 		"/X/dev/amonest.github.io/_posts/maven/2016-12-09-maven-mirrors.md",
 		"/X/dev/amonest.github.io/_posts/maven/2016-12-28-maven-create-project.md",
@@ -181,21 +207,7 @@
 		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-systemctl-services.md",
 		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-netstat-command.md",
 		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-find-command.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-host-name.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-change-hostname.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-ps-command.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-ip-address.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-ip-command.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-aliyun-mirrors.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-aliyun-repo.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-09-spring-mvc-deploy-war.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-09-spring-mvc-static-resources.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-09-spring-mvc-web-controller.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-28-spring-test-service-test.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-26-spring-boot-application-arguments.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-26-spring-boot-config-application-profile.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-26-spring-boot-config-bean-lifecycle.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-26-spring-boot-config-bean-profile.md"
+		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-host-name.md"
 	],
 	"find":
 	{
@@ -342,8 +354,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/X/dev/suifeng-java-projects/.gitignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14,
+								14
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -432,7 +473,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 248.0,
+	"side_bar_width": 196.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
