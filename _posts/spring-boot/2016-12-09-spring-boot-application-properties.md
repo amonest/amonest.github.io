@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot：application.properties
+title: Spring Boot - application.properties
 ---
 
 {% highlight ini %}
