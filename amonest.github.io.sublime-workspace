@@ -27,24 +27,11 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/X/dev/suifeng-java-projects/.gitignore",
-			"settings":
-			{
-				"buffer_size": 14,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
-	"build_system_choices":
-	[
-	],
-	"build_varint": "",
 	"command_palette":
 	{
 		"height": 58.0,
-		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -56,10 +43,7 @@
 	},
 	"console":
 	{
-		"height": 59.0,
-		"history":
-		[
-		]
+		"height": 59.0
 	},
 	"distraction_free":
 	{
@@ -70,19 +54,34 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/X/dev/amonest.github.io",
-		"/X/dev/amonest.github.io/_drafts",
-		"/X/dev/amonest.github.io/_includes",
-		"/X/dev/amonest.github.io/_includes/html",
-		"/X/dev/amonest.github.io/assets"
-	],
 	"file_history":
 	[
-		"/X/dev/gen-md5-password/build.xml",
+		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-15-spring-jpa-specification-examples.md",
 		"/X/dev/amonest.github.io/_includes/html/left.html",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/test/java/example/springdata/jpa/simple/SimpleUserRepositoryTests.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/pom.xml",
+		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-15-spring-jpa-create-query.md",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/simple/User.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/simple/SimpleUserRepository.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditingConfiguration.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditorAwareImpl.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditableUserRepository.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/pom.xml",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/caching/CachingUserRepository.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/caching/User.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerSummary.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/Customer.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerRepository.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/test/java/example/springdata/jpa/auditing/AuditableUserSample.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditableUser.java",
+		"/X/dev/suifeng-java-projects/spring-boot-test/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-boot-test/src/main/java/net/mingyang/spring_boot_test/Application.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/simple/SimpleConfiguration.java",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/test/resources/META-INF/persistence.xml",
+		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/pom.xml",
+		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-15-spring-jpa-specification-usage.md",
 		"/X/dev/suifeng-java-projects/.gitignore",
+		"/X/dev/gen-md5-password/build.xml",
 		"/X/dev/amonest.github.io/assets/base.css",
 		"/X/dev/amonest.github.io/_layouts/post.html",
 		"/X/dev/amonest.github.io/_drafts/personal-library-system-requirements.md",
@@ -184,30 +183,7 @@
 		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-groupmod.md",
 		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-groupadd.md",
 		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-useradd.md",
-		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-passwd.md",
-		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-usermod.md",
-		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-userdel.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-user-mgr.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-subversion-installation.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-httpd-mod-dav-svn.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-httpd-installation.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-subversion-initial-import.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-firewall-cmd.md",
-		"/X/dev/amonest.github.io/assets/navi.css",
-		"/X/dev/amonest.github.io/index.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-28-spring-jpa-jdbc-template.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-28-spring-jpa-integrate-jtds.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-28-spring-jpa-simple-repository.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-28-spring-test-controller.md",
-		"/X/dev/amonest.github.io/_posts/spring/2016-12-28-spring-test-service.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-rpm-command.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-yum-command.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-package-mgr.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-custom-service.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-systemctl-services.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-netstat-command.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-find-command.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-host-name.md"
+		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-passwd.md"
 	],
 	"find":
 	{
@@ -215,7 +191,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"X:\\dev\\amonest.github.io\\_posts\\spring",
@@ -354,37 +330,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/X/dev/suifeng-java-projects/.gitignore",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								14,
-								14
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -427,8 +374,6 @@
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "Packages/Ruby/Ruby.sublime-build",
-	"project": "amonest.github.io.sublime-project",
 	"replace":
 	{
 		"height": 64.0
@@ -437,7 +382,6 @@
 	"select_file":
 	{
 		"height": 0.0,
-		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -446,7 +390,6 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -456,26 +399,10 @@
 		],
 		"width": 380.0
 	},
-	"select_symbol":
-	{
-		"height": 0.0,
-		"last_filter": "",
-		"selected_items":
-		[
-		],
-		"width": 0.0
-	},
-	"selected_group": 0,
-	"settings":
-	{
-	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 196.0,
-	"status_bar_visible": true,
-	"template_settings":
-	{
-	}
+	"status_bar_visible": true
 }
