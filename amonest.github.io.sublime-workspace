@@ -29,9 +29,14 @@
 	[
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 58.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -43,7 +48,10 @@
 	},
 	"console":
 	{
-		"height": 59.0
+		"height": 59.0,
+		"history":
+		[
+		]
 	},
 	"distraction_free":
 	{
@@ -54,35 +62,42 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/X/dev/amonest.github.io",
+		"/X/dev/amonest.github.io/_drafts",
+		"/X/dev/amonest.github.io/_includes",
+		"/X/dev/amonest.github.io/_includes/html",
+		"/X/dev/amonest.github.io/assets"
+	],
 	"file_history":
 	[
-		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-15-spring-jpa-specification-examples.md",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditableUser.java",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditorAwareImpl.java",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditingConfiguration.java",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditableUserRepository.java",
+		"/X/dev/amonest.github.io/_drafts/spring-jpa-entity-auditing.md",
+		"/X/dev/amonest.github.io/_drafts/spring-jpa-create-query-methods.md",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerRepository.java",
+		"/X/dev/amonest.github.io/_drafts/spring-jpa-create-query-projection.md",
+		"/X/dev/amonest.github.io/_drafts/spring-jpa-store-procedures.md",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerSummary.java",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerDto.java",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerProjection.java",
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/Customer.java",
 		"/X/dev/amonest.github.io/_includes/html/left.html",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/test/java/example/springdata/jpa/simple/SimpleUserRepositoryTests.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/pom.xml",
-		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-15-spring-jpa-create-query.md",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/simple/User.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/simple/SimpleUserRepository.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditingConfiguration.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditorAwareImpl.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditableUserRepository.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/pom.xml",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/caching/CachingUserRepository.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/caching/User.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerSummary.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/Customer.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerRepository.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/test/java/example/springdata/jpa/auditing/AuditableUserSample.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditableUser.java",
-		"/X/dev/suifeng-java-projects/spring-boot-test/pom.xml",
-		"/X/dev/suifeng-java-projects/spring-boot-test/src/main/java/net/mingyang/spring_boot_test/Application.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/simple/SimpleConfiguration.java",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/example/src/test/resources/META-INF/persistence.xml",
-		"/C/Documents and Settings/Administrator/桌面/spring-data-examples-master/spring-data-examples-master/jpa/pom.xml",
-		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-15-spring-jpa-specification-usage.md",
+		"/X/dev/amonest.github.io/assets/base.css",
+		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-11-spring-jdbc-config-datasource.md",
+		"/X/dev/amonest.github.io/_drafts/spring-jpa-query-return-types.md",
+		"/X/dev/amonest.github.io/_drafts/spring-jpa-create-query.md",
+		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-11-spring-jdbc-config-cp30.md",
+		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-11-spring-jdbc-config-dbcp.md",
+		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-11-spring-jdbc-config-jndi.md",
+		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-11-spring-jdbc-initialize-database.md",
+		"/X/dev/amonest.github.io/_posts/spring-boot/2016-12-09-spring-boot-application-properties.md",
+		"/X/dev/amonest.github.io/_posts/spring-jdbc/2016-12-28-spring-jdbc-integrate-jtds.md",
 		"/X/dev/suifeng-java-projects/.gitignore",
 		"/X/dev/gen-md5-password/build.xml",
-		"/X/dev/amonest.github.io/assets/base.css",
 		"/X/dev/amonest.github.io/_layouts/post.html",
 		"/X/dev/amonest.github.io/_drafts/personal-library-system-requirements.md",
 		"/X/dev/amonest.github.io/_posts/spring-boot/2017-01-09-spring-boot-bean-scope.md",
@@ -183,7 +198,8 @@
 		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-groupmod.md",
 		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-groupadd.md",
 		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-useradd.md",
-		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-passwd.md"
+		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-passwd.md",
+		"/X/dev/amonest.github.io/_posts/linux-commands/2016-12-31-linux-command-usermod.md"
 	],
 	"find":
 	{
@@ -191,7 +207,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 			"X:\\dev\\amonest.github.io\\_posts\\spring",
@@ -208,6 +224,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"<T>",
 			"cloud_cli_feign_feign",
 			"cloud_cli",
 			"250px",
@@ -301,6 +318,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"&lt;T&gt;",
 			"cloud_cli_feign",
 			"240px",
 			"250px",
@@ -374,6 +392,8 @@
 	{
 		"height": 0.0
 	},
+	"pinned_build_system": "Packages/Ruby/Ruby.sublime-build",
+	"project": "amonest.github.io.sublime-project",
 	"replace":
 	{
 		"height": 64.0
@@ -382,6 +402,7 @@
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -390,6 +411,7 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -399,10 +421,26 @@
 		],
 		"width": 380.0
 	},
-	"show_minimap": false,
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 196.0,
-	"status_bar_visible": true
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
 }

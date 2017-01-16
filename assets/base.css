@@ -250,6 +250,7 @@ a.fb-like:hover {
 .wrapper table {
     xxborder: 1px solid #dddddd;
     width: 100%;
+    margin-bottom: 10px; 
 }
 .wrapper table th, .wrapper table td {
     padding: 8px;

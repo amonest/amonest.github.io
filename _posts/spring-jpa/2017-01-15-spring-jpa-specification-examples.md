@@ -6,7 +6,9 @@ title: Spring JPA - Specification查询示例
 Specification接口：
 
 {% highlight java %}
-Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb);
+public interface Specification<T> {
+    Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb);
+}
 {% endhighlight %}
 
 ---
