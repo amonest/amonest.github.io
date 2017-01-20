@@ -3,8 +3,6 @@ layout: post
 title: Spring Mvc - 维护状态拦截器
 ---
 
-MaintenanceInterceptor.java：
-
 {% highlight java %}
 package net.mingyang.spring_boot_test;
 

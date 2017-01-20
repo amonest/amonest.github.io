@@ -3,8 +3,6 @@ layout: post
 title: Spring Mvc - 执行时间拦截器
 ---
 
-ExecuteTimeInterceptor.java：
-
 {% highlight java %}
 package net.mingyang.spring_boot_test;
 
