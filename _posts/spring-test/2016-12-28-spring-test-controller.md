@@ -3,107 +3,66 @@ layout: post
 title: Spring Test - 控制器测试
 ---
 
-NumberController.java：
-
 {% highlight java %}
 package net.mingyang.spring_boot_test;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@Controller
-public class NumberController {
-    
-    public final static String PARAM_NUM1 = "num1"; 
-    public final static String PARAM_NUM2 = "num2";
-    
-    public final static String MODEL_RESULT = "result";
-    
-    public final static String VIEW_SUCCESS = "success";
-
-    @RequestMapping(value ="/plus")
-    public String plus(@RequestParam(PARAM_NUM1) Integer a, 
-            @RequestParam(PARAM_NUM2) Integer b, Model model) {
-        model.addAttribute(MODEL_RESULT, a + b);
-        return VIEW_SUCCESS;
-    }
-    
-    @RequestMapping(value ="/minus")
-    public String minus(@RequestParam(PARAM_NUM1) Integer a, 
-            @RequestParam(PARAM_NUM2) Integer b, Model model) {
-        model.addAttribute(MODEL_RESULT, a - b);
-        return VIEW_SUCCESS;
-    }
-}
-{% endhighlight %}
-
----
-
-NumberControllerTest.java：
-
-{% highlight java %}
-package net.mingyang.spring_boot_test;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
+
+import net.mingyang.supercap_library.entity.Book;
+import net.mingyang.supercap_library.service.BookService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class NumberControllerTest {
-    
-    private final static int NUM1 = 100;
-    
-    private final static int NUM2 = 30;
-    
-    private MockMvc mvc;
-
-    @Before
-    public void setUp() {  
-        mvc = MockMvcBuilders.standaloneSetup(new NumberController()).build();  
-    }
-    
-    @Test
-    public void testPlus() throws Exception {
-        int expected = NUM1 + NUM2;
-        mvc.perform(MockMvcRequestBuilders.get("/plus")
-                .param(NumberController.PARAM_NUM1, String.valueOf(NUM1))
-                .param(NumberController.PARAM_NUM2, String.valueOf(NUM2)))
-            .andExpect(MockMvcResultMatchers.view().name(NumberController.VIEW_SUCCESS))
-            .andExpect(MockMvcResultMatchers.model().attribute(NumberController.MODEL_RESULT, expected));
-    }
-    
-    @Test
-    public void testMinus() throws Exception {
-        int expected = NUM1 - NUM2;
-        mvc.perform(MockMvcRequestBuilders.get("/minus")
-                .param(NumberController.PARAM_NUM1, String.valueOf(NUM1))
-                .param(NumberController.PARAM_NUM2, String.valueOf(NUM2)))
-            .andExpect(MockMvcResultMatchers.view().name(NumberController.VIEW_SUCCESS))
-            .andExpect(MockMvcResultMatchers.model().attribute(NumberController.MODEL_RESULT, expected));
-    }
-}
-{% endhighlight %}
-
-也可以用 **@WebMvcTest** 简化 **MockMvc** 创建方式：
-
-{% highlight java %}
-
-@RunWith(SpringRunner.class)
-@WebMvcTest(NumberController.class)
-public class NumberControllerTest {
+@AutoConfigureMockMvc
+@Transactional
+@Rollback
+public class BookControllerTest {
     
     @Autowired
     private MockMvc mvc;
+    
+    @Autowired
+    private BookService bookService;
 
-    ... ...
+    Book book;
+    
+    @Before
+    public void setUp() {
+        book = new Book();
+        book.setName("test");
+        bookService.save(book);
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testIndex() throws Exception {
+        MvcResult result = mvc.perform(get("/books/index"))
+            .andExpect(view().name("books/index"))
+            .andExpect(model().attributeExists("bookList"))
+            .andDo(print())
+            .andReturn();
+        
+        List<Book> bookList = (List<Book>) 
+                result.getModelAndView().getModel().get("bookList");
+        assertThat(bookList, hasItems(book));
+    }
 }
 {% endhighlight %}
