@@ -27,22 +27,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "_includes/html/left.html",
-			"settings":
-			{
-				"buffer_size": 14944,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "_posts/spring-mvc/2017-01-20-spring-mvc-configure-servlet.md",
-			"settings":
-			{
-				"buffer_size": 2934,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -87,6 +71,17 @@
 	],
 	"file_history":
 	[
+		"/C/Users/lbin/Desktop/spring-context-4.3.6.RELEASE-sources/org/springframework/context/annotation/AnnotationConfigUtils.java",
+		"/X/dev/amonest.github.io/_includes/html/left.html",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-configuration-flow.md",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-AnnotationConfigApplicationContext.md",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-create-bean-instance.md",
+		"/X/dev/suifeng-android-projects/HelloWorld/HelloWorld.iml",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-AnnotationUtils.md",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-SpringApplicationRunListener.md",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-SpringFactoriesLoader.md",
+		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-configure-servlet.md",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-application-arguments.md",
 		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-multi-languages.md",
 		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-configure-interceptor.md",
 		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-executetime-interceptor.md",
@@ -141,7 +136,6 @@
 		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerDto.java",
 		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/CustomerProjection.java",
 		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/projections/Customer.java",
-		"/X/dev/amonest.github.io/_includes/html/left.html",
 		"/X/dev/amonest.github.io/assets/base.css",
 		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-11-spring-jdbc-config-datasource.md",
 		"/X/dev/amonest.github.io/_drafts/spring-jpa-query-return-types.md",
@@ -204,17 +198,7 @@
 		"/C/Temp/spring-boot-quickstart/target/generated-sources/archetype/src/main/resources/META-INF/maven/archetype-metadata.xml",
 		"/C/Users/lbin/Documents/Tencent Files/1787585212/FileRecv/SpringSecurityConfigCas.java",
 		"/X/dev/suifeng-php-utils/android-rpc-server/index.php",
-		"/C/Temp/spring-boot-helloworld/src/main/java/net/mingyang/spring_boot_helloworld/Application.java",
-		"/C/Temp/spring-boot-quickstart/target/generated-sources/archetype/pom.xml",
-		"/C/Temp/spring-boot-helloworld/src/main/resources/application.properties",
-		"/C/Temp/spring-boot-helloworld/pom.xml",
-		"/C/Temp/spring-boot-quickstart/target/generated-sources/archetype/src/main/resources/archetype-resources/src/main/java/__packageInPathFormat__/__artifactId__/Application.java",
-		"/C/Temp/spring-boot-helloworld/src/main/java/net/mingyang/spring-boot-helloworld/Application.java",
-		"/C/Temp/spring-boot-helloworld/src/main/java/net/mingyang/net/mingyang/spring-boot-helloworld/Application.java",
-		"/C/Temp/spring-boot-helloworld/src/main/java/net/mingyang/net/mingyang/Application.java",
-		"/C/Temp/spring-boot-quickstart/target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml",
-		"/C/Temp/spring-boot-quickstart/target/generated-sources/archetype/src/main/resources/archetype-resources/src/main/resources/application.properties",
-		"/C/Temp/spring-boot-helloworld/src/main/java/net/mingyang/Application.java"
+		"/C/Temp/spring-boot-helloworld/src/main/java/net/mingyang/spring_boot_helloworld/Application.java"
 	],
 	"find":
 	{
@@ -225,6 +209,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"C:\\Users\\lbin\\Desktop\\spring-context-4.3.6.RELEASE-sources",
 			"X:\\dev\\amonest.github.io\\_posts\\spring",
 			"C:\\Users\\lbin\\Desktop\\opencart-2.1.0.2\\opencart-2.1.0.2\\upload\\admin",
 			"C:\\Users\\lbin\\Desktop\\opencart-2.1.0.2\\opencart-2.1.0.2\\upload",
@@ -239,6 +224,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ApplicationContext",
+			"ApplicationContextWare",
+			"ConfigurationClassPostProcessor",
+			"实例",
+			"注解识别器",
 			"small",
 			"<T>",
 			"cloud_cli_feign_feign",
@@ -334,6 +324,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"注解读取器",
 			"&lt;T&gt;",
 			"cloud_cli_feign",
 			"240px",
@@ -364,69 +355,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "_includes/html/left.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14944,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5358,
-								5358
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 253.0,
-						"translation.y": 798.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "_posts/spring-mvc/2017-01-20-spring-mvc-configure-servlet.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2934,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1286,
-								1286
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 399.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
