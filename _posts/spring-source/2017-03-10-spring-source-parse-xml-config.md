@@ -1,9 +1,13 @@
 ---
 layout: post
-title: Spring Analysis - 解析XML配置
+title: Spring Source - 解析XML配置
 ---
 
-以ClassPathXmlApplicationContext为例：
+{% include block/spring-source-list.html %}
+
+---
+
+**ClassPathXmlApplicationContext** 使用方法： 
 
 {% highlight java %}
 public class Application {
@@ -16,24 +20,195 @@ public class Application {
 }
 {% endhighlight %}
 
-ClassPathXmlApplicationContext继承自AbstractApplicationContext。
 
-AbstractApplicationContext的refreshBeanFactory()方法会创建BeanFactory。
+---
+
+**ClassPathXmlApplicationContext** 继承关系：
+
+{% highlight shell %}
+AbstractApplicationContext
+    AbstractRefreshableApplicationContext
+        AbstractRefreshableConfigApplicationContext
+            AbstractXmlApplicationContext        
+                ClassPathXmlApplicationContext
+{% endhighlight %}
+
+
+---
+
+调用关系说明：
 
 {% highlight java %}
-public abstract class AbstractApplicationContext {
+ClassPathXmlApplicationContext {
+    void refresh() {
+        void obtainFreshBeanFactory() {
+            void refreshBeanFactory() {
+                void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) {
+                    XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
+                    void initBeanDefinitionReader(beanDefinitionReader);
+                    void loadBeanDefinitions(beanDefinitionReader) {
+                        // 转移到XmlBeanDefinitionReader去处理
+                        beanDefinitionReader.loadBeanDefinitions(getConfigLocations());
+                    }   
+                }
+            }
+        }
+    }
+}
+
+XmlBeanDefinitionReader {                            
+    int loadBeanDefinitions(String... locations) {
+        int loadBeanDefinitions(String location) {
+            int loadBeanDefinitions(String location, Set<Resource> actualResources) {
+                int loadBeanDefinitions(Resource... resources) {
+                    int loadBeanDefinitions(Resource resource) {
+                        int loadBeanDefinitions(EncodedResource encodedResource) {
+                            int doLoadBeanDefinitions(InputSource inputSource, Resource resource) {
+                                int registerBeanDefinitions(Document doc, Resource resource) {
+                                    BeanDefinitionDocumentReader documentReader = new DefaultBeanDefinitionDocumentReader();
+                                    // 转移到DefaultBeanDefinitionDocumentReader去处理
+                                    documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+DefaultBeanDefinitionDocumentReader {
+    void registerBeanDefinitions(Document doc, XmlReaderContext readerContext) {
+        Element root = doc.getDocumentElement();
+        void doRegisterBeanDefinitions(Element root) {
+            BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegate();
+            void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
+                foreach (Element ele in root.getChildNodes()) {
+                    if (delegate.isDefaultNamespace(ele)) {
+                        void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
+                            if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
+                                void importBeanDefinitionResource(Element ele) {
+                                    String location = ele.getAttribute(RESOURCE_ATTRIBUTE);
+                                    getReaderContext().getReader().loadBeanDefinitions(location, actualResources);
+                                }
+                            }
+                            else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
+                                void processAliasRegistration(Element ele) {
+                                    String name = ele.getAttribute(NAME_ATTRIBUTE);
+                                    String alias = ele.getAttribute(ALIAS_ATTRIBUTE);
+                                    getReaderContext().getRegistry().registerAlias(name, alias);
+                                }
+                            }
+                            else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
+                                void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {
+                                    // 转到BeanDefinitionParserDelegate，返回BeanDefinitionHolder，然后注册
+                                    BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);
+                                    BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
+                                }
+                            }
+                            else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
+                                doRegisterBeanDefinitions(ele);
+                            }
+                        }
+                    }
+                    else {
+                        delegate.parseCustomElement(ele);
+                    }
+                }
+            }
+        }
+    }
+}
+
+BeanDefinitionParserDelegate {
+    BeanDefinitionHolder parseBeanDefinitionElement(Element ele) {
+        BeanDefinition containingBean = null;
+        BeanDefinitionHolder parseBeanDefinitionElement(Element ele, BeanDefinition containingBean) {
+            string beanName = ele.getAttribute(ID_ATTRIBUTE); // 读取beanName，这里为了说明简写了
+            AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean) {
+                AbstractBeanDefinition bd = new GenericBeanDefinition();
+                parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
+                parseMetaElements(ele, bd);
+                parseLookupOverrideSubElements(ele, bd.getMethodOverrides());
+                parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
+                parseConstructorArgElements(ele, bd);
+                parsePropertyElements(ele, bd);
+                parseQualifierElements(ele, bd);
+                return bd;
+            }
+            return new BeanDefinitionHolder(beanDefinition, beanName, aliasesArray);
+        }
+    }
+}
+{% endhighlight %}
+
+
+---
+
+**ClassPathXmlApplicationContext** 构造器通过 **refresh()** 调用 **loadBeanDefinitions(BeanFactory)**。
+
+{% highlight java %}
+public class ClassPathXmlApplicationContext {
+
+    public ClassPathXmlApplicationContext(String configLocation) throws BeansException {
+        this(new String[] {configLocation}, true, null);
+    }
+
+    public ClassPathXmlApplicationContext(String[] configLocations, boolean refresh, ApplicationContext parent)
+            throws BeansException {
+        super(parent);
+        setConfigLocations(configLocations);
+
+        // ---------------------------[ STEP 1 ]---------------------------
+        // 注意这里，调用了refresh()。
+        // refresh()在AbstractApplicationContext中定义。
+        if (refresh) {
+            refresh(); // <<<这里<<<
+        }
+    }
+
     @Override
+    [AbstractApplicationContext]
+    public void refresh() throws BeansException, IllegalStateException {
+        prepareRefresh();
+
+        // ---------------------------[ STEP 2 ]---------------------------
+        // 调用obtainFreshBeanFactory()，刷新内部的BeanFactory实例。
+        ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory(); // <<<这里<<<
+
+        ... ...
+    }
+
+    [AbstractApplicationContext]
+    protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
+        // ---------------------------[ STEP 3 ]---------------------------
+        // refreshBeanFactory()是AbstractApplicationContext的一个虚拟方法，
+        refreshBeanFactory(); // <<<这里<<<
+
+        ConfigurableListableBeanFactory beanFactory = getBeanFactory();
+        return beanFactory;
+    }
+
+    @Override
+    [AbstractRefreshableApplicationContext]
     protected final void refreshBeanFactory() throws BeansException {
-        // 创建一个空的BeanFactory实例
+        if (hasBeanFactory()) {
+            destroyBeans();
+            closeBeanFactory();
+        }
         DefaultListableBeanFactory beanFactory = createBeanFactory();
         beanFactory.setSerializationId(getId());
         customizeBeanFactory(beanFactory);
 
-        // 装入BeanDefinitions
-        loadBeanDefinitions(beanFactory);
+        // ---------------------------[ STEP 4 ]---------------------------
+        // 调用loadBeanDefinitions()，装入BeanDefinitions。
+        loadBeanDefinitions(beanFactory); // <<<这里<<<
+        this.beanFactory = beanFactory;
     }
 
     @Override
+    [AbstractXmlApplicationContext]
     protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws BeansException, IOException {
         // Create a new XmlBeanDefinitionReader for the given BeanFactory.
         XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
@@ -47,27 +222,113 @@ public abstract class AbstractApplicationContext {
         // Allow a subclass to provide custom initialization of the reader,
         // then proceed with actually loading the bean definitions.
         initBeanDefinitionReader(beanDefinitionReader);
-        loadBeanDefinitions(beanDefinitionReader);
+
+        // ---------------------------[ STEP 5 ]---------------------------
+        loadBeanDefinitions(beanDefinitionReader); // <<<这里<<<
+    }
+
+    [AbstractXmlApplicationContext]
+    protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException {
+        Resource[] configResources = getConfigResources();
+        if (configResources != null) {
+            reader.loadBeanDefinitions(configResources);
+        }
+
+        String[] configLocations = getConfigLocations();
+        if (configLocations != null) {
+            // 交给XmlBeanDefinitionReader去处理
+            reader.loadBeanDefinitions(configLocations); // <<<这里<<<
+        }
     }
 }
 {% endhighlight %}
 
 
+---
 
+**loadBeanDefinitions(XmlBeanDefinitionReader)** 将控制权交给 **XmlBeanDefinitionReader**。
+
+**XmlBeanDefinitionReader** 定义了一系列的 **loadBeanDefinitions()** 方法，使用 **location** 或 **resource** 作为参数。
+
+{% highlight java %}
+public class XmlBeanDefinitionReader 
+    extends AbstractBeanDefinitionReader 
+    implements BeanDefinitionReader {
+
+    @Override
+    // BeanDefinitionReader接口方法，XmlBeanDefinitionReader实现
+    public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {
+        return loadBeanDefinitions(new EncodedResource(resource));
+    }
+
+    @Override
+    // BeanDefinitionReader接口方法，AbstractBeanDefinitionReader实现
+    public int loadBeanDefinitions(Resource... resources) throws BeanDefinitionStoreException {
+        int counter = 0;
+        for (Resource resource : resources) {
+            counter += loadBeanDefinitions(resource);
+        }
+        return counter;
+    }
+
+    @Override
+    // BeanDefinitionReader接口方法，AbstractBeanDefinitionReader实现
+    public int loadBeanDefinitions(String location) throws BeanDefinitionStoreException {
+        return loadBeanDefinitions(location, null);
+    }
+
+    @Override
+    // BeanDefinitionReader接口方法，AbstractBeanDefinitionReader实现
+    public int loadBeanDefinitions(String... locations) throws BeanDefinitionStoreException {
+        int counter = 0;
+        for (String location : locations) {
+            counter += loadBeanDefinitions(location);
+        }
+        return counter;
+    }
+
+    // ---------------------------[ ****** ]---------------------------
+    // 所有的loadBeanDefintions()都会交给doLoadBeanDefinitions()来处理
+    // XmlBeanDefinitionReader
+    protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource) {
+        Document doc = doLoadDocument(inputSource, resource);
+        return registerBeanDefinitions(doc, resource); // <<<这里<<<
+    }
+
+    // XmlBeanDefinitionReader
+    public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
+        BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader(); // <<<这里<<<
+        int countBefore = getRegistry().getBeanDefinitionCount();
+
+        // -----------------------[ ****** ]---------------------------
+        // 将控制权交给BeanDefinitionDocumentReader
+        documentReader.registerBeanDefinitions(doc, createReaderContext(resource)); // <<<这里<<<
+        return getRegistry().getBeanDefinitionCount() - countBefore;
+    }
+}
+{% endhighlight %}
 
 
 ---
 
-Spring解析XML配置文件的重点在org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader类。
+**XmlBeanDefinitionReader.registerBeanDefinitions(Document, Resource)** 将控制权再交给 **BeanDefinitionDocumentReader**。
 
-
-**doRegisterBeanDefinitions()**：处理&lt;beans/&gt;元素。
+**BeanDefinitionDocumentReader** 是一个接口，这里的实例是 **DefaultBeanDefinitionDocumentReader** 类型。
 
 {% highlight java %}
-package org.springframework.beans.factory.xml;
-
 public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocumentReader {
     
+    @Override
+    // BeanDefinitionDocumentReader接口方法
+    // XmlBeanDefinitionReader将控制权转过来后，这里是入口。
+    public void registerBeanDefinitions(Document doc, XmlReaderContext readerContext) {
+        this.readerContext = readerContext;
+        Element root = doc.getDocumentElement();
+
+        // ---------------------------[ STEP 1 ]---------------------------
+        doRegisterBeanDefinitions(root); // <<<这里<<<
+    }
+
     protected void doRegisterBeanDefinitions(Element root) {
         // Any nested <beans> elements will cause recursion in this method. In
         // order to propagate and preserve <beans> default-* attributes correctly,
@@ -100,8 +361,9 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
         // 前置处理，目前为空
         preProcessXml(root);
 
+        // ---------------------------[ STEP 2 ]---------------------------
         // 解析root下的子节点，依次处理
-        parseBeanDefinitions(root, this.delegate);
+        parseBeanDefinitions(root, this.delegate); // <<<这里<<<
 
         // 后置处理，目前为空
         postProcessXml(root);
@@ -118,12 +380,14 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
                 if (node instanceof Element) {
                     Element ele = (Element) node;
 
+                    // ---------------[ STEP 3 ]---------------------------
+
                     // 子节点分default和custom两种方式处理
                     // <import/>、<alias/>、<bean/>、<beans/>，这些用default处理，就是内置处理方式
                     // 其他子节点用custom处理方式
 
                     if (delegate.isDefaultNamespace(ele)) {
-                        parseDefaultElement(ele, delegate);
+                        parseDefaultElement(ele, delegate); // <<<这里<<<
                     }
                     else {
                         delegate.parseCustomElement(ele);
@@ -138,6 +402,8 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
     // 默认子节点调度器，包括<import/>、<alias/>、<bean/>、<beans/>
     private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
+
+        // ---------------------------[ STEP 4 ]---------------------------
         // 依据nodeName调用不同的子方法
         if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
             importBeanDefinitionResource(ele);
@@ -146,7 +412,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
             processAliasRegistration(ele);
         }
         else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
-            processBeanDefinition(ele, delegate);
+            processBeanDefinition(ele, delegate); // <<<这里<<<
         }
         else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
             // recurse
@@ -156,20 +422,19 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
     // 处理<bean/>节点
     protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {
+
+        // ---------------------------[ STEP 5 ]---------------------------
+        // 将控制权交给BeanDefinitionParserDelegate处理
         // 这里转到BeanDefinitionParserDelegate处理，
-        BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);
+        BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); // <<<这里<<<
 
         if (bdHolder != null) {
             // 装饰decorate返回的bdHolder，是什么意思？没有明白
             bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);
-            try {
-                // 调用registerBeanDefinition()和registerAlias()，注册beanDefinition
-                BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
-            }
-            catch (BeanDefinitionStoreException ex) {
-                getReaderContext().error("Failed to register bean definition with name '" +
-                        bdHolder.getBeanName() + "'", ele, ex);
-            }
+
+            // 调用registerBeanDefinition()和registerAlias()，注册beanDefinition
+            BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
+
             // Send registration event.
             getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdHolder));
         }
@@ -179,10 +444,9 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
 
 
-
 ---
 
-**org.springframework.beans.factory.xml.BeanDefinitionParserDelegate**：解析element，返回BeanDefinitionHolder。
+**DefaultBeanDefinitionDocumentReader.processBeanDefinition(Element, BeanDefinitionParserDelegate)** 在将控制权交给 **BeanDefinitionParserDelegate**。
 
 {% highlight java %}
 package org.springframework.beans.factory.xml;
@@ -216,10 +480,6 @@ public class BeanDefinitionParserDelegate {
         String beanName = id;
         if (!StringUtils.hasText(beanName) && !aliases.isEmpty()) {
             beanName = aliases.remove(0);
-            if (logger.isDebugEnabled()) {
-                logger.debug("No XML 'id' specified - using '" + beanName +
-                        "' as bean name and " + aliases + " as aliases");
-            }
         }
 
         // containingBean是什么意思？
@@ -514,7 +774,9 @@ public class BeanDefinitionParserDelegate {
 }
 {% endhighlight %}
 
+**BeanDefinitionParserDelegate.parseBeanDefinitionElement()** 返回 **BeanDefinitionHolder**，
 
+**DefaultBeanDefinitionDocumentReader.processBeanDefinition()** 接收到以后，注册到 **BeanFactory**。
 
 
 
