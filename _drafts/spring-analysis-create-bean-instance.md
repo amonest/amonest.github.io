@@ -10,6 +10,9 @@ ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.
 Animal animal = ctx.getBean("animal", Animal.class);
 {% endhighlight %}
 
+
+---
+
 getBean()方法是在AbstractBeanFactory类实现的。
 
 {% highlight java %}
@@ -21,6 +24,9 @@ public class AbstractBeanFactory extends ... {
     }
 }
 {% endhighlight %}
+
+
+---
 
 getBean()调用了内部方法doGetBean()。
 

@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"bean",
+				"beans"
+			],
+			[
 				"ce",
 				"cellspacing	Attr"
 			],
@@ -28,29 +32,18 @@
 	"buffers":
 	[
 		{
-			"file": "/X/dev/supercap-cloth/src/cc/modules/email/Mail.java",
+			"file": "_includes/html/left.html",
 			"settings":
 			{
-				"buffer_size": 11413,
+				"buffer_size": 18111,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "\n sky闪闪的星星\nsky闪闪的星星\n在使用java的使用经常会用到发送邮件的功能，而java发送邮件经常使用有三种方式，分别是调用Java自己的api、sping写的api和apache的api，下面介绍是的使用java本身自己的api实现.\n1/10\n前提准备工作：       首先，邮件的发送方要开启POP3 和SMTP服务--即发送qq邮件的账号要开启POP3 和SMTP服务       \n2/10\n开启方法：  登陆qq邮箱 \n3/10\n  点击  设置\n\n4/10\n3。点击—-账户 \n\n5/10\n找到：POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务 —点击开启 \n\n6/10\n发送短信 —–点击确定 \n\n7/10\n6。稍等一会，很得到一个授权码！ –注意：这个一定要记住，一会用到 \n\n8/10\n7。点击保存修改 —OK 完成 \n\n9/10\njava 测试代码： package cn.cupcat.test;import java.util.Properties;import javax.mail.Message;import javax.mail.MessagingException;import javax.mail.Session;import javax.mail.Transport;import javax.mail.internet.AddressException;import javax.mail.internet.InternetAddress;import javax.mail.internet.MimeMessage;import javax.mail.internet.MimeMessage.RecipientType;public class SendmailUtil {            public static voi d main(String[] args) throws AddressException,            MessagingException {         Properties properties = new Properties();  properties.put(\"mail.transport.protocol\", \"smtp\");// 连接协议          properties.put(\"mail.smtp.host\", \"smtp.qq.com\");// 主机名          properties.put(\"mail.smtp.port\", 465);// 端口号          properties.put(\"mail.smtp.auth\", \"true\");          properties.put(\"mail.smtp.ssl.enable\", \"true\");//设置是否使用ssl安全连接  ---一般都使用          properties.put(\"mail.debug\", \"true\");//设置是否显示debug信息  true 会在控制台显示相关信息        //得到回话对象        Session session = Session.getInstance(properties);        // 获取邮件对象        Message message = new MimeMessage(session);        //设置发件人邮箱地址        message.setFrom(new InternetAddress(\"123456789@qq.com\"));        //设置收件人地址        message.setRecipients(                RecipientType.TO,                new InternetAddress[] { new InternetAddress(\"987654321@qq.com\") });        //设置邮件标题        message.setSubject(\"这是第一封Java邮件\");        //设置邮件内容        message.setText(\"内容为： 这是第一封java发送来的邮件。\");        //得到邮差对象        Transport transport = session.getTransport();        //连接自己的邮箱账户        transport.connect(\"123456789@qq.com\", \"vvctybgbvvophjcj\");//密码为刚才得到的授权码        //发送邮件        transport.sendMessage(message, message.getAllRecipients());    } }",
+			"file": "_posts/spring/2017-03-24-spring-source-eureka-instance-config.md",
 			"settings":
 			{
-				"buffer_size": 2098,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "---\nlayout: post\ntitle: Eclipse设置tab转换为空格\n---\n\n\nGibhub: <https://github.com/docker/compose>\n\nDocker Compose: <https://docs.docker.com/compose/>\n\nInstall Docker Compose: <https://docs.docker.com/compose/install/>\n\nDaoClout: <http://get.daocloud.io/> #国内Docker镜像\n\n{% highlight shell %}\n$ curl -L \"https://github.com/docker/compose/releases/download/1.11.1/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose\n\n$ chmod +x /usr/local/bin/docker-compose\n\n$ docker-compose --version\n{% endhighlight %}",
-			"file": "_posts/eclipse/2017-02-28-eclipse-tab-spaces.md",
-			"file_size": 555,
-			"file_write_time": 131327228843997099,
-			"settings":
-			{
-				"buffer_size": 515,
+				"buffer_size": 2281,
 				"line_ending": "Windows"
 			}
 		}
@@ -94,19 +87,49 @@
 		"/X/dev/amonest.github.io",
 		"/X/dev/amonest.github.io/_drafts",
 		"/X/dev/amonest.github.io/_includes",
+		"/X/dev/amonest.github.io/_includes/block",
 		"/X/dev/amonest.github.io/_includes/html"
 	],
 	"file_history":
 	[
+		"/X/dev/amonest.github.io/_posts/spring/2017-03-24-spring-source-eureka-client-config.md",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zookeeper-webclient/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zookeeper-compute/pom.xml",
+		"/X/dev/suifeng-java-projects/cloud-examples/cloud-compute-service/src/main/java/net/mingyang/cloud_compute_service/ComputeController.java",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/eureka-service/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zookeeper-discovery/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zookeeper-config/pom.xml",
+		"/X/dev/amonest.github.io/_includes/block/spring-source-list.html",
+		"/X/dev/amonest.github.io/_posts/spring/2017-03-13-spring-source-xml-custom-schema.md",
+		"/X/dev/amonest.github.io/_drafts/spring-source-create-bean-instance.md",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/user-service/src/main/java/net/mingyang/spring_cloud_examples/user_service/Application.java",
+		"/X/bin/spring-1.4.1.RELEASE/bin/spring.bat",
+		"/X/dev/suifeng-java-projects/spring-boot-helloworld/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-boot-test/pom.xml",
+		"/C/Users/lbin/Desktop/20170317101654.xml",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/eureka-service/src/main/java/net/mingyang/spring_cloud_examples/eureka_service/Application.java",
+		"/X/dev/supercap-cloth/.gitignore",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-create-bean-instance.md",
+		"/X/dev/amonest.github.io/_posts/spring/2017-03-13-spring-config-custom-xml-schema.md",
+		"/X/dev/amonest.github.io/_includes/html/left.html",
+		"/X/dev/amonest.github.io/_posts/others/2016-11-19-jekyll-installation-on-windows.md",
+		"/X/dev/amonest.github.io/_drafts/spring-source-xml-entity-resolver.md",
+		"/X/dev/amonest.github.io/_includes/block/spring-analysis-list.html",
+		"/X/dev/amonest.github.io/_layouts/post.html",
+		"/X/dev/supercap-cloth/src/cc/modules/email/Mail.java",
+		"/X/dev/amonest.github.io/_drafts/spring-source-parse-xml-config.md",
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-parse-xml-config.md",
+		"/X/dev/amonest.github.io/_includes/abc.html",
+		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/custom/layerRecommends.jsp",
+		"/X/dev/amonest.github.io/_posts/eclipse/2017-02-28-eclipse-tab-spaces.md",
 		"/C/Windows/System32/drivers/etc/hosts",
 		"/X/dev/suifeng-java-projects/ant-spring-generator/build.xml",
 		"/X/dev/suifeng-java-projects/ant-spring-generator/build/email-service/src/main/java/net/mingyang/spring_cloud_examples/email_service/Application.java",
 		"/C/Users/lbin/Desktop/2017.02.24 AM/方案一/电脑、iPhone、安卓、Linux系列（增强版）/hosts",
-		"/X/dev/amonest.github.io/_includes/html/left.html",
 		"/X/dev/amonest.github.io/_posts/linux/2017-02-23-linux-install-docker-compose.md",
 		"/C/Users/lbin/Desktop/links.txt",
 		"/X/dev/suifeng-java-projects/cloud-examples/cloud-eureka-server/src/main/docker/Dockerfile",
-		"/X/dev/suifeng-java-projects/spring-cloud-examples/eureka-service/pom.xml",
 		"/X/dev/amonest.github.io/_posts/linux/2017-02-22-linux-modify-sudoers.md",
 		"/X/dev/suifeng-java-projects/cloud-examples/cloud-eureka-server/pom.xml",
 		"/X/dev/amonest.github.io/_posts/linux/2017-02-22-linux-query-user-in-groups.md",
@@ -179,7 +202,6 @@
 		"/C/Users/lbin/Desktop/spring-context-4.3.6.RELEASE-sources/org/springframework/context/annotation/AnnotationConfigUtils.java",
 		"/X/dev/amonest.github.io/_drafts/spring-analysis-configuration-flow.md",
 		"/X/dev/amonest.github.io/_drafts/spring-analysis-AnnotationConfigApplicationContext.md",
-		"/X/dev/amonest.github.io/_drafts/spring-analysis-create-bean-instance.md",
 		"/X/dev/suifeng-android-projects/HelloWorld/HelloWorld.iml",
 		"/X/dev/amonest.github.io/_drafts/spring-analysis-SpringApplicationRunListener.md",
 		"/X/dev/amonest.github.io/_drafts/spring-analysis-SpringFactoriesLoader.md",
@@ -197,39 +219,11 @@
 		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/custom/UserRepositoryImplJdbc.java",
 		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/custom/UserRepository.java",
 		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/customall/User.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/customall/UserRepository.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/customall/ExtendedJpaRepository.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/interceptors/src/main/java/example/springdata/jpa/interceptors/Customer.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/interceptors/src/main/java/example/springdata/jpa/interceptors/CustomerRepository.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/interceptors/src/main/java/example/springdata/jpa/interceptors/ApplicationConfiguration.java",
-		"/X/dev/amonest.github.io/_drafts/spring-mvc-RequestContextHolder.md",
-		"/X/dev/amonest.github.io/_drafts/spring-mvc-WebContextHolder.md",
-		"/X/dev/amonest.github.io/_posts/spring-test/2016-12-28-spring-test-controller.md",
-		"/X/dev/amonest.github.io/_drafts/spring-mvc-RequestContextUtils.md",
-		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/modules/top.jsp",
-		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/revise-pwd.jsp",
-		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/login.jsp",
-		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/check-account.jsp",
-		"/X/dev/amonest.github.io/_drafts/spring-mvc-executetime-interceptor.md",
-		"/X/dev/amonest.github.io/_drafts/spring-mvc-maintenance-interceptor.md",
-		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/index.jsp",
-		"/X/dev/amonest.github.io/_posts/spring-test/2016-12-28-spring-test-dbunit.md",
-		"/X/dev/amonest.github.io/_posts/spring-test/2016-12-28-spring-test-simple.md",
-		"/X/dev/amonest.github.io/_drafts/spring-mvc-configure-interceptor.md",
-		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/WEB-INF/classes/struts-ajax.xml",
-		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-16-spring-jdbc-embedded-hsqldb.md",
-		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-16-spring-jdbc-embedded-datasource.md",
-		"/X/dev/amonest.github.io/_posts/spring-jdbc/2016-12-28-spring-jdbc-jdbc-template.md",
-		"/X/dev/amonest.github.io/_posts/spring-jdbc/2017-01-11-spring-jdbc-embedded-datasource.md",
-		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-16-spring-jpa-create-query-methods.md",
-		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-16-spring-jpa-entity-auditing.md",
-		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-15-spring-jpa-specification-examples.md",
-		"/X/dev/amonest.github.io/_posts/spring-jpa/2017-01-16-spring-jpa-query-projections.md",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/auditing/AuditorAwareImpl.java"
+		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/customall/UserRepository.java"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -252,6 +246,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Jersey",
+			"X:\\bin\\spring-1.4.1.RELEASE\\bin",
+			"// ******",
+			"group",
+			"role",
+			"user",
 			"hasErrors",
 			"\"param\"",
 			"param",
@@ -355,6 +355,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"// <<<这里<<<",
+			"permission",
+			"group",
+			"role",
 			"注解读取器",
 			"&lt;T&gt;",
 			"cloud_cli_feign",
@@ -386,60 +390,33 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/X/dev/supercap-cloth/src/cc/modules/email/Mail.java",
+					"file": "_includes/html/left.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11413,
+						"buffer_size": 18111,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8223,
-								8223
+								2573,
+								2573
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Java/Java.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 4731.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2098,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2098,
-								2098
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 8602.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -447,28 +424,30 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "_posts/eclipse/2017-02-28-eclipse-tab-spaces.md",
+					"buffer": 1,
+					"file": "_posts/spring/2017-03-24-spring-source-eureka-instance-config.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 515,
+						"buffer_size": 2281,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								47,
-								47
+								2264,
+								2264
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1039.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -479,7 +458,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -510,7 +489,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 404.0
+		"height": 28.0
 	},
 	"output.find_results":
 	{
@@ -520,7 +499,7 @@
 	"project": "amonest.github.io.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -562,7 +541,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 161.0,
+	"side_bar_width": 371.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
