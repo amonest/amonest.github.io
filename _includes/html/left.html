@@ -6,7 +6,7 @@
         <ul>
             <li class="tree java-programming">
                 <a href="#">Java Programming</a>
-                <ul>
+                <ul style="position: absolute; margin-top: -0.8em;">
                     <li class="tree2" style="border-bottom: 0px;">
                         <a href="#">Apache Maven <span style="display:inline;position:absolute;left:120px;">- &nbsp; 项目管理</span></a>
                         <ul>
@@ -36,6 +36,13 @@
                     </li>
 
                     <li class="tree2" style="border-bottom: 0px;">
+                        <a href="#">Spring <span style="display:inline;position:absolute;left:120px;">- &nbsp; 注入式框架</span></a>
+                        <ul>
+                            <li style="border-bottom: #696969 1px solid;"><a href="/2017/04/03/spring-config-servlet-registration">(1) 注册Servlet</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="tree2" style="border-bottom: 0px;">
                         <a href="#">Java Source <span style="display:inline;position:absolute;left:120px;">- &nbsp; 源码分析</span></a>
                         <ul>
                             <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 240px; line-height: 19px;"><a href="#">Spring Context 源码分析</a></li>
@@ -44,8 +51,10 @@
                             <li style="border-bottom: #696969 1px solid;"><a href="/2017/03/13/spring-source-xml-custom-schema">(3) 自定义XML Schema</a></li>
 
                             <li style="background: #dcdcdc; border-bottom: #696969 1px solid;"><a href="#">Spring Cloud 源码分析</a></li>
-                            <li><a href="/2017/03/24/spring-source-eureka-client-config">(1) Eureka客户端配置</a></li>
-                            <li style="border-bottom: 0px;"><a href="/2017/03/24/spring-source-eureka-instance-config">(2) Eureka实例配置</a></li>
+                            <li><a href="/2017/03/28/spring-source-eureka-client-summary">(1) Eureka客户端说明</a></li>
+                            <li><a href="/2017/03/24/spring-source-eureka-client-config">(2) Eureka客户端配置</a></li>
+                            <li><a href="/2017/03/24/spring-source-eureka-instance-config">(3) Eureka实例配置</a></li>
+                            <li style="border-bottom: 0px;"><a href="/2017/03/28/spring-source-eureka-http-client">(4) EurekaHttpClient</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -53,86 +62,122 @@
 
             <li class="tree spring-framework" >
                 <a href="#">Spring Framework</a>
-                <ul style="position: absolute; margin-top: -2.5em;">
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid;"><a href="#">&nbsp; Spring Boot</a></li>
-                    <li><a href="/2017/01/07/spring-boot-create-new-project">( 1 ) 创建Spring Boot新项目</a></li>
-                    <li><a href="/2017/01/07/spring-boot-initialize-project">( 2 ) 初始化Spring Boot项目</a></li>
-                    <li><a href="/2017/01/07/spring-boot-autowired-application-context">( 3 ) 自动注入ApplicationContext</a></li>
-                    <li><a href="/2017/01/07/spring-boot-custom-application-event">( 4 ) 自定义ApplicationEvent</a></li>
-                    <li><a href="/2017/01/07/spring-boot-package-executable-jar">( 5 ) 发布可执行的jar文件</a></li>
-                    <li><a href="/2017/01/07/spring-boot-autowired-application-arguments">( 6 ) 获取Spring Boot启动参数</a></li>
-                    <li><a href="/2017/01/09/spring-boot-autowired-resource">( 7 ) 区别@Autowired与@Resource</a></li>
-                    <li><a href="/2017/01/09/spring-boot-import-external-properties">( 8 ) 导入外部Properties文件</a></li>
-                    <li><a href="/2017/01/09/spring-boot-mix-java-xml-config">( 9 ) 混合Java和XML配置</a></li>
-                    <li><a href="/2017/01/09/spring-boot-multi-profiles">(10) 定义多环境@Profile</a></li>
-                    <li><a href="/2017/01/09/spring-boot-bean-scope">(11) Bean的作用域</a></li>
-                    <li><a href="/2016/12/28/spring-boot-application-logging">(12) 启用应用程序日志</a></li>
-                    <li><a href="/2017/01/09/spring-boot-multi-datasources">(13) 配置多数据源</a></li>
-                    <li style="border-bottom: #696969 1px solid;"><a href="/2016/12/09/spring-boot-application-properties">(14) application.properties</a></li>
-
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid;"><a href="#">&nbsp; Spring Config</a></li>
-                    <li><a href="/2016/12/26/spring-boot-config-complex-configuration">( 1 ) 组合注解</a></li>
+                <ul style="position: absolute; margin-top: -2.6em;">
+                    <li class="tree2">
+                        <a href="#">Spring Boot</a>
+                        <ul>
+                            <li><a href="/2017/01/07/spring-boot-create-new-project">( 1 ) 创建Spring Boot新项目</a></li>
+                            <li><a href="/2017/01/07/spring-boot-initialize-project">( 2 ) 初始化Spring Boot项目</a></li>
+                            <li><a href="/2017/01/07/spring-boot-autowired-application-context">( 3 ) 自动注入ApplicationContext</a></li>
+                            <li><a href="/2017/01/07/spring-boot-custom-application-event">( 4 ) 自定义ApplicationEvent</a></li>
+                            <li><a href="/2017/01/07/spring-boot-package-executable-jar">( 5 ) 发布可执行的jar文件</a></li>
+                            <li><a href="/2017/01/07/spring-boot-autowired-application-arguments">( 6 ) 获取Spring Boot启动参数</a></li>
+                            <li><a href="/2017/01/09/spring-boot-autowired-resource">( 7 ) 区别@Autowired与@Resource</a></li>
+                            <li><a href="/2017/01/09/spring-boot-import-external-properties">( 8 ) 导入外部Properties文件</a></li>
+                            <li><a href="/2017/01/09/spring-boot-mix-java-xml-config">( 9 ) 混合Java和XML配置</a></li>
+                            <li><a href="/2017/01/09/spring-boot-multi-profiles">(10) 定义多环境@Profile</a></li>
+                            <li><a href="/2017/01/09/spring-boot-bean-scope">(11) Bean的作用域</a></li>
+                            <li><a href="/2016/12/28/spring-boot-application-logging">(12) 启用应用程序日志</a></li>
+                            <li><a href="/2017/01/09/spring-boot-multi-datasources">(13) 配置多数据源</a></li>
+                            <li><a href="/2016/12/09/spring-boot-application-properties">(14) application.properties</a></li>
+                            <li style="border-bottom: #696969 1px solid;"><a href="/2016/12/25/spring-boot-cli-installation">(3) 安装Spring Boot CLI</a></li>
+                        </ul>
+                    </li>
                     
-                    <li><a href="/2016/12/09/spring-boot-application-configuration">( 3 ) 配置说明</a></li>
-                    <li><a href="/2016/12/26/spring-boot-config-bean-lifecycle">( 4 ) @PostConstruct、@PreDestroy</a></li>
-                    <li><a href="/2016/12/26/spring-boot-config-enable-scheduling">( 5 ) @Scheduled</a></li>
-                    <li><a href="/2016/12/26/spring-boot-config-spring-boot-application">( 6 ) @SpringBootApplication</a></li>
-                    <li><a href="/2016/12/26/spring-boot-config-enable-auto-configuration">( 7 ) @EnableAutoConfiguration</a></li>
-                    <li><a href="/2016/12/26/spring-boot-config-auto-configuration-sample">( 8 ) 自动配置实例</a></li>
-                    <li style="border-bottom: #696969 1px solid;"><a href="/2017/03/13/spring-config-custom-xml-schema">( 9 ) 自定义XML Schema</a></li>
+                    <li class="tree2">
+                        <a href="#">Spring Config</a>
+                        <ul>
+                            <li><a href="/2016/12/26/spring-boot-config-complex-configuration">( 1 ) 组合注解</a></li>                    
+                            <li><a href="/2016/12/09/spring-boot-application-configuration">( 3 ) 配置说明</a></li>
+                            <li><a href="/2016/12/26/spring-boot-config-bean-lifecycle">( 4 ) @PostConstruct、@PreDestroy</a></li>
+                            <li><a href="/2016/12/26/spring-boot-config-enable-scheduling">( 5 ) @Scheduled</a></li>
+                            <li><a href="/2016/12/26/spring-boot-config-spring-boot-application">( 6 ) @SpringBootApplication</a></li>
+                            <li><a href="/2016/12/26/spring-boot-config-enable-auto-configuration">( 7 ) @EnableAutoConfiguration</a></li>
+                            <li><a href="/2016/12/26/spring-boot-config-auto-configuration-sample">( 8 ) 自动配置实例</a></li>
+                            <li><a href="/2017/03/13/spring-config-custom-xml-schema">( 9 ) 自定义XML Schema</a></li>
+                            <li style="border-bottom: #696969 1px solid;"><a href="/2017/04/05/spring-autowired-map-or-list">(10) 注入Map或List</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="tree2">
+                        <a href="#">Spring MVC</a>
+                        <ul style="position: absolute; margin-top: -3.4em;">
+                            <li><a href="/2016/12/09/spring-mvc-web-controller">( 1 ) 创建Web项目</a></li>
+                            <li><a href="/2016/12/09/spring-mvc-integrate-thymeleaf">( 2 ) 集成Thymeleaf</a></li>
+                            <li><a href="/2016/12/09/spring-mvc-static-resources">( 3 ) 静态资源</a></li>
+                            <li><a href="/2016/12/09/spring-mvc-devtools">( 4 ) devtools</a></li>
+                            <li><a href="/2016/12/09/spring-mvc-deploy-war">( 5 ) 发布war</a></li>
+                            <li><a href="/2017/01/20/spring-mvc-configure-interceptor">( 6 ) 配置拦截器</a></li>                            
+                            <li><a href="/2017/01/20/spring-mvc-multi-languages">(12) 配置多语言</a></li>
+                            <li style="border-bottom: #696969 1px solid;"><a href="/2017/01/20/spring-mvc-configure-servlet">(13) Servlet、Filter、Listener</a></li>
 
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid;"><a href="#">&nbsp; Spring Mvc</a></li>
-                    <li><a href="/2016/12/09/spring-mvc-web-controller">( 1 ) 创建Web项目</a></li>
-                    <li><a href="/2016/12/09/spring-mvc-integrate-thymeleaf">( 2 ) 集成Thymeleaf</a></li>
-                    <li><a href="/2016/12/09/spring-mvc-static-resources">( 3 ) 静态资源</a></li>
-                    <li><a href="/2016/12/09/spring-mvc-devtools">( 4 ) devtools</a></li>
-                    <li><a href="/2016/12/09/spring-mvc-deploy-war">( 5 ) 发布war</a></li>
-                    <li><a href="/2017/01/20/spring-mvc-configure-interceptor">( 6 ) 配置拦截器</a></li>
-                    <li><a href="/2017/01/20/spring-mvc-executetime-interceptor">( 7 ) ExecuteTimeInterceptor</a></li>
-                    <li><a href="/2017/01/20/spring-mvc-maintenance-interceptor">( 8 ) MaintenanceInterceptor</a></li>
-                    <li><a href="/2017/01/20/spring-mvc-RequestContextUtils">( 9 ) RequestContextUtils</a></li>
-                    <li><a href="/2017/01/20/spring-mvc-RequestContextHolder">(10) RequestContextHolder</a></li>
-                    <li><a href="/2017/01/20/spring-mvc-WebContextHolder">(11) WebContextHolder</a></li>
-                    <li><a href="/2017/01/20/spring-mvc-multi-languages">(12) 配置多语言</a></li>
-                    <li style="border-bottom: 0px;"><a href="/2017/01/20/spring-mvc-configure-servlet">(13) Servlet、Filter、Listener</a></li>
-                </ul>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;"><a href="#">&nbsp; 配置</a></li>
+                            <li style="border-bottom: #696969 1px solid;"><a href="/2017/04/05/spring-config-servlet-context-listener">( 1 ) 配置ServletContextListener</a></li>
 
-                <ul style="position: absolute; margin-top: -2.5em; margin-left: 20.25em; border-left: #696969 1px solid; z-index:70;">
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 240px; line-height: 19px;"><a href="#">&nbsp; Spring JDBC</a></li>
-                    <li><a href="/2017/01/11/spring-jdbc-config-datasource">(1) 配置DataSource</a></li>
-                    <li><a href="/2016/12/28/spring-jdbc-integrate-jtds">(2) 集成jTDS</a></li>
-                    <li><a href="/2017/01/11/spring-jdbc-initialize-database">(3) 初始化数据</a></li>
-                    <li><a href="/2016/12/28/spring-jdbc-jdbc-template">(4) JdbcTemplate</a></li>
-                    <li><a href="/2017/01/16/spring-jdbc-embedded-hsqldb">(5) 嵌入式HSQLDB</a></li>
-
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 240px; line-height: 19px;"><a href="#">&nbsp; Spring JPA</a></li>
-                    <li><a href="/2017/01/16/spring-jpa-create-query">(1) 创建查询</a></li>
-                    <li><a href="/2017/01/16/spring-jpa-query-projections">(2) 投影查询</a></li>
-                    <li><a href="/2017/01/16/spring-jpa-entity-auditing">(3) 实体审计</a></li>
-                    <li><a href="/2017/01/15/spring-jpa-specification-examples">(4) Specification示例</a></li>
-                    <li style="border-bottom: #696969 1px solid;"><a href="/2017/02/16/spring-jpa-validate-annotations">(5) 常用验证注解</a></li>
-
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 240px; line-height: 19px;"><a href="#">&nbsp; Spring Security</a></li>
-                    <li style="border-bottom: #696969 1px solid;"><a href="/2017/02/11/spring-security-jdbc-detail-manager"">(1) 数据库认证</a></li>
-
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 240px; line-height: 19px;"><a href="#">&nbsp; Spring Shell</a></li>
-                    <li><a href="/2016/12/27/spring-boot-shell-create-project"">(1) 创建Shell</a></li>
-                    <li style="border-bottom: #696969 1px solid;"><a href="/2016/12/27/spring-boot-shell-simple-user"">(2) 定制登录用户</a></li>
-
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 240px; line-height: 19px;"><a href="#">&nbsp; Spring Boot</a></li>
-                    <li style="border-bottom: #696969 1px solid;"><a href="/2016/12/25/spring-boot-cli-installation">(3) 安装Spring Boot CLI</a></li>
-
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 240px; line-height: 19px;"><a href="#">&nbsp; Spring Test</a></li>
-                    <li><a href="/2016/12/28/spring-test-simple">(1) 简单测试</a></li>
-                    <li><a href="/2016/12/28/spring-test-controller">(2) 控制器测试</a></li>
-                    <li style="border-bottom: #696969 1px solid;"><a href="/2016/12/28/spring-test-dbunit">(3) dbunit测试</a></li>
-
-                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid; width: 240px; line-height: 19px;"><a href="#">&nbsp; Spring Cloud</a></li>
-                    <li><a href="/2017/01/03/spring-cloud-sample-summary">(1) 实例(概述)</a></li>
-                    <li><a href="/2017/01/03/spring-cloud-sample-discovery">(2) 实例(discovery)</a></li>
-                    <li><a href="/2017/01/03/spring-cloud-sample-config">(3) 实例(config)</a></li>
-                    <li><a href="/2017/01/03/spring-cloud-sample-student">(4) 实例(student)</a></li>
-                    <li style="border-bottom: 0px;"><a href="/2017/01/03/spring-cloud-sample-cli-feign">(5) 实例(cli-feign)</a></li>
+                            <li style="background: #dcdcdc; border-bottom: #696969 1px solid;"><a href="#">&nbsp; 工具</a></li>
+                            <li><a href="/2017/01/20/spring-mvc-executetime-interceptor">( 1 ) ExecuteTimeInterceptor</a></li>
+                            <li><a href="/2017/01/20/spring-mvc-maintenance-interceptor">( 2 ) MaintenanceInterceptor</a></li>
+                            <li><a href="/2017/01/20/spring-mvc-RequestContextUtils">( 3 ) RequestContextUtils</a></li>
+                            <li><a href="/2017/01/20/spring-mvc-RequestContextHolder">( 4 ) RequestContextHolder</a></li>
+                            <li style="border-bottom: 0px;"><a href="/2017/01/20/spring-mvc-WebContextHolder">( 5 ) WebContextHolder</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="tree2">
+                        <a href="#">Spring JDBC</a>
+                        <ul>
+                            <li><a href="/2017/01/11/spring-jdbc-config-datasource">(1) 配置DataSource</a></li>
+                            <li><a href="/2016/12/28/spring-jdbc-integrate-jtds">(2) 集成jTDS</a></li>
+                            <li><a href="/2017/01/11/spring-jdbc-initialize-database">(3) 初始化数据</a></li>
+                            <li><a href="/2016/12/28/spring-jdbc-jdbc-template">(4) JdbcTemplate</a></li>
+                            <li><a href="/2017/01/16/spring-jdbc-embedded-hsqldb">(5) 嵌入式HSQLDB</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="tree2">
+                        <a href="#">Spring JPA</a>
+                        <ul>
+                            <li><a href="/2017/01/16/spring-jpa-create-query">(1) 创建查询</a></li>
+                            <li><a href="/2017/01/16/spring-jpa-query-projections">(2) 投影查询</a></li>
+                            <li><a href="/2017/01/16/spring-jpa-entity-auditing">(3) 实体审计</a></li>
+                            <li><a href="/2017/01/15/spring-jpa-specification-examples">(4) Specification示例</a></li>
+                            <li style="border-bottom: #696969 1px solid;"><a href="/2017/02/16/spring-jpa-validate-annotations">(5) 常用验证注解</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="tree2">
+                        <a href="#">Spring Security</a>
+                        <ul>
+                            <li style="border-bottom: #696969 1px solid;"><a href="/2017/02/11/spring-security-jdbc-detail-manager"">(1) 数据库认证</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="tree2">
+                        <a href="#">Spring Test</a>
+                        <ul>
+                            <li><a href="/2016/12/28/spring-test-simple">(1) 简单测试</a></li>
+                            <li><a href="/2016/12/28/spring-test-controller">(2) 控制器测试</a></li>
+                            <li style="border-bottom: #696969 1px solid;"><a href="/2016/12/28/spring-test-dbunit">(3) dbunit测试</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="tree2">
+                        <a href="#">Spring Cloud</a>
+                        <ul>
+                            <li><a href="/2017/01/03/spring-cloud-sample-summary">(1) 实例(概述)</a></li>
+                            <li><a href="/2017/01/03/spring-cloud-sample-discovery">(2) 实例(discovery)</a></li>
+                            <li><a href="/2017/01/03/spring-cloud-sample-config">(3) 实例(config)</a></li>
+                            <li><a href="/2017/01/03/spring-cloud-sample-student">(4) 实例(student)</a></li>
+                            <li style="border-bottom: 0px;"><a href="/2017/01/03/spring-cloud-sample-cli-feign">(5) 实例(cli-feign)</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="tree2" style="border-bottom: 0px;">
+                        <a href="#">Spring Utils</a>
+                        <ul>
+                            <li style="border-bottom: 0px;"><a href="/2017/04/05/spring-reflection-set-field">( 1 ) 重置私有字段</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li><!-- /.spring-framework -->
 
@@ -226,6 +271,14 @@
                     </li>
                 </ul>
             </li><!-- /.linux-softwares -->
+
+            <li class="tree database">
+                <a href="#">Database Mgr.</a>
+                <ul>
+                    <li style="background: #dcdcdc; border-bottom: #696969 1px solid;"><a href="#">&nbsp; Sybase</a></li>
+                    <li style="border-bottom: 0px;"><a href="/2017/03/30/sybase-identity-insert">(1) 插入identity数据</a></li>
+                </ul>
+            </li><!-- /.database -->
 
             <li class="tree miscellaneous">
                 <a href="#">Miscellaneous</a>

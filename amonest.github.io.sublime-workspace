@@ -35,16 +35,28 @@
 			"file": "_includes/html/left.html",
 			"settings":
 			{
-				"buffer_size": 18111,
+				"buffer_size": 21077,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "_posts/spring/2017-03-24-spring-source-eureka-instance-config.md",
+			"contents": "---\nlayout: post\ntitle: Spring Source - SpringApplication初始化\n---\n\nSpringApplication初始化函数：\n\n{% highlight java %}\nprivate void initialize(Object[] sources) {\n    if (sources != null && sources.length > 0) {\n        this.sources.addAll(Arrays.asList(sources));\n    }\n    this.webEnvironment = deduceWebEnvironment();\n    setInitializers((Collection) getSpringFactoriesInstances(\n            ApplicationContextInitializer.class));\n    setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));\n    this.mainApplicationClass = deduceMainApplicationClass();\n}\n{% endhighlight %}\n\n\n---\n\n### 第一步：设置配置对象\n\n{% highlight java %}\n//实例变量\n//private final Set<Object> sources = new LinkedHashSet<Object>();\n\nif (sources != null && sources.length > 0) {\n    this.sources.addAll(Arrays.asList(sources));\n}\n{% endhighlight %}\n\n实例变量sources用来保存配置对象，通常是一个配置类。\n\n\n---\n\n### 第二步：检查是否Web环境\n\n{% highlight java %}\n//实例变量\n//private boolean webEnvironment;\n\nthis.webEnvironment = deduceWebEnvironment();\n{% endhighlight %}\n\ndeduceWebEnvironment()通过检查Web环境必需的一些类是否存在来确定当前是否是Web环境。\n\n{% highlight java %}\n//实例变量\n//private static final String[] WEB_ENVIRONMENT_CLASSES = { \"javax.servlet.Servlet\",\n//            \"org.springframework.web.context.ConfigurableWebApplicationContext\" };\n\nprivate boolean deduceWebEnvironment() {\n    for (String className : WEB_ENVIRONMENT_CLASSES) {\n        if (!ClassUtils.isPresent(className, null)) {\n            return false;\n        }\n    }\n    return true;\n}\n{% endhighlight %}\n\n\n---\n\n### 第三步：初始化ApplicationContextInitializer\n\n{% highlight java %}\nsetInitializers((Collection) getSpringFactoriesInstances(\n        ApplicationContextInitializer.class));\n{% endhighlight %}\n\n\n\n\n\npublic AnnotatedBeanDefinitionReader(BeanDefinitionRegistry registry, Environment environment) {\n    Assert.notNull(registry, \"BeanDefinitionRegistry must not be null\");\n    Assert.notNull(environment, \"Environment must not be null\");\n    this.registry = registry;\n    this.conditionEvaluator = new ConditionEvaluator(registry, environment, null);\n    AnnotationConfigUtils.registerAnnotationConfigProcessors(this.registry);\n}",
+			"file": "_drafts/spring-source-annotation-application-initialize.md",
+			"file_size": 1975,
+			"file_write_time": 131360232381651587,
 			"settings":
 			{
-				"buffer_size": 2281,
+				"buffer_size": 2128,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "public PropertySourcesLoader() {\n    this.loaders = SpringFactoriesLoader.loadFactories(PropertySourceLoader.class,\n            getClass().getClassLoader());\n}",
+			"settings":
+			{
+				"buffer_size": 159,
+				"line_ending": "Windows",
+				"name": "public PropertySourcesLoader() {"
 			}
 		}
 	],
@@ -87,14 +99,55 @@
 		"/X/dev/amonest.github.io",
 		"/X/dev/amonest.github.io/_drafts",
 		"/X/dev/amonest.github.io/_includes",
-		"/X/dev/amonest.github.io/_includes/block",
-		"/X/dev/amonest.github.io/_includes/html"
+		"/X/dev/amonest.github.io/_includes/html",
+		"/X/dev/amonest.github.io/_layouts"
 	],
 	"file_history":
 	[
+		"/X/dev/amonest.github.io/_includes/snippet/SpringApplication.txt",
+		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-autowired-map-or-list.md",
+		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-config-servlet-context-listener.md",
+		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-reflection-set-field.md",
+		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/WEB-INF/jsp/enterprise/column/epColumn.jsp",
+		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/WEB-INF/jsp/enterprise/goods/columnInfo_forelation.jsp",
+		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/check-account.jsp",
+		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/detail-account.jsp",
+		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/theme/default/image/style.custom.css",
+		"/X/dev/amonest.github.io/assets/navi.css",
+		"/X/dev/amonest.github.io/_posts/spring/2017-04-03-spring-config-servlet-registration.md",
+		"/X/dev/amonest.github.io/index.md",
+		"/X/dev/amonest.github.io/assets/superfish/css/superfish.css",
+		"/X/dev/amonest.github.io/_posts/spring/2016-12-09-spring-mvc-web-controller.md",
+		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-mvc-simple-url-handler-mapping.md",
+		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-config-autowired-map-or-list.md",
+		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-config-autowired-collection.md",
+		"/X/dev/amonest.github.io/_includes/html/top.html",
+		"/X/dev/amonest.github.io/_includes/html/header.html",
+		"/X/dev/amonest.github.io/_includes/html/left.html",
+		"/X/dev/amonest.github.io/_posts/spring/2017-03-24-spring-source-eureka-instance-config.md",
+		"/X/dev/amonest.github.io/_posts/spring/2017-03-28-spring-source-eureka-client-summary.md",
+		"/X/dev/amonest.github.io/_posts/database/sybase/2017-03-30-sybase-identity-insert.md",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zuul-service/src/main/resources/application.properties",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/user-service/src/main/java/net/mingyang/spring_cloud_examples/user_service/Application.java",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/user-service/src/main/java/net/mingyang/spring_cloud_examples/user_service/controller/ComputeController.java",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/web-client/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zuul-service/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zuul-service/src/main/resources/bootstrap.properties",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zuul-service/src/main/java/net/mingyang/spring_cloud_examples/zuul_service/Application.java",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/pom.xml",
+		"/X/dev/suifeng-java-projects/spring-cloud-examples/zuul-service/.gitignore",
+		"/D/SHARED/ERP/SQL/sybase數據庫異常轉移.sql",
+		"/X/dev/amonest.github.io/_posts/others/2016-11-19-jekyll-installation-on-windows.md",
+		"/X/dev/amonest.github.io/_posts/spring/2017-03-28-spring-source-eureka-http-client.md",
+		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/WEB-INF/classes/jdbc.properties",
+		"/X/dev/supercap-cloth/src/cc/modules/orm/hibernate/SQLServer2005Dialect.java",
+		"/C/Users/lbin/Desktop/SUPERCAP.html",
+		"/X/dev/amonest.github.io/_posts/java/2017-03-27-java-call-ant-api.md",
+		"/X/dev/amonest.github.io/_posts/java/2017-03-27-java-call-cmd-and-return.md",
+		"/X/dev/amonest.github.io/_posts/java/2017-03-27-java-thread-daemon-thread.md",
+		"/X/dev/amonest.github.io/_posts/spring/2016-12-26-spring-boot-config-auto-configuration-sample.md",
 		"/X/dev/amonest.github.io/_posts/spring/2017-03-24-spring-source-eureka-client-config.md",
 		"/X/dev/suifeng-java-projects/spring-cloud-examples/zookeeper-webclient/pom.xml",
-		"/X/dev/suifeng-java-projects/spring-cloud-examples/pom.xml",
 		"/X/dev/suifeng-java-projects/spring-cloud-examples/zookeeper-compute/pom.xml",
 		"/X/dev/suifeng-java-projects/cloud-examples/cloud-compute-service/src/main/java/net/mingyang/cloud_compute_service/ComputeController.java",
 		"/X/dev/suifeng-java-projects/spring-cloud-examples/eureka-service/pom.xml",
@@ -103,7 +156,6 @@
 		"/X/dev/amonest.github.io/_includes/block/spring-source-list.html",
 		"/X/dev/amonest.github.io/_posts/spring/2017-03-13-spring-source-xml-custom-schema.md",
 		"/X/dev/amonest.github.io/_drafts/spring-source-create-bean-instance.md",
-		"/X/dev/suifeng-java-projects/spring-cloud-examples/user-service/src/main/java/net/mingyang/spring_cloud_examples/user_service/Application.java",
 		"/X/bin/spring-1.4.1.RELEASE/bin/spring.bat",
 		"/X/dev/suifeng-java-projects/spring-boot-helloworld/pom.xml",
 		"/X/dev/suifeng-java-projects/spring-boot-test/pom.xml",
@@ -112,8 +164,6 @@
 		"/X/dev/supercap-cloth/.gitignore",
 		"/X/dev/amonest.github.io/_drafts/spring-analysis-create-bean-instance.md",
 		"/X/dev/amonest.github.io/_posts/spring/2017-03-13-spring-config-custom-xml-schema.md",
-		"/X/dev/amonest.github.io/_includes/html/left.html",
-		"/X/dev/amonest.github.io/_posts/others/2016-11-19-jekyll-installation-on-windows.md",
 		"/X/dev/amonest.github.io/_drafts/spring-source-xml-entity-resolver.md",
 		"/X/dev/amonest.github.io/_includes/block/spring-analysis-list.html",
 		"/X/dev/amonest.github.io/_layouts/post.html",
@@ -181,45 +231,7 @@
 		"/C/Users/lbin/Desktop/calvin1978-springside4-master/springside4/examples/boot-api/src/main/java/org/springside/examples/bootapi/api/BookEndpoint.java",
 		"/C/Users/lbin/Desktop/calvin1978-springside4-master/springside4/examples/boot-api/src/main/java/org/springside/examples/bootapi/dto/BookDto.java",
 		"/C/Users/lbin/Desktop/calvin1978-springside4-master/springside4/examples/boot-api/src/main/java/org/springside/examples/bootapi/domain/Book.java",
-		"/X/dev/amonest.github.io/_drafts/spring-analysis-AnnotationUtils.md",
-		"/X/dev/suifeng-java-projects/disconf-master/README.md",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-web/html/login.html",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-web/html/modifypassword.html",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-web/src/main/webapp/WEB-INF/web.xml",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-web/src/main/resources/applicationContext.xml",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-client/src/main/resources/disconf_sys.properties",
-		"/X/dev/suifeng-java-projects/supercap-library/src/main/resources/templates/dgfp_43_hs/users.html",
-		"/X/dev/suifeng-java-projects/supercap-library/src/main/resources/templates/dgfp_43_hs/user.html",
-		"/X/dev/suifeng-java-projects/disconf-master/docs/README.md",
-		"/X/dev/suifeng-java-projects/disconf-master/docs/source/install/01.md",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-client/src/main/java/com/baidu/disconf/client/addons/properties/ReloadableProperties.java",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-client/src/main/java/com/baidu/disconf/client/addons/properties/ReloadConfiguration.java",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-client/src/main/java/com/baidu/disconf/client/config/inner/DisInnerConfigAnnotation.java",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-client/src/main/java/com/baidu/disconf/client/config/inner/DisClientComConfig.java",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-client/src/main/java/com/baidu/disconf/client/watch/WatchMgr.java",
-		"/X/dev/suifeng-java-projects/disconf-master/disconf-client/pom.xml",
-		"/X/dev/suifeng-java-projects/supercap-library/src/main/resources/templates/fragments.html",
-		"/C/Users/lbin/Desktop/spring-context-4.3.6.RELEASE-sources/org/springframework/context/annotation/AnnotationConfigUtils.java",
-		"/X/dev/amonest.github.io/_drafts/spring-analysis-configuration-flow.md",
-		"/X/dev/amonest.github.io/_drafts/spring-analysis-AnnotationConfigApplicationContext.md",
-		"/X/dev/suifeng-android-projects/HelloWorld/HelloWorld.iml",
-		"/X/dev/amonest.github.io/_drafts/spring-analysis-SpringApplicationRunListener.md",
-		"/X/dev/amonest.github.io/_drafts/spring-analysis-SpringFactoriesLoader.md",
-		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-configure-servlet.md",
-		"/X/dev/amonest.github.io/_drafts/spring-analysis-application-arguments.md",
-		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-multi-languages.md",
-		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-configure-interceptor.md",
-		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-executetime-interceptor.md",
-		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-maintenance-interceptor.md",
-		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-20-spring-mvc-WebContextHolder.md",
-		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-21-spring-mvc-RequestContextUtils.md",
-		"/X/dev/amonest.github.io/_posts/spring-mvc/2017-01-21-spring-mvc-RequestContextHolder.md",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/custom/UserRepositoryCustom.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/custom/UserRepositoryImpl.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/custom/UserRepositoryImplJdbc.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/custom/UserRepository.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/customall/User.java",
-		"/C/Users/lbin/Desktop/spring-data-examples-master/spring-data-examples-master/jpa/example/src/main/java/example/springdata/jpa/customall/UserRepository.java"
+		"/X/dev/amonest.github.io/_drafts/spring-analysis-AnnotationUtils.md"
 	],
 	"find":
 	{
@@ -246,6 +258,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"depot",
+			"WEB224",
+			"WEB221",
+			"Refresh",
+			"Qty",
+			"goodsInfos",
+			"UnderConstruction.jpg",
+			" style=\"width: 160px; background: url({{ ASSET_PATH }}/img/arrow.gif) no-repeat 150px 50%;\"",
+			"dot",
+			"dash",
+			"menu",
+			"tree2",
 			"Jersey",
 			"X:\\bin\\spring-1.4.1.RELEASE\\bin",
 			"// ******",
@@ -355,6 +379,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"",
 			"// <<<这里<<<",
 			"permission",
 			"group",
@@ -390,7 +415,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -399,15 +424,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18111,
+						"buffer_size": 21077,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2573,
-								2573
+								12437,
+								12437
 							]
 						],
 						"settings":
@@ -416,8 +441,8 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 153.0,
+						"translation.y": 2599.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -425,19 +450,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "_posts/spring/2017-03-24-spring-source-eureka-instance-config.md",
+					"file": "_drafts/spring-source-annotation-application-initialize.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2281,
+						"buffer_size": 2128,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2264,
-								2264
+								2128,
+								1702
 							]
 						],
 						"settings":
@@ -447,7 +472,35 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1039.0,
+						"translation.y": 756.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 159,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								159,
+								159
+							]
+						],
+						"settings":
+						{
+							"auto_name": "public PropertySourcesLoader() {",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

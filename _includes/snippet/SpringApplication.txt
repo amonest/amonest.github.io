@@ -1,0 +1,15 @@
+SpringApplication初始化：
+
+private void initialize(Object[] sources) {
+    if (sources != null && sources.length > 0) {
+        this.sources.addAll(Arrays.asList(sources));
+    }
+    this.webEnvironment = deduceWebEnvironment();
+    setInitializers((Collection) getSpringFactoriesInstances(
+            ApplicationContextInitializer.class));
+    setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));
+    this.mainApplicationClass = deduceMainApplicationClass();
+}
+
+
+
