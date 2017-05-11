@@ -109,7 +109,7 @@ public String[] getStates() {
 
 在这个例子中，数组states已经逸出(escape)了它所属的范围。这个本应是私有的数据，事实上已经变成公有了。
 
-**不要让this引用在构造期间逸出**。对象只有通过构造函数返回后，才处于可预言的、稳定的状态。所以从构造函数内部发布的独享，只是一个未完成构造的对象。
+**不要让this引用在构造期间逸出**。对象只有通过构造函数返回后，才处于可预言的、稳定的状态。所以从构造函数内部发布的对象，只是一个未完成构造的对象。
 
 **甚至即使是在构造函数的最后一行发布的引用也是如此**。
 
@@ -136,5 +136,25 @@ public clas XmlReader {
         reader.setParser(new XmlParser());
         return reader;
     }
+}
+{% endhighlight %}
+
+
+---
+
+### ThreadLocal
+
+ThreadLocal提供了get与set访问器，为每个使用它的线程维护一份单独的拷贝。所以，**get总是返回由当前执行线程通过set设置的最新值**。
+
+{% highlight java %}
+public static ThreadLocal<Connection> connectionHolder =
+    = new ThreadLocal<Connection>() {
+        public Connection initialValue() {
+            return DriverManager.getConnection(DB_URL);
+        }
+    };
+
+public static Connection getConnection() {
+    return connectionHolder.get();
 }
 {% endhighlight %}
