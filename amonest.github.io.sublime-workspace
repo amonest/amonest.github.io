@@ -31,6 +31,82 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "    public BeanDefinition parseCustomElement(Element ele, BeanDefinition containingBd) {\n        String namespaceUri = getNamespaceURI(ele);\n        NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);\n        if (handler == null) {\n            error(\"Unable to locate Spring NamespaceHandler for XML schema namespace [\" + namespaceUri + \"]\", ele);\n            return null;\n        }\n        return handler.parse(ele, new ParserContext(this.readerContext, this, containingBd));\n    }\nparserContext.delegate.parseCustomElement(child, builder.getBeanDefinition())\n\nparserContext.delegate.parseBeanDefinitionElement(child, builder.getBeanDefinition())\n\nparserContext.delegate.parsePropertyElements(ele, bd);\n.Object val = parserContext.delegate.parsePropertyValue(ele, bd, propertyName);\n\n\n\nreaderContext.parseCustomElement(child, builder)\n\n    protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {\n        if (delegate.isDefaultNamespace(root)) {\n            NodeList nl = root.getChildNodes();\n            for (int i = 0; i < nl.getLength(); i++) {\n                Node node = nl.item(i);\n                if (node instanceof Element) {\n                    Element ele = (Element) node;\n                    if (delegate.isDefaultNamespace(ele)) {\n                        parseDefaultElement(ele, delegate);\n                    }\n                    else {\n                        delegate.parseCustomElement(ele);\n                    }\n                }\n            }\n        }\n        else {\n            delegate.parseCustomElement(root);\n        }\n    }\n\n\npublic void parsePropertyElements(Element beanEle, BeanDefinition bd) {\n        NodeList nl = beanEle.getChildNodes();\n        for (int i = 0; i < nl.getLength(); i++) {\n            Node node = nl.item(i);\n            if (isCandidateElement(node) && nodeNameEquals(node, PROPERTY_ELEMENT)) {\n                parsePropertyElement((Element) node, bd);\n            }\n        }\n    }\n\n\n    Object val = parsePropertyValue(ele, bd, propertyName);\n            PropertyValue pv = new PropertyValue(propertyName, val);\n            parseMetaElements(ele, pv);\n            pv.setSource(extractSource(ele));\n            bd.getPropertyValues().addPropertyValue(pv);\n\n\n\n\npublic Properties parsePropsElement(Element propsEle) {\n        ManagedProperties props = new ManagedProperties();\n        props.setSource(extractSource(propsEle));\n        props.setMergeEnabled(parseMergeAttribute(propsEle));\n\n        List<Element> propEles = DomUtils.getChildElementsByTagName(propsEle, PROP_ELEMENT);\n        for (Element propEle : propEles) {\n            String key = propEle.getAttribute(KEY_ATTRIBUTE);\n            // Trim the text value to avoid unwanted whitespace\n            // caused by typical XML formatting.\n            String value = DomUtils.getTextValue(propEle).trim();\n            TypedStringValue keyHolder = new TypedStringValue(key);\n            keyHolder.setSource(extractSource(propEle));\n            TypedStringValue valueHolder = new TypedStringValue(value);\n            valueHolder.setSource(extractSource(propEle));\n            props.put(keyHolder, valueHolder);\n        }\n\n        return props;\n    }",
+			"settings":
+			{
+				"buffer_size": 3243,
+				"line_ending": "Windows",
+				"name": "public BeanDefinition parseCustomElement(Eleme"
+			}
+		},
+		{
+			"contents": "1. ConsumerConfig\n  可以直接配置address，而且可以用逗号分割多个\n\n2. 在consumer中设置loadbalance和haStragery\n\n3. Consumer设置成泛型：\nclass Consumer<T> {\n    Class<?> interfaceClass;\n\n    Consumer(Class<?> interfaceClass) {\n       ... ...\n    }\n}\n\nConsumer<FooService> fooConsumer = new Consumer(FooService.class);\n\n设置LoadBalance和Strategy\nclass Consumer<T> {\n    LoadBalance loadBalance;\n    HaStragery haStragery;\n}\n\nConsumer需要一个初始化方法:\nvoid init() {\n    if (getRegistry() != null) {\n        getRegistry().subscribe();\n    }\n}\n\nConsumer需要作为一个监听地址变化事件：\nvoid onAddressListChanged(Registry registry, List<Address> addressList) {\n    //\n}\n\nprivate ConcurrentHashMap<URL, List<Referer<T>>> registryReferers = new ConcurrentHashMap<URL, List<Referer<T>>>();\n\nvoid refreshAddressList() {\n    List<Referer<T>> newClients = new ArrayList<Referer<T>>();\n    for (Address) {\n        if (!address.isMatch) {\n            continue;\n        }\n        Referer<T> referer = getExistingReferer(u, registryReferers.get(registryUrl));\n        if (referer == null) {\n            // careful u: serverURL, refererURL鐨勯厤缃細琚玸erverURL鐨勯厤缃鐩�\n            URL refererURL = u.createCopy();\n            mergeClientConfigs(refererURL);\n            referer = protocol.refer(interfaceClass, refererURL, u);\n        }\n        if (referer != null) {\n            newReferers.add(referer);\n        }\n    }\n\n    if (CollectionUtil.isEmpty(newReferers)) {\n        onRegistryEmpty(registryUrl);\n        return;\n    }\n\n    // 姝ゅ涓嶉攢姣乺eferers锛岀敱cluster杩涜閿�姣�\n    registryReferers.put(registryUrl, newReferers);\n    refreshCluster();\n}\nprivate Referer<T> getExistingReferer(URL url, List<Referer<T>> referers) {\n    if (referers == null) {\n        return null;\n    }\n    for (Referer<T> r : referers) {\n        if (ObjectUtils.equals(url, r.getUrl()) || ObjectUtils.equals(url, r.getServiceUrl())) {\n            return r;\n        }\n    }\n    return null;\n}\nprivate void refreshCluster() {\n    List<Referer<T>> referers = new ArrayList<Referer<T>>();\n    for (List<Referer<T>> refs : registryReferers.values()) {\n        referers.addAll(refs);\n    }\n    cluster.onRefresh(referers);\n}\n\n\n4. LoadBalance\npublic interface LoadBalance<T> {\n\n    void onRefresh(List<Referer<T>> referers);\n\n    Referer<T> select(Request request);\n\n    void selectToHolder(Request request, List<Referer<T>> refersHolder);\n\n    void setWeightString(String weightString);\n}\n\n\n5. HaStragery\npublic interface HaStrategy<T> {\n\n    void setUrl(URL url);\n\n    Response call(Request request, LoadBalance<T> loadBalance);\n\n}\n\n6. Protocol\npublic interface Protocol {\n    <T> Exporter<T> export(Provider<T> provider, URL url);\n    <T> Referer<T> refer(Class<T> clz, URL url, URL serviceUrl);\n    void destroy();\n}",
+			"file": "/X/dev/suifeng-java-projects/orchid-parent/TODO.txt",
+			"file_size": 3000,
+			"file_write_time": 131393897468653074,
+			"settings":
+			{
+				"buffer_size": 2708,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "\n    \n    public static Registry getDefaultRegistry() {\n        if (defaultRegistry == null) {\n            synchronized (RegistryConfig.class) {\n                if (defaultRegistry == null) {\n                    defaultRegistry = (Registry) ExtensionHelper.getExtension(\n                            Registry.class, DEFAULT_Registry_TYPE);\n                    defaultRegistry.setSerialization(SerializationConfig.getDefaultSerialization());\n                    defaultRegistry.setCodec(CodecConfig.getDefaultCodec());\n                }\n            }\n        }\n        return defaultRegistry;\n    }\n    \n    private static Registry defaultRegistry;",
+			"settings":
+			{
+				"buffer_size": 646,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/Response.java",
+			"settings":
+			{
+				"buffer_size": 3538,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/ResponseFuture.java",
+			"settings":
+			{
+				"buffer_size": 1525,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/Channel.java",
+			"settings":
+			{
+				"buffer_size": 1753,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/support/DefaultFuture.java",
+			"settings":
+			{
+				"buffer_size": 11190,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/Endpoint.java",
+			"settings":
+			{
+				"buffer_size": 1851,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/ResponseCallback.java",
+			"settings":
+			{
+				"buffer_size": 949,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -76,8 +152,11 @@
 	],
 	"file_history":
 	[
-		"/X/dev/suifeng-java-projects/orchid-parent/README.md",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/support/SimpleFuture.java",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/Client.java",
 		"/X/dev/amonest.github.io/_drafts/spring-source-create-bean-instance.md",
+		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/check-account.jsp",
+		"/X/dev/suifeng-java-projects/orchid-parent/README.md",
 		"/X/dev/amonest.github.io/_drafts/spring-analysis-AnnotationConfigApplicationContext.md",
 		"/X/dev/amonest.github.io/_includes/html/left.html",
 		"/X/dev/amonest.github.io/_posts/books/2017-04-29-java-multi-threads.md",
@@ -95,7 +174,6 @@
 		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-reflection-set-field.md",
 		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/WEB-INF/jsp/enterprise/column/epColumn.jsp",
 		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/WEB-INF/jsp/enterprise/goods/columnInfo_forelation.jsp",
-		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/check-account.jsp",
 		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/detail-account.jsp",
 		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/jsps/theme/default/image/style.custom.css",
 		"/X/dev/amonest.github.io/assets/navi.css",
@@ -201,9 +279,7 @@
 		"/C/Users/lbin/Desktop/registration-login-spring-hsql-master/registration-login-spring-hsql-master/src/main/java/com/hellokoding/auth/model/User.java",
 		"/C/Users/lbin/Desktop/registration-login-spring-hsql-master/registration-login-spring-hsql-master/src/main/java/com/hellokoding/auth/model/Role.java",
 		"/C/Users/lbin/Desktop/registration-login-spring-hsql-master/registration-login-spring-hsql-master/src/main/java/com/hellokoding/auth/repository/UserRepository.java",
-		"/C/Users/lbin/Desktop/registration-login-spring-hsql-master/registration-login-spring-hsql-master/src/main/java/com/hellokoding/auth/repository/RoleRepository.java",
-		"/C/Users/lbin/Desktop/registration-login-spring-hsql-master/registration-login-spring-hsql-master/src/main/java/com/hellokoding/auth/service/UserService.java",
-		"/C/Users/lbin/Desktop/registration-login-spring-hsql-master/registration-login-spring-hsql-master/src/main/java/com/hellokoding/auth/service/SecurityServiceImpl.java"
+		"/C/Users/lbin/Desktop/registration-login-spring-hsql-master/registration-login-spring-hsql-master/src/main/java/com/hellokoding/auth/repository/RoleRepository.java"
 	],
 	"find":
 	{
@@ -231,6 +307,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Server",
+			"Transport",
+			"serialization",
+			"Serialization",
 			"BeanDefinitionRegistryPostProcessor ",
 			"BeanDefinitionRegistryPostProcessor",
 			"depot",
@@ -354,6 +434,11 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Registry",
+			"Server",
+			"transport",
+			"Codec",
+			"Transport",
 			"",
 			"// <<<这里<<<",
 			"permission",
@@ -390,8 +475,275 @@
 	"groups":
 	[
 		{
+			"selected": 6,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3243,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2019,
+								2019
+							]
+						],
+						"settings":
+						{
+							"auto_name": "public BeanDefinition parseCustomElement(Eleme",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 627.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/X/dev/suifeng-java-projects/orchid-parent/TODO.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2708,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2375,
+								2375
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1221.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 646,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								646,
+								646
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/Response.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3538,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2214.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/ResponseFuture.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1525,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1074,
+								1522
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 378.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/Channel.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1753,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1490,
+								1490
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 702.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/support/DefaultFuture.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11190,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4834,
+								4834
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 3618.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/Endpoint.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1851,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 324.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/exchange/ResponseCallback.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 949,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								949,
+								706
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
 			]
 		}
 	],
