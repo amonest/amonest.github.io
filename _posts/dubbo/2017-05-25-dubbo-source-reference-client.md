@@ -96,6 +96,7 @@ private <T> Invoker<T> doRefer(Cluster cluster, Registry registry, Class<T> type
     }
 
     // 订阅注册中心，注意订阅了三个类别：providers、configurators、routers
+    // 参考后面的《注册中心》
     directory.subscribe(subscribeUrl.addParameter(Constants.CATEGORY_KEY, 
             Constants.PROVIDERS_CATEGORY 
             + "," + Constants.CONFIGURATORS_CATEGORY 
@@ -104,14 +105,6 @@ private <T> Invoker<T> doRefer(Cluster cluster, Registry registry, Class<T> type
     return cluster.join(directory);
 }
 {% endhighlight %}
-
-
-
----
-
-### 订阅服务
-
-
 
 
 ---
@@ -161,6 +154,7 @@ public class RegistryDirectory<T> extends AbstractDirectory<T> implements Notify
     }
 }
 {% endhighlight %}
+
 
 RegistryDirectory实现类NotifyListener接口，所以可以作为订阅注册中心的通知接受者。
 
@@ -236,6 +230,179 @@ public synchronized void notify(List<URL> urls) {
     refreshInvoker(invokerUrls);
 }
 {% endhighlight %}
+
+
+在notify()的结尾，调用了refreshInvokers()方法，刷新invokerUrls。
+
+{% highlight java %}
+private void refreshInvoker(List<URL> invokerUrls){
+    if (invokerUrls != null && invokerUrls.size() == 1 && invokerUrls.get(0) != null
+            && Constants.EMPTY_PROTOCOL.equals(invokerUrls.get(0).getProtocol())) {
+        this.forbidden = true; // 禁止访问
+        this.methodInvokerMap = null; // 置空列表
+        destroyAllInvokers(); // 关闭所有Invoker
+    } else {
+
+        this.forbidden = false; // 允许访问
+
+        Map<String, Invoker<T>> oldUrlInvokerMap = this.urlInvokerMap; // local reference
+        if (invokerUrls.size() == 0 && this.cachedInvokerUrls != null){
+            invokerUrls.addAll(this.cachedInvokerUrls);
+        } else {
+            this.cachedInvokerUrls = new HashSet<URL>();
+            this.cachedInvokerUrls.addAll(invokerUrls);//缓存invokerUrls列表，便于交叉对比
+        }
+        if (invokerUrls.size() ==0 ){
+            return;
+        }
+
+        // 将URL列表转成Invoker列表
+        Map<String, Invoker<T>> newUrlInvokerMap = toInvokers(invokerUrls) ;
+        Map<String, List<Invoker<T>>> newMethodInvokerMap = toMethodInvokers(newUrlInvokerMap); // 换方法名映射Invoker列表
+        
+        // state change
+        //如果计算错误，则不进行处理.
+        if (newUrlInvokerMap == null || newUrlInvokerMap.size() == 0 ){
+            logger.error(new IllegalStateException("urls to invokers error .invokerUrls.size :"+invokerUrls.size() + ", invoker.size :0. urls :"+invokerUrls.toString()));
+            return ;
+        }
+        this.methodInvokerMap = multiGroup ? toMergeMethodInvokerMap(newMethodInvokerMap) : newMethodInvokerMap;
+        this.urlInvokerMap = newUrlInvokerMap;
+        try{
+            destroyUnusedInvokers(oldUrlInvokerMap,newUrlInvokerMap); // 关闭未使用的Invoker
+        }catch (Exception e) {
+            logger.warn("destroyUnusedInvokers error. ", e);
+        }
+    }
+}
+{% endhighlight %}
+
+
+
+---
+
+### Registry 注册中心
+
+Registry注册中心是一个接口，提供了注册和订阅两种功能，这里主要说明其中的订阅功能。
+
+{% highlight java %}
+public interface Registry {
+    void subscribe(URL url, NotifyListener listener);
+    void unsubscribe(URL url, NotifyListener listener);
+}
+{% endhighlight %}
+
+ZookeeperRegistry是Registry接口的一个实现类，提供Zookeeper注册中心功能。
+
+{% highlight java %}
+public class ZookeeperRegistry extends FailbackRegistry {
+
+    public void subscribe(URL url, NotifyListener listener) {
+        //url=consumer://192.168.12.84/net.mingyang.simple_dubbo_server.HelloService?application=dubbo-client&category=providers,configurators,routers&dubbo=2.5.4-SNAPSHOT&interface=net.mingyang.simple_dubbo_server.HelloService&methods=sayHello,sayBye&pid=15260&side=consumer&timestamp=1496200522227
+
+        // 将注册信息保存到subscribed
+        // 这一段代码实质在AbstractRegistry
+        Set<NotifyListener> listeners = subscribed.get(url);
+        if (listeners == null) {
+            subscribed.putIfAbsent(url, new ConcurrentHashSet<NotifyListener>());
+            listeners = subscribed.get(url);
+        }
+        listeners.add(listener);
+
+        List<URL> urls = new ArrayList<URL>();
+
+        // 将URL转换成ZK路径，格式如下：
+        //  /dubbo/net.mingyang.simple_dubbo_server.HelloService/providers
+        //  /dubbo/net.mingyang.simple_dubbo_server.HelloService/configurators
+        //  /dubbo/net.mingyang.simple_dubbo_server.HelloService/routers
+
+        for (String path : toCategoriesPath(url)) {
+            ConcurrentMap<NotifyListener, ChildListener> listeners = zkListeners.get(url);
+            if (listeners == null) {
+                zkListeners.putIfAbsent(url, new ConcurrentHashMap<NotifyListener, ChildListener>());
+                listeners = zkListeners.get(url);
+            }
+
+            // 这里形成一个对应关系：
+            //  listener(NotifyListener) -> zkListener(ChildListener)
+
+            ChildListener zkListener = listeners.get(listener);
+            if (zkListener == null) {
+                listeners.putIfAbsent(listener, new ChildListener() {
+                    public void childChanged(String parentPath, List<String> currentChilds) {
+                        ZookeeperRegistry.this.notify(url, listener, toUrlsWithEmpty(url, parentPath, currentChilds));
+                    }
+                });
+                zkListener = listeners.get(listener);
+            }
+
+            // 防御性处理, 有可能订阅的路径不存在, 这里可以先建立
+            zkClient.create(path, false);
+
+            List<String> children = zkClient.addChildListener(path, zkListener);
+            if (children != null) {
+                urls.addAll(toUrlsWithEmpty(url, path, children));
+            }
+        }
+
+        // 最后, 调用notify()通知NotifyListener
+        notify(url, listener, urls);
+    }
+}
+{% endhighlight %}
+
+在subscribe()的最后，用获取的URL列表调用了notify()，目的是回调NotifyListener的notify()方法。
+
+{% highlight java %}
+protected void notify(URL url, NotifyListener listener, List<URL> urls) {
+    // url=是消费者URL，以consumer://开始
+    // urls=是注册中心返回的网址列表
+
+    // 最终的result是这样的一个结构：
+    //  providers = [url1, url2, url3, ...]
+    //  routers = [url1, url2, url3, ...]
+    //  configurators = [url1, url2, url3, ...]
+
+    Map<String, List<URL>> result = new HashMap<String, List<URL>>();
+
+    for (URL u : urls) {
+        // 检查提供者URL和消费者URL是否匹配?
+        if (UrlUtils.isMatch(url, u)) {
+            String category = u.getParameter(Constants.CATEGORY_KEY, Constants.DEFAULT_CATEGORY);
+            List<URL> categoryList = result.get(category);
+            if (categoryList == null) {
+                categoryList = new ArrayList<URL>();
+                result.put(category, categoryList);
+            }
+            categoryList.add(u);
+        }
+    }
+
+    if (result.size() == 0) {
+        return;
+    }
+
+    Map<String, List<URL>> categoryNotified = notified.get(url);
+    if (categoryNotified == null) {
+        notified.putIfAbsent(url, new ConcurrentHashMap<String, List<URL>>());
+        categoryNotified = notified.get(url);
+    }
+
+    for (Map.Entry<String, List<URL>> entry : result.entrySet()) {
+        String category = entry.getKey();
+        List<URL> categoryList = entry.getValue();
+        categoryNotified.put(category, categoryList);
+
+        // 缓存notified到本地properties文件
+        saveProperties(url);
+
+        // 回调NotifyListener接口，比如RegistryDirectory
+        listener.notify(categoryList);
+    }
+}
+{% endhighlight %}
+
+
 
 
 ---
@@ -475,5 +642,6 @@ public class ScriptRouter implements Router {
     }
 }
 {% endhighlight %}
+
 
 
