@@ -10,8 +10,6 @@ title: 首页
 .wrapper table th, .wrapper table td {padding: 4px 8px;}
 </style>
 
-<base target="_blank" />
-
 <table>
     <tr>
         <td width="20%"><a href="https://github.com/" target="_blank">GitHub</a></td>
@@ -44,20 +42,20 @@ title: 首页
     </tr>
     <tr>
         <td>
-            <a href="https://www.oschina.net/p/disconf">disconf</a>
-            &nbsp;<a href="http://disconf.readthedocs.io/zh_CN/latest/index.html">[文档]</a>
-            &nbsp;<a href="https://github.com/knightliao/disconf-demos-java">[Demo]</a>
-            &nbsp;<a href="https://github.com/knightliao/disconf">[Github]</a>   
+            <a href="https://www.oschina.net/p/disconf" target="_blank">disconf</a>
+            &nbsp;<a href="http://disconf.readthedocs.io/zh_CN/latest/index.html" target="_blank">[文档]</a>
+            &nbsp;<a href="https://github.com/knightliao/disconf-demos-java" target="_blank">[Demo]</a>
+            &nbsp;<a href="https://github.com/knightliao/disconf" target="_blank">[Github]</a>   
         </td>
     </tr>
     <tr>
         <td>
-            <a href="https://www.oschina.net/p/apollo-ctrip">Apollo</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/Apollo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97">[使用指南]</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97">[分布式部署指南]</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/Apollo%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1">[配置中心设计]</a>
+            <a href="https://www.oschina.net/p/apollo-ctrip" target="_blank">Apollo</a>
+            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/Apollo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97" target="_blank">[使用指南]</a>
+            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97" target="_blank">[分布式部署指南]</a>
+            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/Apollo%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1" target="_blank">[配置中心设计]</a>
             &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/Quick-Start">[Quick Start]</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo">[Github]</a>   
+            &nbsp;<a href="https://github.com/ctripcorp/apollo" target="_blank">[Github]</a>   
         </td>
     </tr>
 </table>
