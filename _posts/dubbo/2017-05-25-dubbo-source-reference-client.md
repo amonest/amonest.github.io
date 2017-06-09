@@ -22,86 +22,177 @@ public class DubboClientTest {
 
 ---
 
-### 首先，需要说明的是下面这条语句：
+
+第一步：从get()开始。
 
 {% highlight java %}
-invoker = refprotocol.refer(interfaceClass, url);
-{% endhighlight %}
-
-这里的url是注册地址：
-
-{% highlight shell %}
-registry://192.168.12.84:2181/com.alibaba.dubbo.registry.RegistryService?application=dubbo-client&dubbo=2.5.4-SNAPSHOT&pid=10888&refer=application%3Ddubbo-client%26dubbo%3D2.5.4-SNAPSHOT%26interface%3Dnet.mingyang.simple_dubbo_server.HelloService%26methods%3DsayHello%2CsayBye%26pid%3D10888%26side%3Dconsumer%26timestamp%3D1495697621982&registry=zookeeper&timestamp=1495697644516]
-{% endhighlight %}
-
-register是地址协议，192.168.12.84:2181是注册中心IP地址和端口。
-
-参数registry=zookeeper，说明注册中心使用的是Zookeeper。
-
-参数refer，是已经编码encode后的字符串，使用时需要解码decode才能用。
-
-regprotocol是Protocol适配器，根据URL协议调用具体Protocol实现类。这里对应的是RegistryProtocol实现类。
-
-{% highlight java %}
-public class RegistryProtocol implements Protocol {
-
-    public <T> Invoker<T> refer(Class<T> type, URL url) throws RpcException {        
-        // 参数type=HelloService.class
-
-        // 协议转换, url原先是registry协议，类似registry://0.0.0.0:0000/这样。
-        // 这里获取转换成zookeeper://0.0.0.0:0000/这样
-        url = url.setProtocol(url.getParameter(Constants.REGISTRY_KEY, Constants.DEFAULT_REGISTRY)).removeParameter(Constants.REGISTRY_KEY);
-
-        // 获取ZookeeperRegistry实例
-        Registry registry = registryFactory.getRegistry(url);
-        if (RegistryService.class.equals(type)) {
-            return proxyFactory.getInvoker((T) registry, type, url);
-        }
-
-        // 获取查询参数, 从ReferenceConfig来
-        Map<String, String> qs = StringUtils.parseQueryString(url.getParameterAndDecoded(Constants.REFER_KEY));
-
-        // group="a,b" or group="*"
-        String group = qs.get(Constants.GROUP_KEY);
-        if (group != null && group.length() > 0 ) {
-            if ( ( Constants.COMMA_SPLIT_PATTERN.split( group ) ).length > 1
-                    || "*".equals( group ) ) {
-                return doRefer( getMergeableCluster(), registry, type, url );
-            }
-        }
-
-        // 这里的cluster是一个Cluster适配器
-        return doRefer(cluster, registry, type, url);
+public synchronized T get() {
+    if (ref == null) {
+        init();
     }
+    return ref;
 }
 {% endhighlight %}
 
-doRefer()是RegistryProtocl内部的引用实现方法。
+这是一个单例方法，调用init()创建实例。
+
+
+---
+
+第二步：在init()里面，初始化一个Map实例，合并各种来源的属性，最后调用createProxy()创建代理。
 
 {% highlight java %}
-private <T> Invoker<T> doRefer(Cluster cluster, Registry registry, Class<T> type, URL url) {
-    // 注册目录，参考后面的《目录服务》
-    RegistryDirectory<T> directory = new RegistryDirectory<T>(type, url);
-    directory.setRegistry(registry);
-    directory.setProtocol(protocol);
+private void init() {
 
-    // 订阅地址，注意是consumer://协议
-    URL subscribeUrl = new URL(Constants.CONSUMER_PROTOCOL, NetUtils.getLocalHost(), 0, type.getName(), directory.getUrl().getParameters());
+    // 这里是读取系统环境设置
+    appendProperties(this);
 
-    // 是否需要在注册中心负责消费者，注册分类consumers
-    if (! Constants.ANY_VALUE.equals(url.getServiceInterface())
-            && url.getParameter(Constants.REGISTER_KEY, true)) {
-        registry.register(subscribeUrl.addParameters(Constants.CATEGORY_KEY, Constants.CONSUMERS_CATEGORY,
-                Constants.CHECK_KEY, String.valueOf(false)));
+    Map<String, String> map = new HashMap<String, String>();
+    map.put(Constants.SIDE_KEY, Constants.CONSUMER_SIDE);
+    map.put(Constants.DUBBO_VERSION_KEY, Version.getVersion());
+    map.put(Constants.TIMESTAMP_KEY, String.valueOf(System.currentTimeMillis()));
+    map.put(Constants.INTERFACE_KEY, interfaceName);
+    appendParameters(map, application);
+    appendParameters(map, module);
+    appendParameters(map, consumer, Constants.DEFAULT_KEY);
+    appendParameters(map, this);
+
+    ref = createProxy(map);
+}
+{% endhighlight %}
+
+
+---
+
+第三步：createProxy()调用。
+
+{% highlight java %}
+private T createProxy(Map<String, String> map) {
+    URL tmpUrl = new URL("temp", "localhost", 0, map);
+    
+    // 用户指定URL，指定的URL可能是点对点直连地址，也可能是注册中心URL
+    // url可以是dubbo://1921.68.12.84:8893/这样，说明是直连地址
+    // 也可以是registry://192.168.12.84:2181/这样，说明是注册中心地址
+
+    if (url != null && url.length() > 0) { 
+        String[] us = Constants.SEMICOLON_SPLIT_PATTERN.split(url);
+        if (us != null && us.length > 0) {
+            for (String u : us) {
+                URL url = URL.valueOf(u);
+
+                if (url.getPath() == null || url.getPath().length() == 0) {
+                    url = url.setPath(interfaceName);
+                }
+
+                // registry协议，必需带上refer参数                
+                if (Constants.REGISTRY_PROTOCOL.equals(url.getProtocol())) {
+                    urls.add(url.addParameterAndEncoded(
+                            Constants.REFER_KEY, StringUtils.toQueryString(map)));
+                } else {
+                    urls.add(ClusterUtils.mergeUrl(url, map));
+                }
+            }
+        }
+    } else { 
+
+        // 通过注册中心配置拼装URL
+        // 执行到这里，说明没有指定URL，只能通过RegistryConfig获取注册中心地址
+        // 所以，loadRegistries()返回的一定是registry://协议的地址
+
+        List<URL> us = loadRegistries(false);
+        if (us != null && us.size() > 0) {
+            for (URL u : us) {
+                URL monitorUrl = loadMonitor(u);
+                if (monitorUrl != null) {
+                    map.put(Constants.MONITOR_KEY, URL.encode(monitorUrl.toFullString()));
+                }
+
+                // registry协议，必需带上refer参数
+                urls.add(u.addParameterAndEncoded(Constants.REFER_KEY, StringUtils.toQueryString(map)));
+            }
+        }
+
+        if (urls == null || urls.size() == 0) {
+            throw new IllegalStateException("No such any registry to reference " + interfaceName);
+        }
     }
 
-    // 订阅注册中心，注意订阅了三个类别：providers、configurators、routers
-    // 参考后面的《注册中心》
-    directory.subscribe(subscribeUrl.addParameter(Constants.CATEGORY_KEY, 
-            Constants.PROVIDERS_CATEGORY 
-            + "," + Constants.CONFIGURATORS_CATEGORY 
-            + "," + Constants.ROUTERS_CATEGORY));
+    // 地址列表，注意它可能是registry://，可能是dubbo://，都不能确定
+    // 地址使用的协议不同，refprotocol处理也不同，因为refprotocol是一个适配器类
+    // 当dubbo协议时，调用的是DubboProtocol，返回的是简单的Invoker
+    // 当Registry协议时，调用的是RegistryProtocol，返回的是支持集群功能的Invoker
+    // 但是，不管那种协议，结果都是Invoker
 
-    return cluster.join(directory);
+    if (urls.size() == 1) {
+        invoker = refprotocol.refer(interfaceClass, urls.get(0));
+    } else {
+        List<Invoker<?>> invokers = new ArrayList<Invoker<?>>();
+        URL registryURL = null;
+        for (URL url : urls) {
+            invokers.add(refprotocol.refer(interfaceClass, url));
+            if (Constants.REGISTRY_PROTOCOL.equals(url.getProtocol())) {
+                registryURL = url; // 用了最后一个registry url
+            }
+        }
+
+        if (registryURL != null) { // 有 注册中心协议的URL
+            // 对有注册中心的Cluster 只用 AvailableCluster
+            URL u = registryURL.addParameter(Constants.CLUSTER_KEY, AvailableCluster.NAME); 
+            invoker = cluster.join(new StaticDirectory(u, invokers));
+        }  else { // 不是 注册中心的URL
+            invoker = cluster.join(new StaticDirectory(invokers));
+        }
+    }
+
+    // 创建服务代理
+    return (T) proxyFactory.getProxy(invoker);
+}
+{% endhighlight %}
+
+
+---
+
+第四步：调用proxyFactory的getProxy()方法，包装invoker，返回代理实例。
+
+{% highlight java %}
+public class JdkProxyFactory extends AbstractProxyFactory {
+
+    public <T> T getProxy(Invoker<T> invoker, Class<?>[] interfaces) {
+        return (T) Proxy.newProxyInstance(
+                Thread.currentThread().getContextClassLoader(), 
+                interfaces, 
+                new InvokerInvocationHandler(invoker));
+    }
+
+}
+{% endhighlight %}
+
+InvokerInvocationHandler可以将方法调用封装成Invocation，由invoker完成调用处理。
+
+{% highlight java %}
+public class InvokerInvocationHandler implements InvocationHandler {
+    private final Invoker<?> invoker;
+    
+    public InvokerInvocationHandler(Invoker<?> handler){
+        this.invoker = handler;
+    }
+
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        String methodName = method.getName();
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        if (method.getDeclaringClass() == Object.class) {
+            return method.invoke(invoker, args);
+        }
+        if ("toString".equals(methodName) && parameterTypes.length == 0) {
+            return invoker.toString();
+        }
+        if ("hashCode".equals(methodName) && parameterTypes.length == 0) {
+            return invoker.hashCode();
+        }
+        if ("equals".equals(methodName) && parameterTypes.length == 1) {
+            return invoker.equals(args[0]);
+        }
+        return invoker.invoke(new RpcInvocation(method, args)).recreate();
+    }
 }
 {% endhighlight %}

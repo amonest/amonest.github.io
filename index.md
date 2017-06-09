@@ -8,58 +8,56 @@ title: 首页
 <style>
 .subject {display: none;}
 .wrapper table th, .wrapper table td {padding: 4px 8px;}
+
+ul.r {padding-left: 0px;}
+ul.r li {float:left; list-style: none; margin-right: 10px;}
 </style>
 
 <table>
     <tr>
-        <td width="20%"><a href="https://github.com/" target="_blank">GitHub</a></td>
-        <td width="20%"><a href="https://www.apache.org/" target="_blank">Apache</a></td>
-        <td width="20%"><a href="https://spring.io/" target="_blank">Spring</a></td>
-        <td width="20%"><a href="http://mvnrepository.com/" target="_blank">MVNrepository</a></td>
-        <td width="20%"><a href="http://grepcode.com/" target="_blank">GrepCode</a></td>
-    </tr>
-    <tr>
-        <td><a href="https://www.w3schools.com/" target="_blank">W3School</a></td>
-        <td><a href="http://www.server-world.info/en/" target="_blank">ServerWorld</a></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td><a href="http://git.oschina.net/" target="_blank">码云</a></td>
-        <td><a href="http://www.oschina.net/" target="_blank">开源中国</a></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td>
+            <ul class="r">
+                <li><a href="https://github.com/" target="_blank">[GitHub]</a></li>
+                <li><a href="https://www.apache.org/" target="_blank">[Apache]</a></li>
+                <li><a href="https://spring.io/" target="_blank">[Spring]</a></li>
+                <li><a href="http://mvnrepository.com/" target="_blank">[MVNrepository]</a></li>
+                <li><a href="http://grepcode.com/" target="_blank">[GrepCode]</a></li>
+                <li><a href="https://www.w3schools.com/" target="_blank">[W3School]</a></li>
+                <li><a href="http://www.server-world.info/en/" target="_blank">[ServerWorld]</a></li>
+                <li><a href="http://git.oschina.net/" target="_blank">[码云]</a></li>
+                <li><a href="http://www.oschina.net/" target="_blank">[开源中国]</a></li>
+            </ul>
+        </td>
     </tr>
 </table>
-
-
 
 <table>
-    <tr style="background-color: #dcdcdc;">
-        <td>配置管理</td>
-    </tr>
     <tr>
         <td>
-            <a href="https://www.oschina.net/p/disconf" target="_blank">disconf</a>
-            &nbsp;<a href="http://disconf.readthedocs.io/zh_CN/latest/index.html" target="_blank">[文档]</a>
-            &nbsp;<a href="https://github.com/knightliao/disconf-demos-java" target="_blank">[Demo]</a>
-            &nbsp;<a href="https://github.com/knightliao/disconf" target="_blank">[Github]</a>   
+            <ul class="r">
+                <li><a href="http://dubbo.io/" target="_blank">[dubbo]</a></li>
+                <li><a href="https://github.com/dangdangdotcom/dubbox" target="_blank">[dubbox]</a></li>
+                <li><a href="http://disconf.readthedocs.io/zh_CN/latest/index.html" target="_blank">[disconf]</a></li>
+                <li><a href="https://github.com/ctripcorp/apollo" target="_blank">[Apollo]</a></li>
+                <li><a href="https://github.com/weibocom/motan" target="_blank">[motan]</a></li>
+                <li><a href="https://github.com/alibaba/druid" target="_blank">[druid]</a></li>
+                <li><a href="http://www.jumpserver.org/" target="_blank">[JumpServer]</a></li>
+                <li><a href="https://jenkins.io/" target="_blank">[Jenkins]</a></li>
+            </ul>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="https://www.oschina.net/p/apollo-ctrip" target="_blank">Apollo</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/Apollo%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97" target="_blank">[使用指南]</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97" target="_blank">[分布式部署指南]</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/Apollo%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1" target="_blank">[配置中心设计]</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo/wiki/Quick-Start">[Quick Start]</a>
-            &nbsp;<a href="https://github.com/ctripcorp/apollo" target="_blank">[Github]</a>   
+            <ul class="r">                
+                <li><a href="http://www.zentao.net/" target="_blank">[禅道]</a></li>                
+                <li><a href="http://www.thinkphp.cn/" target="_blank">[ThinkPHP]</a></li>                
+                <li><a href="http://www.opencartchina.com/" target="_blank">[OpenCart]</a></li>
+                <li><a href="https://www.oschina.net/p/owncloud" target="_blank">[ownCloud]</a></li>
+            </ul>
+            
         </td>
     </tr>
 </table>
-
 
 <table>
     <tr>
