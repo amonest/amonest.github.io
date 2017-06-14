@@ -15,6 +15,81 @@ public interface Protocol {
 
 ---
 
+### Export 导出服务
+
+export()在服务端使用，可以导出服务。
+
+{% highlight java %}
+public <T> Exporter<T> export(Invoker<T> invoker) throws RpcException {
+    
+    // url=提供者地址，以dubbo://协议
+    URL url = invoker.getUrl();
+    
+    String key = serviceKey(url);
+
+    // DubboExporter简单包装了Invoker
+    // 通过getInvoker()方法将两者联系起来
+    DubboExporter<T> exporter = new DubboExporter<T>(invoker, key, exporterMap);
+    exporterMap.put(key, exporter);
+
+    openServer(url);
+    
+    return exporter;
+}
+{% endhighlight %}
+
+
+这里重点是调用openServer()启动Server，但是为了避免重复启动，使用serverMap保存已启动的Server。
+
+{% highlight java %}
+private void openServer(URL url) {
+    String key = url.getAddress();
+    boolean isServer = url.getParameter(Constants.IS_SERVER_KEY,true);
+    if (isServer) {
+        ExchangeServer server = serverMap.get(key);
+        if (server == null) {
+            serverMap.put(key, createServer(url));
+        } else {
+            server.reset(url);
+        }
+    }
+}
+{% endhighlight %}
+
+createServer()负责创建具体的Server。
+
+{% highlight java %}
+private ExchangeServer createServer(URL url) {
+    url = url.addParameterIfAbsent(Constants.CHANNEL_READONLYEVENT_SENT_KEY, Boolean.TRUE.toString());
+    url = url.addParameterIfAbsent(Constants.HEARTBEAT_KEY, String.valueOf(Constants.DEFAULT_HEARTBEAT));
+
+    // 默认Server类型=netty
+    String str = url.getParameter(Constants.SERVER_KEY, Constants.DEFAULT_REMOTING_SERVER);
+    if (str != null && str.length() > 0 
+        && ! ExtensionLoader.getExtensionLoader(Transporter.class).hasExtension(str))
+        throw new RpcException("Unsupported server type: " + str + ", url: " + url);
+
+    // 解码器
+    url = url.addParameter(Constants.CODEC_KEY, 
+                Version.isCompatibleVersion() ? COMPATIBLE_CODEC_NAME : DubboCodec.NAME);
+
+    ExchangeServer server;
+    
+    try {
+        server = Exchangers.bind(url, requestHandler);
+    } catch (RemotingException e) {
+        throw new RpcException("Fail to start server(url: " + url + ") " + e.getMessage(), e);
+    }
+
+    return server;
+}
+{% endhighlight %}
+
+
+
+
+---
+
 ### Refer 引用服务
 
 refer()在客户端使用，可以引用服务端的服务。

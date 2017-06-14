@@ -12,6 +12,160 @@ public interface Protocol {
 }
 {% endhighlight %}
 
+---
+
+### Export 导出服务
+
+export()在服务端使用，可以导出服务。
+
+Invoker有一个getUrl()属性，在RegistryProtocol这里，该属性是registry://协议。
+
+但是该Url有export属性，是编码后的提供者地址，使用dubbo://协议。
+
+{% highlight java %}
+public <T> Exporter<T> export(final Invoker<T> originInvoker) throws RpcException {
+    // doLocalExport()，导出Invoker
+    String key = getCacheKey(originInvoker);
+    ExporterChangeableWrapper<T> exporter = (ExporterChangeableWrapper<T>) bounds.get(key);
+    if (exporter == null) {
+        synchronized (bounds) {
+            exporter = (ExporterChangeableWrapper<T>) bounds.get(key);
+            if (exporter == null) {
+
+                // 这里getProviderUrl()是返回export属性
+                final Invoker<?> invokerDelegete = 
+                    new InvokerDelegete<T>(originInvoker, getProviderUrl(originInvoker));
+
+                // 这里分两个步骤：
+                // 1. 调用protocol.export()导出服务，因为invokerDelegete使用的是dubbo协议，
+                //    所以，实际执行的是DubboProtocol
+                // 2. 对DubboProtocol返回的Exporter用ExporterChangeableWrapper封装，
+                //    目的是ExporterChangeableWrapper可以修改内部的Exporter
+
+                exporter = new ExporterChangeableWrapper<T>(
+                    (Exporter<T>)protocol.export(invokerDelegete), originInvoker);
+
+                bounds.put(key, exporter);
+            }
+        }
+    }
+
+    // 注册提供者，在注册中心创建提供者路径
+    final Registry registry = getRegistry(originInvoker);
+    final URL registedProviderUrl = getRegistedProviderUrl(originInvoker); // 获取dubbo://提供者地址。
+    registry.register(registedProviderUrl);
+
+    // 订阅override数据
+    final URL overrideSubscribeUrl = getSubscribedOverrideUrl(registedProviderUrl);
+    final OverrideListener overrideSubscribeListener = new OverrideListener(overrideSubscribeUrl);
+    overrideListeners.put(overrideSubscribeUrl, overrideSubscribeListener);
+    registry.subscribe(overrideSubscribeUrl, overrideSubscribeListener);
+
+    //保证每次export都返回一个新的exporter实例
+    return new Exporter<T>() {
+        public Invoker<T> getInvoker() {
+            return exporter.getInvoker();
+        }
+        public void unexport() {
+            exporter.unexport();
+            registry.unregister(registedProviderUrl);
+
+            overrideListeners.remove(overrideSubscribeUrl);
+            registry.unsubscribe(overrideSubscribeUrl, overrideSubscribeListener);
+        }
+    };
+}
+{% endhighlight %}
+
+
+提供者在注册的同时，也提供了订阅功能。订阅的目的是提供中心管理功能。
+
+{% highlight java %}
+private class OverrideListener implements NotifyListener {
+        
+    private volatile List<Configurator> configurators;
+    
+    private final URL subscribeUrl;
+
+    public OverrideListener(URL subscribeUrl) {
+        this.subscribeUrl = subscribeUrl;
+    }
+
+    /*
+     *  provider 端可识别的override url只有这两种.
+     *  override://0.0.0.0/serviceName?timeout=10
+     *  override://0.0.0.0/?timeout=10
+     */
+    public void notify(List<URL> urls) {
+        List<URL> result = new ArrayList<URL>(urls);
+
+        for (URL url : urls) {
+            URL overrideUrl = url;
+            if (!UrlUtils.isMatch(subscribeUrl, overrideUrl)) {
+                result.remove(overrideUrl);
+            }
+        }
+
+        // 转换成Configurator对象
+        this.configurators = RegistryDirectory.toConfigurators(result);
+
+        List<ExporterChangeableWrapper<?>> exporters = 
+                new ArrayList<ExporterChangeableWrapper<?>>(bounds.values());
+
+        for (ExporterChangeableWrapper<?> exporter : exporters){
+            Invoker<?> invoker = exporter.getOriginInvoker();
+            final Invoker<?> originInvoker ;
+            if (invoker instanceof InvokerDelegete){
+                originInvoker = ((InvokerDelegete<?>)invoker).getInvoker();
+            } else {
+                originInvoker = invoker;
+            }
+
+            // 原始Url，从registry://地址里面读取export参数
+            URL originUrl = 
+                URL.valueOf(origininvoker.getUrl().getParameterAndDecoded(Constants.EXPORT_KEY));
+
+            // 新的Url，通过Configurator重新配置
+            URL newUrl = getNewInvokerUrl(originUrl);
+            
+            // 如果URL有变化，则重新导出
+            if (! originUrl.equals(newUrl)) {
+                RegistryProtocol.this.doChangeLocalExport(originInvoker, newUrl);
+            }
+        }
+    }
+    
+    // 通过Configurator重新配置Url
+    private URL getNewInvokerUrl(URL url) {
+        List<Configurator> localConfigurators = this.configurators; // local reference
+        // 合并override参数
+        if (localConfigurators != null && localConfigurators.size() > 0) {
+            for (Configurator configurator : localConfigurators) {
+                url = configurator.configure(url);
+            }
+        }
+        return url;
+    }
+
+    // RegistryProtocol
+    // 重新导出
+    private <T> void doChangeLocalExport(final Invoker<T> originInvoker, URL newInvokerUrl) {
+        String key = getCacheKey(originInvoker);
+        final ExporterChangeableWrapper<T> exporter = (ExporterChangeableWrapper<T>) bounds.get(key);
+        if (exporter == null){
+            logger.warn(new IllegalStateException("error state, exporter should not be null"));
+            return ;//不存在是异常场景 直接返回 
+        } else {
+
+            // 1. 使用protocol.export()重新导出
+            // 2. 修改ExporterChangeableWrapper的Exporter，这样的目的应该是保持原先的exporter引用不变
+            final Invoker<T> invokerDelegete = new InvokerDelegete<T>(originInvoker, newInvokerUrl);
+            exporter.setExporter(protocol.export(invokerDelegete));
+        }
+    }
+}
+{% endhighlight %}
+
 
 ---
 
