@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"parse_image",
+				"parse_image_path"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
 				"bean",
 				"beans"
 			],
@@ -32,38 +44,11 @@
 	"buffers":
 	[
 		{
-			"file": "_includes/html/left.html",
+			"file": "/C/Users/lbin/Desktop/babaio-renren-fast-master/renren-fast/README.md",
 			"settings":
 			{
-				"buffer_size": 22888,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "_posts/dubbo/2017-06-01-dubbo-source-registry-directory.md",
-			"settings":
-			{
-				"buffer_size": 5961,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "_posts/dubbo/2017-05-25-dubbo-source-reference-client.md",
-			"settings":
-			{
-				"buffer_size": 12544,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "---\nlayout: post\ntitle: Dubbo 源码分析 - 配置\n---\n\nConfigurator的作用是根据调用信息，在多个Invoker中做一次过滤，选出一个子集。\n\n{% highlight java %}\npublic interface Configurator extends Comparable<Configurator> {\n    URL getUrl();\n    URL configure(URL url);\n\n}\n{% endhighlight %}\n\n\n\n\n\n\n\n\n目前Router接口有三个实现类：ScriptRouter、ConditionRouter和MockInvokersSelector。例如，ScriptRouter是这样处理的：\n\n{% highlight java %}\npublic class ScriptRouter implements Router {\n\n    public ScriptRouter(URL url) {\n        this.url = url;\n        String type = url.getParameter(Constants.TYPE_KEY);\n        this.priority = url.getParameter(Constants.PRIORITY_KEY, 0);\n        this.rule = url.getParameterAndDecoded(Constants.RULE_KEY);\n        this.engine = ScriptEngineManager().getEngineByName(type);\n    }\n\n    public <T> List<Invoker<T>> route(List<Invoker<T>> invokers, \n                URL url, Invocation invocation) throws RpcException {\n        try {\n            List<Invoker<T>> invokersCopy = new ArrayList<Invoker<T>>(invokers);\n            Compilable compilable = (Compilable) engine;\n\n            // 编译脚本执行环境参数\n            Bindings bindings = engine.createBindings();\n            bindings.put(\"invokers\", invokersCopy);\n            bindings.put(\"invocation\", invocation);\n            bindings.put(\"context\", RpcContext.getContext());\n\n            // 调用编译脚本\n            CompiledScript function = compilable.compile(rule);\n            Object obj = function.eval(bindings);\n\n            // 处理脚本返回结果\n            if (obj instanceof Invoker[]) {\n                invokersCopy = Arrays.asList((Invoker<T>[]) obj);\n            } else if (obj instanceof Object[]) {\n                invokersCopy = new ArrayList<Invoker<T>>();\n                for (Object inv : (Object[]) obj) {\n                    invokersCopy.add((Invoker<T>)inv);\n                }\n            } else {\n                invokersCopy = (List<Invoker<T>>) obj;\n            }\n\n            return invokersCopy;\n        } catch (ScriptException e) {\n            logger.error(\"route error\");\n            return invokers;\n        }\n    }\n}\n{% endhighlight %}\n\n\nRoute的使用主要是RegistryDirectory中，依据注册中心的变更信息，创建Router对象。\n\n如果注册中心返回的网址是router://协议或者category=routers，说明这是一个路由规则，通过toRouters()转化成Router对象。\n\n{% highlight java %}\nprivate List<Router> toRouters(List<URL> urls) {\n    List<Router> routers = new ArrayList<Router>();\n    if(urls == null || urls.size() < 1){\n        return routers ;\n    }\n\n    if (urls != null && urls.size() > 0) {\n        for (URL url : urls) {\n            if (Constants.EMPTY_PROTOCOL.equals(url.getProtocol())) {\n                continue;\n            }\n\n            String routerType = url.getParameter(Constants.ROUTER_KEY);\n            if (routerType != null && routerType.length() > 0){\n                url = url.setProtocol(routerType);\n            }\n\n            try{\n                Router router = routerFactory.getRouter(url);\n                if (!routers.contains(router))\n                    routers.add(router);\n            } catch (Throwable t) {\n                logger.error(\"convert router url to router error, url: \"+ url, t);\n            }\n        }\n    }\n    return routers;\n}\n{% endhighlight %}\n\n\ntoRouters()转化后的Router对象列表通过setRouters()注入到RegistryDirectory。\n\n{% highlight java %}\nprotected void setRouters(List<Router> routers){\n    // copy list\n    routers = routers == null ? new  ArrayList<Router>() : new ArrayList<Router>(routers);\n\n    // append url router\n    String routerkey = url.getParameter(Constants.ROUTER_KEY);\n    if (routerkey != null && routerkey.length() > 0) {\n        RouterFactory routerFactory = ExtensionLoader.getExtensionLoader(RouterFactory.class)\n                    .getExtension(routerkey);\n        routers.add(routerFactory.getRouter(url));\n    }\n\n    // 这里加入了一个通用的MockInvokersSelector对象。\n    // MockInvokersSelector类的compareTo()方法有点特殊，统统返回1，保证排在最前面。\n    routers.add(new MockInvokersSelector());\n\n    // Router实现了Comparable，可以排序\n    // 目前是根据URL中提供的priority排序。\n    Collections.sort(routers);\n\n    this.routers = routers;\n}\n{% endhighlight %}\n\n\n最后，RegistryDirectory的list()方法被调用时，依次调用所有的Router，过滤Invoker列表。\n\n{% highlight java %}\npublic List<Invoker<T>> list(Invocation invocation) throws RpcException {\n    List<Invoker<T>> invokers = doList(invocation);\n\n    List<Router> localRouters = this.routers; // local reference\n    if (localRouters != null && localRouters.size() > 0) {\n\n        // 依次调用所有的Router\n        for (Router router: localRouters){\n            try {\n                if (router.getUrl() == null || router.getUrl().getParameter(Constants.RUNTIME_KEY, true)) {\n                    invokers = router.route(invokers, getConsumerUrl(), invocation);\n                }\n            } catch (Throwable t) {\n                logger.error(\"Failed to execute router: \" + getUrl() + \", cause: \" + t.getMessage(), t);\n            }\n        }\n    }\n\n    return invokers;\n}\n{% endhighlight %}\n\n\n\n\n",
-			"file": "_posts/dubbo/2017-06-01-dubbo-source-configurator.md",
-			"file_size": 5509,
-			"file_write_time": 131411069622348002,
-			"settings":
-			{
-				"buffer_size": 4864,
-				"line_ending": "Windows"
+				"buffer_size": 2160,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -111,19 +96,48 @@
 	],
 	"file_history":
 	[
+		"/X/dev/suifeng-scripts/cloth-image-uploader/cloth-image-uploader.yaml",
+		"/X/dev/suifeng-scripts/cloth-image-uploader/cloth-image-uploader.py",
+		"/X/dev/suifeng-scripts/cloth-image-scanner/cloth-image-scanner.yaml",
+		"/X/dev/amonest.github.io/_posts/python/2017-06-26-python-mirrors.md",
+		"/X/dev/suifeng-scripts/cloth-image-scanner/cloth-image-scanner.py",
+		"/C/Users/lbin/pip/pip.ini",
+		"/X/dev/amonest.github.io/_posts/books/2017-06-28-zookeeper.md",
+		"//wlfs03/FS/cloth-image-handler/cloth-image-handler.xml",
+		"/X/dev/amonest.github.io/_includes/html/left.html",
+		"/X/dev/amonest.github.io/_posts/python/2017-06-26-python-install-pip.md",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-admin/pom.xml",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/pom.xml",
+		"/X/dev/suifeng-java-projects/dubbo-master/pom.xml",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-test/dubbo-test-examples/src/test/java/com/alibaba/dubbo/examples/annotation/AnnotationTest.java",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-rpc/dubbo-rpc-api/src/main/java/com/alibaba/dubbo/rpc/protocol/AbstractProtocol.java",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-config/dubbo-config-api/src/main/java/com/alibaba/dubbo/config/AbstractConfig.java",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-container/dubbo-container-api/src/main/java/com/alibaba/dubbo/container/Main.java",
+		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-config/dubbo-config-api/src/main/java/com/alibaba/dubbo/config/RegistryConfig.java",
+		"/X/dev/amonest.github.io/articles.md",
+		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-registry-protocol.md",
+		"/X/dev/amonest.github.io/_posts/dubbo/2017-05-25-dubbo-source-client-calltrace.md",
+		"/X/dev/amonest.github.io/_posts/netty/2017-06-09-netty-pipeline-flow.md",
+		"/X/dev/amonest.github.io/index.md",
+		"/X/dev/amonest.github.io/_includes/html/top.html",
+		"/X/dev/amonest.github.io/_layouts/post.html",
+		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-dubbo-protocol.md",
+		"/X/dev/amonest.github.io/_posts/dubbo/2017-05-25-dubbo-source-reference-client.md",
+		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-registry.md",
+		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-transporter.md",
+		"/X/dev/amonest.github.io/_posts/netty/2017-06-09-netty-motan-encode.md",
+		"/C/Users/lbin/Downloads/181997.txt",
+		"/X/yun/Dubbo/ServiceConfig.exportLocal().txt",
+		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-registry-directory.md",
 		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-router.md",
 		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-configurator.md",
-		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-registry-protocol.md",
 		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-exchangers.md",
 		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-cluster.md",
 		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-load-balance.md",
 		"/X/dev/amonest.github.io/_posts/dubbo/2017-06-01-dubbo-source-protocol-dubbo.md",
-		"/X/dev/amonest.github.io/index.md",
-		"/X/dev/amonest.github.io/_includes/html/left.html",
-		"/X/dev/amonest.github.io/_posts/dubbo/2017-05-25-dubbo-source-reference-client.md",
 		"/X/dev/amonest.github.io/_posts/others/2016-11-19-jekyll-installation-on-windows.md",
 		"/X/dev/amonest.github.io/_posts/others/2016-12-27-sublime-settings.md",
-		"/X/yun/Dubbo/ServiceConfig.exportLocal().txt",
 		"/X/dev/amonest.github.io/_posts/dubbo/2017-05-25-dubbo-source-protocol-dubbo.md",
 		"/C/Users/lbin/.dubbo/dubbo-registry-192.168.12.84.cache",
 		"/C/Users/lbin/Desktop/dubbo-master/dubbo-master/dubbo-remoting/dubbo-remoting-api/src/main/java/com/alibaba/dubbo/remoting/Channel.java",
@@ -167,7 +181,6 @@
 		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-mvc-simple-url-handler-mapping.md",
 		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-config-autowired-map-or-list.md",
 		"/X/dev/amonest.github.io/_posts/spring/2017-04-05-spring-config-autowired-collection.md",
-		"/X/dev/amonest.github.io/_includes/html/top.html",
 		"/X/dev/amonest.github.io/_includes/html/header.html",
 		"/X/dev/amonest.github.io/_posts/spring/2017-03-24-spring-source-eureka-instance-config.md",
 		"/X/dev/amonest.github.io/_posts/spring/2017-03-28-spring-source-eureka-client-summary.md",
@@ -209,36 +222,8 @@
 		"/X/dev/amonest.github.io/_posts/spring/2017-03-13-spring-config-custom-xml-schema.md",
 		"/X/dev/amonest.github.io/_drafts/spring-source-xml-entity-resolver.md",
 		"/X/dev/amonest.github.io/_includes/block/spring-analysis-list.html",
-		"/X/dev/amonest.github.io/_layouts/post.html",
 		"/X/dev/supercap-cloth/src/cc/modules/email/Mail.java",
-		"/X/dev/amonest.github.io/_drafts/spring-source-parse-xml-config.md",
-		"/X/dev/amonest.github.io/_drafts/spring-analysis-parse-xml-config.md",
-		"/X/dev/amonest.github.io/_includes/abc.html",
-		"//cloth/apache-tomcat-8.0.35/webapps/ROOT/custom/layerRecommends.jsp",
-		"/X/dev/amonest.github.io/_posts/eclipse/2017-02-28-eclipse-tab-spaces.md",
-		"/C/Windows/System32/drivers/etc/hosts",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/build.xml",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/build/email-service/src/main/java/net/mingyang/spring_cloud_examples/email_service/Application.java",
-		"/C/Users/lbin/Desktop/2017.02.24 AM/方案一/电脑、iPhone、安卓、Linux系列（增强版）/hosts",
-		"/X/dev/amonest.github.io/_posts/linux/2017-02-23-linux-install-docker-compose.md",
-		"/C/Users/lbin/Desktop/links.txt",
-		"/X/dev/suifeng-java-projects/cloud-examples/cloud-eureka-server/src/main/docker/Dockerfile",
-		"/X/dev/amonest.github.io/_posts/linux/2017-02-22-linux-modify-sudoers.md",
-		"/X/dev/suifeng-java-projects/cloud-examples/cloud-eureka-server/pom.xml",
-		"/X/dev/amonest.github.io/_posts/linux/2017-02-22-linux-query-user-in-groups.md",
-		"/X/dev/amonest.github.io/_posts/linux-commands/2017-02-22-linux-command-groups.md",
-		"/X/dev/amonest.github.io/_posts/linux/2016-12-29-linux-host-name.md",
-		"/X/dev/suifeng-java-projects/cloud-parent/cloud-discovery/pom.xml",
-		"/X/dev/suifeng-java-projects/cloud-parent/cloud-config/src/main/resources/bootstrap.properties",
-		"/X/dev/suifeng-java-projects/cloud-parent/cloud-config/pom.xml",
-		"/X/dev/suifeng-java-projects/cloud-parent/cloud-score/pom.xml",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/common.xml",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/src/application.properties",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/src/pom.xml",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/build/spring-cloud-configserver/pom.xml",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/src/Application.java",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/.gitignore",
-		"/X/dev/suifeng-java-projects/ant-spring-generator/build/spring-cloud-configserver/src/main/java/net/mingyang/spring_cloud_configserver/Application.java"
+		"/X/dev/amonest.github.io/_drafts/spring-source-parse-xml-config.md"
 	],
 	"find":
 	{
@@ -249,6 +234,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"C:\\Users\\lbin\\Desktop\\dubbo-master\\dubbo-master",
 			"X:\\dev\\amonest.github.io\\_drafts",
 			"C:\\Users\\lbin\\Desktop\\thymeleaf-spring4-2.1.5.RELEASE-sources",
 			"C:\\Users\\lbin\\Desktop\\spring-context-4.3.6.RELEASE-sources",
@@ -266,6 +252,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"join",
+			"_parse_",
+			"plugin.version",
+			"cache",
+			"shutdownHook",
+			"getServerShutdownTimeout",
+			"SHUTDOWN_WAIT_KEY",
+			"MockInvoker",
+			"Routers",
+			"toMergeMethodInvokerMap",
+			"overrideDirectoryUrl",
 			"Exchange",
 			"subscribe",
 			"group",
@@ -382,16 +379,7 @@
 			"DubboRegistryFactory",
 			"setRegistryFactory",
 			"registryFactory",
-			"ProxyFactory",
-			"Wrapper",
-			"forgetPassword",
-			"source",
-			"Javassist",
-			"proxyFactory",
-			"ref",
-			"update_check",
-			"update",
-			"upgrade"
+			"ProxyFactory"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -399,6 +387,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"_parse_image_",
 			"Registry",
 			"Server",
 			"transport",
@@ -440,124 +429,32 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "_includes/html/left.html",
+					"file": "/C/Users/lbin/Desktop/babaio-renren-fast-master/renren-fast/README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22888,
+						"buffer_size": 2160,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4189,
-								4189
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 252.0,
-						"translation.y": 285.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "_posts/dubbo/2017-06-01-dubbo-source-registry-directory.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5961,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4049,
-								4049
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2209.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "_posts/dubbo/2017-05-25-dubbo-source-reference-client.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12544,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10403,
-								10403
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4465.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "_posts/dubbo/2017-06-01-dubbo-source-configurator.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4864,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								61,
-								61
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1140.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -609,7 +506,7 @@
 	"project": "amonest.github.io.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
